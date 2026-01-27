@@ -832,7 +832,6 @@ GameObject:
   - component: {fileID: 1030423172}
   - component: {fileID: 1030423173}
   - component: {fileID: 1030423174}
-  - component: {fileID: 1030423175}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -985,22 +984,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1030423175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030423170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df846bb007ce7d94daf724d158893887, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Doors
-  AtDoor: 0
-  AtBackDoor: 0
-  temp: 0
-  DoorPrompt: {fileID: 784185127}
 --- !u!1 &1326738914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,6 +994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1326738915}
   - component: {fileID: 1326738916}
+  - component: {fileID: 1326738917}
   m_Layer: 0
   m_Name: LeftDoor
   m_TagString: BackDoor
@@ -1079,6 +1063,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 5.2}
   m_EdgeRadius: 0
+--- !u!114 &1326738917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326738914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df846bb007ce7d94daf724d158893887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Doors
+  AtDoor: 0
+  DoorValue: 0
+  DoorPrompt: {fileID: 784185127}
 --- !u!1 &1545642785
 GameObject:
   m_ObjectHideFlags: 0
