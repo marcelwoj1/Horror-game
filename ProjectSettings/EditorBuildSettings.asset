@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Temp_room.unity
     guid: 15abd4b9c05c21f48996688e97e3f236
+  - enabled: 1
+    path: Assets/Scenes/Temp_room 1.unity
+    guid: c43fee58541223742b2d9897597087c0
+  - enabled: 1
+    path: Assets/Scenes/Temp_room 2.unity
+    guid: d0ce3ad16e86907459dd2d701c3182ae
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
