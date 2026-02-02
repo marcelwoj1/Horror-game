@@ -16,15 +16,18 @@ public class Movement : MonoBehaviour
     private float _MOVE_THRESHOLD = 0f;
     private float _GROUND_CHECK_RADIUS = 0.15f;
     private float _JUMP_BUFFER = 0.5f;
+    private bool IsLit;
 
 
 
     // | VARIABLES |
 
     // Components
+    public GameObject TorchLight;
     private Rigidbody2D _rigidBody;
     private Transform _feetLocation;
     private SpriteAnimator _animator;
+    public SpriteRenderer _spriteRenderer;
 
 
     // Config
@@ -68,6 +71,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidBody = GetComponent<Rigidbody2D>();
         _feetLocation = transform.Find("FeetLocation").transform;
         _animator = GetComponent<SpriteAnimator>();
@@ -145,6 +149,13 @@ public class Movement : MonoBehaviour
                 if (MoveState == MoveStates.Moving) _animator.Play("Walk");
                 else _animator.Play("Idle");
             }
+        }
+
+        // Torch
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if(IsLit == false){IsLit = true;} else {IsLit = false;}
+            TorchLight.SetActive(IsLit);
         }
     }
 
