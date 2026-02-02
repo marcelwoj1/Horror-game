@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c86e1d3ee12ab14db8d856b0706c119, type: 3}
+  m_Name: Idle
+  m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
+  AnimationName: Idle
+  Frames:
+  - {fileID: 1905689494460619138, guid: f2ef50ece0f9eb44e9d0261825ab1c9c, type: 3}
+  FrameRate: 10
+  Loop: 1

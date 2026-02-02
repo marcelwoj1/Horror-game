@@ -629,7 +629,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -755,35 +754,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d3fc95af92990646baddb9c4e04f5f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
-  target: {fileID: 1030423171}
-  offset: {x: 0, y: 1.82, z: -10}
-  smoothingType: 1
-  smoothSpeed: 5
-  maxSmoothSpeed: 10
-  useLookAhead: 1
-  lookAheadDistance: 3
-  lookAheadSmoothness: 5
-  lookAheadThreshold: 0.5
-  useBounds: 0
-  minBounds: {x: -5, y: -50}
-  maxBounds: {x: 5, y: 50}
-  followXOnly: 0
-  followYOnly: 0
-  deadZoneX: 0
-  deadZoneY: 0
-  showDebugGizmos: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,11 +1021,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1030423171}
-  - component: {fileID: 1030423172}
   - component: {fileID: 1030423173}
   - component: {fileID: 1030423174}
-  - component: {fileID: 1030423175}
-  m_Layer: 0
+  - component: {fileID: 1030423176}
+  - component: {fileID: 1030423177}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1079,48 +1049,6 @@ Transform:
   - {fileID: 1832840459}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1030423172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030423170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e06fbe6e8a54a0b449844f5167f1ad1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  maxSpeed: 8
-  acceleration: 10
-  deceleration: 50
-  turnSpeed: 10
-  jumpForce: 12
-  idleSprites:
-  - {fileID: 1905689494460619138, guid: f2ef50ece0f9eb44e9d0261825ab1c9c, type: 3}
-  walkSprites:
-  - {fileID: -4020396710224822986, guid: f2ef50ece0f9eb44e9d0261825ab1c9c, type: 3}
-  - {fileID: -1591972020532057549, guid: f2ef50ece0f9eb44e9d0261825ab1c9c, type: 3}
-  jumpSprites:
-  - {fileID: -6236955497759345800, guid: f2ef50ece0f9eb44e9d0261825ab1c9c, type: 3}
-  fallSprites:
-  - {fileID: -8807605491673031513, guid: f2ef50ece0f9eb44e9d0261825ab1c9c, type: 3}
-  animationFrameRate: 5
-  fallThreshold: 0.1
-  groundThreshold: 0.05
-  stopThreshold: 0.01
-  inputDeadzone: 0.1
-  inputSensitivity: 1
-  useSmoothAcceleration: 0
-  accelerationCurve: 2
-  showDebugInfo: 0
-  FeetLocation: {fileID: 1832840459}
-  groundCheckDistance: 2
-  groundCheckWidth: 0.8
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  groundCheckOffset: {x: 0, y: 0}
 --- !u!50 &1030423173
 Rigidbody2D:
   serializedVersion: 5
@@ -1207,28 +1135,43 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!95 &1030423175
-Animator:
-  serializedVersion: 7
+--- !u!114 &1030423176
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030423170}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06fbe6e8a54a0b449844f5167f1ad1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Movement
+  _moveSpeed: 5
+  _jumpPower: 10
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  MoveState: 0
+  AirState: 0
+--- !u!114 &1030423177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030423170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a7020b85edf8841afdb04c3122744c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
+  _animations:
+  - {fileID: 11400000, guid: dc6e125a1621d494fa33404bf0cbfd64, type: 2}
+  - {fileID: 11400000, guid: 4fb8ac692e564f04297333a365b1d16f, type: 2}
+  - {fileID: 11400000, guid: 670216ddd37c78549b1d8bcd9399df81, type: 2}
+  - {fileID: 11400000, guid: 8f7510db604ceb745b73e4066c1ad299, type: 2}
+  _startingAnimation: 
 --- !u!1 &1326738914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1277,7 @@ GameObject:
   - component: {fileID: 1545642786}
   - component: {fileID: 1545642789}
   - component: {fileID: 1545642790}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1667,7 +1610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1832840459}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FeetLocation
   m_TagString: Player
   m_Icon: {fileID: 0}

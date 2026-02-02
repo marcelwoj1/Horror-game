@@ -4,6 +4,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+
+
 public class Movement : MonoBehaviour
 {
     
@@ -13,7 +15,7 @@ public class Movement : MonoBehaviour
     private float _FALL_THRESHOLD = 0f;
     private float _MOVE_THRESHOLD = 0f;
     private float _GROUND_CHECK_RADIUS = 0.15f;
-    private float _JUMP_BUFFER = 0.1f;
+    private float _JUMP_BUFFER = 0.5f;
 
 
 
@@ -22,6 +24,7 @@ public class Movement : MonoBehaviour
     // Components
     private Rigidbody2D _rigidBody;
     private Transform _feetLocation;
+    private SpriteAnimator _animator;
 
 
     // Config
@@ -32,8 +35,7 @@ public class Movement : MonoBehaviour
 
     // Input
     private Vector2 _movementDirection;
-    private bool _jumpQueued = false;
-    private float _lastJumpInput;
+    private float _lastJumpInput = -100f;
     
     
 
@@ -68,6 +70,8 @@ public class Movement : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _feetLocation = transform.Find("FeetLocation").transform;
+        _animator = GetComponent<SpriteAnimator>();
+        
     }
 
     
@@ -86,10 +90,10 @@ public class Movement : MonoBehaviour
 
 
         // Jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
-            _jumpQueued = true;
-        }       
+            _lastJumpInput = Time.time;
+        }
 
 
 
@@ -123,24 +127,38 @@ public class Movement : MonoBehaviour
             AirState = AirStates.Grounded;
         }
 
+        // ANIMATION & FLIPPING
+        if (_animator != null)
+        {
+            // Handle Flipping
+            if (_movementDirection.x > 0) _animator.SetFlip(true);
+            else if (_movementDirection.x < 0) _animator.SetFlip(false);
 
-
-   
+            // Handle States
+            if (AirState != AirStates.Grounded)
+            {
+                if (AirState == AirStates.Jumping) _animator.Play("Jump");
+                else if (AirState == AirStates.Falling) _animator.Play("Fall");
+            }
+            else
+            {
+                if (MoveState == MoveStates.Moving) _animator.Play("Walk");
+                else _animator.Play("Idle");
+            }
+        }
     }
 
 
     void FixedUpdate()
     {
 
-        //Debug.Log(_jumpQueued);
 
         // Move
         _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
 
-        if (_jumpQueued && IsGrounded())
+        if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
         {
-            Debug.Log("jumping");
-            _jumpQueued = false;
+            _lastJumpInput = -100f;
             _rigidBody.linearVelocityY = 0;
             _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
         }
