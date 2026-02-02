@@ -2,19 +2,46 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
+
+[System.Serializable]
+public class PositionOption
+{
+    public string name;
+    public Vector3 position;
+}
 
 public class Doors : MonoBehaviour
 {
     public bool AtDoor;
-    public int DoorValue;
     public GameObject DoorPrompt;
+    public GameObject Player;
+    
+    [Header("Door Locations")]
+    [SerializeField]
+    private List<PositionOption> positions = new List<PositionOption>()
+    {
+        new PositionOption { name = "1st Room", position = new Vector3(23, 0, 0) },
+        new PositionOption { name = "2nd Room", position = new Vector3(0, 1, 0) },
+        new PositionOption { name = "3rd Room", position = new Vector3(5, 1, 0) }
+    };
 
-    // Update is called once per frame
+    [SerializeField]
+    private int selectedIndex = 0;
+
+    void Start()
+    {
+        selectedIndex = Mathf.Clamp(selectedIndex, 0, positions.Count - 1);
+    } 
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.E)) 
         {
-            if(AtDoor == true){SceneManager.LoadScene(DoorValue);}
+            if(AtDoor == true)
+            {
+                Player.transform.position = positions[selectedIndex].position;
+            }
         }
     }
 
