@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c86e1d3ee12ab14db8d856b0706c119, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
-  AnimationName: 
-  Frames: []
-  FrameRate: 10
+  AnimationName: Attack
+  Frames:
+  - {fileID: -1510321628455969631, guid: 2c4619f8074791e458ef6f949fba683b, type: 3}
+  - {fileID: 4070807764285805193, guid: 2c4619f8074791e458ef6f949fba683b, type: 3}
+  - {fileID: 4344597672263679736, guid: 2c4619f8074791e458ef6f949fba683b, type: 3}
+  - {fileID: 4567925003391636033, guid: 2c4619f8074791e458ef6f949fba683b, type: 3}
+  - {fileID: 8086667007611163439, guid: 2c4619f8074791e458ef6f949fba683b, type: 3}
+  - {fileID: -3085191663337355337, guid: 2c4619f8074791e458ef6f949fba683b, type: 3}
+  - {fileID: -7251473289056548707, guid: 2c4619f8074791e458ef6f949fba683b, type: 3}
+  FrameRate: 7
   Loop: 1
+  PingPong: 1
