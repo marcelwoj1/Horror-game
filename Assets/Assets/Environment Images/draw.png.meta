@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 33427c46e7b6da04d933349d72e482cc
+guid: fd883b7d1852af247b5094c9d9734a62
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2160687857295375787
-    second: SPTProjectIntroScene_HallwaysConcept_0
+      213: -2555591554857944400
+    second: draw_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SPTProjectIntroScene_HallwaysConcept_0
+      name: draw_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2000
-        height: 675
+        width: 646
+        height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bad379c882e4cfd10800000000000000
-      internalID: 2160687857295375787
+      spriteID: 0ba34bd5507b88cd0800000000000000
+      internalID: -2555591554857944400
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SPTProjectIntroScene_HallwaysConcept_0: 2160687857295375787
+      draw_0: -2555591554857944400
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
