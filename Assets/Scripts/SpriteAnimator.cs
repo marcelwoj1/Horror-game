@@ -15,8 +15,12 @@ public class SpriteAnimator : MonoBehaviour
     private int _currentFrame;
     private float _timer;
     private bool _isPlaying = false;
+    private int _direction = 1; // 1 for forward, -1 for backward (used for ping-pong)
+    private bool? _loopOverride = null; // If set, overrides the animation's Loop setting
 
     private Dictionary<string, CustomSpriteAnimation> _animationDict = new Dictionary<string, CustomSpriteAnimation>();
+
+    public bool IsPlaying => _isPlaying;
 
     void Awake()
     {
@@ -57,18 +61,52 @@ public class SpriteAnimator : MonoBehaviour
         if (_timer >= frameDuration)
         {
             _timer -= frameDuration;
-            _currentFrame++;
+            _currentFrame += _direction;
 
-            if (_currentFrame >= _currentAnimation.Frames.Length)
+            // Handle ping-pong animations
+            if (_currentAnimation.PingPong)
             {
-                if (_currentAnimation.Loop)
+                // Reached the end going forward
+                if (_currentFrame >= _currentAnimation.Frames.Length)
                 {
-                    _currentFrame = 0;
+                    _currentFrame = _currentAnimation.Frames.Length - 2;
+                    _direction = -1; // Reverse direction
+                    
+                    if (_currentFrame < 0) _currentFrame = 0;
                 }
-                else
+                // Reached the beginning going backward
+                else if (_currentFrame < 0)
                 {
-                    _currentFrame = _currentAnimation.Frames.Length - 1;
-                    _isPlaying = false;
+                    bool shouldLoop = _loopOverride.HasValue ? _loopOverride.Value : _currentAnimation.Loop;
+                    
+                    if (shouldLoop)
+                    {
+                        _currentFrame = 1;
+                        _direction = 1; // Go forward again
+                    }
+                    else
+                    {
+                        _currentFrame = 0;
+                        _isPlaying = false;
+                    }
+                }
+            }
+            // Handle normal animations
+            else
+            {
+                if (_currentFrame >= _currentAnimation.Frames.Length)
+                {
+                    bool shouldLoop = _loopOverride.HasValue ? _loopOverride.Value : _currentAnimation.Loop;
+                    
+                    if (shouldLoop)
+                    {
+                        _currentFrame = 0;
+                    }
+                    else
+                    {
+                        _currentFrame = _currentAnimation.Frames.Length - 1;
+                        _isPlaying = false;
+                    }
                 }
             }
 
@@ -89,8 +127,16 @@ public class SpriteAnimator : MonoBehaviour
     /// </summary>
     public void Play(string animationName)
     {
-        // Don't restart if already playing the same thing
-        if (_currentAnimation != null && _currentAnimation.AnimationName == animationName && _isPlaying)
+        Play(animationName, null);
+    }
+
+    /// <summary>
+    /// Plays an animation by name with optional loop override.
+    /// </summary>
+    public void Play(string animationName, bool? overrideLoop)
+    {
+        // Don't restart if already playing the same thing (unless we're changing the loop override)
+        if (_currentAnimation != null && _currentAnimation.AnimationName == animationName && _isPlaying && overrideLoop == _loopOverride)
             return;
 
         if (_animationDict.TryGetValue(animationName, out CustomSpriteAnimation anim))
@@ -98,7 +144,10 @@ public class SpriteAnimator : MonoBehaviour
             _currentAnimation = anim;
             _currentFrame = 0;
             _timer = 0f;
+            _direction = 1; // Always start going forward
+            _loopOverride = overrideLoop; // Set the loop override
             _isPlaying = true;
+            
             UpdateSprite();
         }
         else

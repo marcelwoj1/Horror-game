@@ -7,4 +7,5 @@ public class CustomSpriteAnimation : ScriptableObject
     public Sprite[] Frames;
     public float FrameRate = 10f;
     public bool Loop = true;
+    public bool PingPong = false; // If true, animation will reverse when it reaches the end
 }
