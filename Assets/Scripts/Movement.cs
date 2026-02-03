@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     private float _GROUND_CHECK_RADIUS = 0.15f;
     private float _JUMP_BUFFER = 0.5f;
     private bool IsLit;
+    private bool InventoryOpen;
 
 
 
@@ -24,6 +25,7 @@ public class Movement : MonoBehaviour
 
     // Components
     public GameObject TorchLight;
+    public GameObject Inventory;
     private Rigidbody2D _rigidBody;
     private Transform _feetLocation;
     private SpriteAnimator _animator;
@@ -82,6 +84,20 @@ public class Movement : MonoBehaviour
     void Update()
     {
 
+
+        // Inventory
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            InventoryOpen = !InventoryOpen;
+            Inventory.SetActive(InventoryOpen);
+        }
+
+        if (InventoryOpen)
+        {
+            _movementDirection = Vector2.zero;
+            if (_animator != null && AirState == AirStates.Grounded) _animator.Play("Idle");
+            return;
+        }
 
         // GET INPUT
 
@@ -154,7 +170,7 @@ public class Movement : MonoBehaviour
         // Torch
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(IsLit == false){IsLit = true;} else {IsLit = false;}
+            IsLit = !IsLit;
             TorchLight.SetActive(IsLit);
         }
     }
