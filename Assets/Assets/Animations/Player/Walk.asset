@@ -16,5 +16,5 @@ MonoBehaviour:
   Frames:
   - {fileID: -4020396710224822986, guid: f2ef50ece0f9eb44e9d0261825ab1c9c, type: 3}
   - {fileID: -1591972020532057549, guid: f2ef50ece0f9eb44e9d0261825ab1c9c, type: 3}
-  FrameRate: 7
+  FrameRate: 4
   Loop: 1
