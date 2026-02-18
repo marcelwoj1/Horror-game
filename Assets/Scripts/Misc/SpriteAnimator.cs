@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -21,6 +22,11 @@ public class SpriteAnimator : MonoBehaviour
     private Dictionary<string, CustomSpriteAnimation> _animationDict = new Dictionary<string, CustomSpriteAnimation>();
 
     public bool IsPlaying => _isPlaying;
+    public string CurrentAnimationName => _currentAnimation?.AnimationName;
+    public int CurrentFrame => _currentFrame;
+
+    /// <summary>Fired every frame change: (animationName, frameIndex)</summary>
+    public event Action<string, int> OnFrameChanged;
 
     void Awake()
     {
@@ -119,6 +125,7 @@ public class SpriteAnimator : MonoBehaviour
         if (_currentAnimation.Frames.Length > _currentFrame)
         {
             _spriteRenderer.sprite = _currentAnimation.Frames[_currentFrame];
+            OnFrameChanged?.Invoke(_currentAnimation.AnimationName, _currentFrame);
         }
     }
 
