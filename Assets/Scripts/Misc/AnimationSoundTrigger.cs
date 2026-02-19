@@ -20,12 +20,6 @@ public class AnimationSoundTrigger : MonoBehaviour
         [Tooltip("SoundService group to play (e.g. \"FootstepPlayer\")")]
         public string SoundGroupName;
 
-        [Tooltip("Play as a local (positional) sound")]
-        public bool IsLocal = true;
-
-        [Tooltip("Attach the audio source to this object so it follows")]
-        public bool AttachToObject = false;
-
         // Runtime lookup set built from FrameIndices for O(1) checks
         [System.NonSerialized] public HashSet<int> FrameSet;
     }
@@ -69,15 +63,8 @@ public class AnimationSoundTrigger : MonoBehaviour
             if (entry.AnimationName != animationName) continue;
             if (!entry.FrameSet.Contains(frameIndex)) continue;
 
-            if (entry.IsLocal)
-            {
-                GameObject attachTarget = entry.AttachToObject ? gameObject : null;
-                SoundService.Instance.Play(entry.SoundGroupName, (Vector2)transform.position, attachTarget);
-            }
-            else
-            {
-                SoundService.Instance.Play(entry.SoundGroupName);
-            }
+            // Always play as a local (positional) sound attached to this object
+            SoundService.Instance.Play(entry.SoundGroupName, (Vector2)transform.position, gameObject);
         }
     }
 }

@@ -15,17 +15,18 @@ public class SoundGroup
     [Tooltip("One or more clips; a random one is chosen each play")]
     public AudioClip[] Clips;
 
-    [Range(0f, 1f)]
+    [Range(0.1f, 5f)]
     public float Volume = 1f;
 
-    [Range(0.5f, 2f)]
+    [Range(0.1f, 2f)]
     public float Pitch = 1f;
+
+    [Range(0f, 0.5f)]
+    [Tooltip("Randomly swing the pitch either negatively or positively every time the sound plays")]
+    public float PitchVariance = 0f;
 
     [Tooltip("Loop the clip?")]
     public bool Loop = false;
-
-    [Tooltip("Global = 2-D (no position). Local = 3-D (requires a position).")]
-    public bool IsGlobal = true;
 }
 
 // ---------------------------------------------------------------------------
@@ -86,11 +87,24 @@ public class SoundService : MonoBehaviour
     public void Play(string groupName)
     {
         if (!TryGetGroup(groupName, out SoundGroup group)) return;
-
-        if (!group.IsGlobal)
-            Debug.LogWarning($"[SoundService] '{groupName}' is marked as Local but was called without a position. Playing globally.");
-
         PlayGlobal(group);
+    }
+
+    /// <summary>
+    /// Play a global sound with an optional volume multiplier.
+    /// </summary>
+    public void PlayGlobal(string groupName, float volumeMultiplier = 1f)
+    {
+        if (!TryGetGroup(groupName, out SoundGroup group)) return;
+        
+        AudioSource src = GetPooledSource();
+        ConfigureSource(src, group);
+        src.volume *= volumeMultiplier; // Apply multiplier on top of base volume
+        src.transform.SetParent(transform, false);
+        src.spatialBlend = 0f; // full 2-D
+        src.Play();
+
+        StartCoroutine(ReturnWhenDone(src, null));
     }
 
     /// <summary>
@@ -110,9 +124,6 @@ public class SoundService : MonoBehaviour
     public void Play(string groupName, Vector2 position, GameObject attachTo)
     {
         if (!TryGetGroup(groupName, out SoundGroup group)) return;
-
-        if (group.IsGlobal)
-            Debug.LogWarning($"[SoundService] '{groupName}' is marked as Global but was called with a position. Playing globally.");
 
         AudioSource src = GetPooledSource();
         ConfigureSource(src, group);
@@ -185,7 +196,10 @@ public class SoundService : MonoBehaviour
 
         src.clip   = group.Clips[Random.Range(0, group.Clips.Length)];
         src.volume = group.Volume;
-        src.pitch  = group.Pitch;
+        
+        float randomPitch = group.Pitch + Random.Range(-group.PitchVariance, group.PitchVariance);
+        src.pitch  = Mathf.Clamp(randomPitch, 0.1f, 3f); // Unity's pitch range is roughly 0 to 3
+        
         src.loop   = group.Loop;
     }
 
