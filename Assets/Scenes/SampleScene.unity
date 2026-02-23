@@ -1121,6 +1121,7 @@ GameObject:
   - component: {fileID: 1030423176}
   - component: {fileID: 1030423177}
   - component: {fileID: 1030423178}
+  - component: {fileID: 1030423179}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1248,7 +1249,7 @@ MonoBehaviour:
   TorchLight: {fileID: 715760574}
   Inventory: {fileID: 0}
   _spriteRenderer: {fileID: 1030423174}
-  _moveSpeed: 2.5
+  _moveSpeed: 8
   _jumpPower: 10
   _groundLayer:
     serializedVersion: 2
@@ -1289,6 +1290,18 @@ MonoBehaviour:
   - AnimationName: Walk
     FrameIndices: 0000000001000000
     SoundGroupName: FootstepPlayer
+--- !u!114 &1030423179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030423170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6dee89cb9d0b1448d8480c7a0efec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
 --- !u!4 &1036857643 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 783548827428617906, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
