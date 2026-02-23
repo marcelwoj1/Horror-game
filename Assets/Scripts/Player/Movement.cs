@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
     private float _GROUND_CHECK_RADIUS = 0.15f;
     private float _JUMP_BUFFER = 0.5f;
     private bool IsLit;
-    private bool IsInventoryOpen;
+    private bool IsInventoryOpen = false;
 
 
 
@@ -160,11 +160,25 @@ public class Movement : MonoBehaviour
             TorchLight.SetActive(IsLit);
         }
 
-        //Inventory
-        if (Input.GetKeyDown(KeyCode.I))
+        
+    }
+    public void InventoryButton()
+    {
+        Debug.Log("Inventory Button Pressed");
+        if(IsInventoryOpen == false)
         {
-            if(IsInventoryOpen == false){IsInventoryOpen = true;} else {IsInventoryOpen = false;}
+            IsInventoryOpen = true;
             Inventory.SetActive(IsInventoryOpen);
+            Debug.Log("Inventory Opened");
+            _rigidBody.linearVelocityX = 0;
+            _rigidBody.linearVelocityY = 0;
+            _animator.Play("Idle");
+        }
+        else
+        {
+            IsInventoryOpen = false;
+            Inventory.SetActive(IsInventoryOpen);
+            Debug.Log("Inventory Closed");
         }
     }
 
@@ -172,16 +186,19 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
 
-
-        // Move
-        _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
-
-        if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
+        if(IsInventoryOpen == false)
         {
-            _lastJumpInput = -100f;
-            _rigidBody.linearVelocityY = 0;
-            _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+            // Move
+            _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
+            
+            if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
+            {
+                _lastJumpInput = -100f;
+                _rigidBody.linearVelocityY = 0;
+                _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+            }
         }
+                
 
     }
 
