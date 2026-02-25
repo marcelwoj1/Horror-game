@@ -5,7 +5,15 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Image image;
+    
     [HideInInspector] public Transform parentAfterDrag;
+    [HideInInspector] public Item item;
+
+    public void Initialize(Item newItem)
+    {
+        item = newItem;
+        image.sprite = newItem.itemImage;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {

@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class InvenotryManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public InventorySlot[] inventorySlots;
+    public GameObject InventoryPrefab;
+
+    public void AddItem(Item item)
     {
-        
+        for(int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            Inventory ItemInSlot = slot.GetComponentInChildren<Inventory>();
+            if(ItemInSlot == null)
+            {
+                SpawnNewItem(item, slot);
+                return;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void SpawnNewItem(Item item, InventorySlot slot)
     {
-        
+        GameObject newItem = Instantiate(InventoryPrefab, slot.transform);
+        Inventory inventory = newItem.GetComponent<Inventory>();
+        inventory.Initialize(item);
     }
 }
