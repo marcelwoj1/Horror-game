@@ -134,7 +134,7 @@ public class SpriteAnimator : MonoBehaviour
     /// </summary>
     public void Play(string animationName)
     {
-        Play(animationName, null);
+        Play(animationName, null, false);
     }
 
     /// <summary>
@@ -142,8 +142,20 @@ public class SpriteAnimator : MonoBehaviour
     /// </summary>
     public void Play(string animationName, bool? overrideLoop)
     {
+        Play(animationName, overrideLoop, false);
+    }
+
+    /// <summary>
+    /// Plays an animation by name with optional loop override and force play option.
+    /// </summary>
+    public void Play(string animationName, bool? overrideLoop, bool forcePlay)
+    {
         // Don't restart if already playing the same thing (unless we're changing the loop override)
         if (_currentAnimation != null && _currentAnimation.AnimationName == animationName && _isPlaying && overrideLoop == _loopOverride)
+            return;
+
+        // If the current animation is uninterruptible and still playing, bypass unless forcePlay is true
+        if (!forcePlay && _isPlaying && _currentAnimation != null && _currentAnimation.Uninterruptible)
             return;
 
         if (_animationDict.TryGetValue(animationName, out CustomSpriteAnimation anim))

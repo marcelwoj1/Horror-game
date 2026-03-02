@@ -148,8 +148,19 @@ public class Movement : MonoBehaviour
             }
             else
             {
-                if (MoveState == MoveStates.Moving) _animator.Play("Walk");
-                else _animator.Play("Idle");
+                if (MoveState == MoveStates.Moving)
+                {
+                    _animator.Play("Walk");
+                }
+                else
+                {
+                    _animator.Play("Idle");
+                }
+                
+                if(Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _animator.Play("Attack");
+                }
             }
         }
 
@@ -159,8 +170,6 @@ public class Movement : MonoBehaviour
             if(IsLit == false){IsLit = true;} else {IsLit = false;}
             TorchLight.SetActive(IsLit);
         }
-
-        
     }
     public void InventoryButton()
     {
