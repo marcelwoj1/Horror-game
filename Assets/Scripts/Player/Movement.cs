@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
     private float _JUMP_BUFFER = 0.5f;
     private bool IsLit;
     private bool IsInventoryOpen = false;
+    public bool HasAxe = false;
 
 
 
@@ -157,7 +158,7 @@ public class Movement : MonoBehaviour
                     _animator.Play("Idle");
                 }
                 
-                if(Input.GetKeyDown(KeyCode.Mouse0))
+                if(Input.GetKeyDown(KeyCode.Mouse0) && HasAxe == true)
                 {
                     _animator.Play("Attack");
                 }
@@ -207,8 +208,10 @@ public class Movement : MonoBehaviour
                 _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
             }
         }
-                
-
+    }
+    public void PickAxeUp()
+    {
+        HasAxe = true;
     }
 
 }
