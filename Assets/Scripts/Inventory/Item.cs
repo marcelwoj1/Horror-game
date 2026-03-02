@@ -4,5 +4,6 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public string itemName;
+    public int SlotSize;
     public Sprite itemImage;
 }

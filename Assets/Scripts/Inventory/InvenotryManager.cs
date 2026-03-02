@@ -13,8 +13,11 @@ public class InvenotryManager : MonoBehaviour
             Inventory ItemInSlot = slot.GetComponentInChildren<Inventory>();
             if(ItemInSlot == null)
             {
-                SpawnNewItem(item, slot);
-                return;
+                if(item.SlotSize == slot.slotSize)
+                {
+                    SpawnNewItem(item, slot);
+                    return;
+                }
             }
         }
     }
@@ -23,6 +26,7 @@ public class InvenotryManager : MonoBehaviour
     {
         GameObject newItem = Instantiate(InventoryPrefab, slot.transform);
         Inventory inventory = newItem.GetComponent<Inventory>();
+        inventory.isBottomSlot = slot.BottomSlot;
         inventory.Initialize(item);
     }
 }

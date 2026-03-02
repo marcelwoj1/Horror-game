@@ -273,6 +273,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5004865055505499445, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: m_CellSize.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004865055505499445, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004865055505499445, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Constraint
       value: 0
       objectReference: {fileID: 0}
@@ -283,6 +291,14 @@ PrefabInstance:
     - target: {fileID: 5013597780611394829, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Name
       value: InventorySlot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: slotSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: BottomSlot
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7662742096793910751, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Pivot.x
@@ -1284,6 +1300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: slotSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7662742096793910751, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1766,6 +1786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: slotSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7662742096793910751, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1988,6 +2012,10 @@ PrefabInstance:
     - target: {fileID: 5013597780611394829, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Name
       value: InventorySlot (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: slotSize
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7662742096793910751, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Pivot.x
@@ -2361,6 +2389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   image: {fileID: 0}
+  SlotSize: 0
+  isBottomSlot: 0
   parentAfterDrag: {fileID: 0}
   item: {fileID: 0}
 --- !u!114 &1030423180
@@ -2943,6 +2973,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: slotSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7662742096793910751, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3206,7 +3240,7 @@ Transform:
   m_GameObject: {fileID: 1428958001}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.63, y: 9.15, z: 0}
+  m_LocalPosition: {x: -8.39, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4761,6 +4795,10 @@ PrefabInstance:
     - target: {fileID: 5013597780611394829, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Name
       value: InventorySlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: slotSize
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7662742096793910751, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: m_Pivot.x
