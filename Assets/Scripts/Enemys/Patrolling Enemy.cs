@@ -5,40 +5,36 @@ public class PatrollingEnemy : MonoBehaviour
     private Vector2 _movementDirection;
     private Rigidbody2D _rigidBody;
 
-    private bool IsMovingRight = false;
+    public bool IsMovingRight = false;
 
-    private Transform _leftTarget;
-    private Transform _rightTarget;
+    public Transform LeftTarget;
+    public Transform RightTarget;
+
+    public float _leftTargetX;
+    public float _rightTargetX;
+    public float _currentPositionX;
 
     public float _moveSpeed;
 
     public void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
-        _leftTarget = transform.Find("LeftTarget");
-        _rightTarget = transform.Find("RightTarget");
+        _movementDirection = (RightTarget.position - transform.position).normalized;
+        _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
     }
     public void Update()
     {
-        
-
-        if(transform.position.x > _leftTarget.position.x)
+        _currentPositionX = transform.position.x;
+        _leftTargetX = LeftTarget.position.x;
+        _rightTargetX = RightTarget.position.x;
+        if(transform.position.x < LeftTarget.position.x)
         {
-            IsMovingRight = false;
-        }
-        if(transform.position.x < _rightTarget.position.x)
-        {
-            IsMovingRight = true;
-        }
-
-        if(IsMovingRight == true)
-        {
-            _movementDirection = (_rightTarget.position - transform.position).normalized;
+            _movementDirection = (RightTarget.position - transform.position).normalized;
             _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
         }
-        else
+        else if(transform.position.x > RightTarget.position.x)
         {
-            _movementDirection = (_leftTarget.position - transform.position).normalized;
+            _movementDirection = (LeftTarget.position - transform.position).normalized;
             _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
         }
         
