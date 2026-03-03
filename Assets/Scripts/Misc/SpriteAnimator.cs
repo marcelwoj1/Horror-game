@@ -1,6 +1,19 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class AnimationStringEvent : UnityEvent<string> { }
+
+[System.Serializable]
+public class AnimationSpecificEvents
+{
+    [Tooltip("The exact name of the animation to listen for.")]
+    public string AnimationName;
+    public UnityEvent onAnimationStart;
+    public UnityEvent onAnimationEnd;
+}
 
 public class SpriteAnimator : MonoBehaviour
 {
@@ -27,6 +40,44 @@ public class SpriteAnimator : MonoBehaviour
 
     /// <summary>Fired every frame change: (animationName, frameIndex)</summary>
     public event Action<string, int> OnFrameChanged;
+
+    /// <summary>Fired when an animation starts: (animationName)</summary>
+    public event Action<string> OnAnimationStarted;
+    
+    /// <summary>Fired when an animation ends or is stopped: (animationName)</summary>
+    public event Action<string> OnAnimationEnded;
+
+    [Header("Events")]
+    public AnimationStringEvent onAnimationStart;
+    public AnimationStringEvent onAnimationEnd;
+
+    [Header("Specific Animation Events")]
+    [Tooltip("Define events that only trigger for specific animations.")]
+    [SerializeField] private List<AnimationSpecificEvents> _specificEvents = new List<AnimationSpecificEvents>();
+
+    private void TryInvokeSpecificStartEvent(string animName)
+    {
+        if (string.IsNullOrEmpty(animName)) return;
+        foreach (var specEvent in _specificEvents)
+        {
+            if (specEvent.AnimationName == animName)
+            {
+                specEvent.onAnimationStart?.Invoke();
+            }
+        }
+    }
+
+    private void TryInvokeSpecificEndEvent(string animName)
+    {
+        if (string.IsNullOrEmpty(animName)) return;
+        foreach (var specEvent in _specificEvents)
+        {
+            if (specEvent.AnimationName == animName)
+            {
+                specEvent.onAnimationEnd?.Invoke();
+            }
+        }
+    }
 
     void Awake()
     {
@@ -94,6 +145,9 @@ public class SpriteAnimator : MonoBehaviour
                     {
                         _currentFrame = 0;
                         _isPlaying = false;
+                        OnAnimationEnded?.Invoke(_currentAnimation?.AnimationName);
+                        onAnimationEnd?.Invoke(_currentAnimation?.AnimationName);
+                        TryInvokeSpecificEndEvent(_currentAnimation?.AnimationName);
                     }
                 }
             }
@@ -112,6 +166,9 @@ public class SpriteAnimator : MonoBehaviour
                     {
                         _currentFrame = _currentAnimation.Frames.Length - 1;
                         _isPlaying = false;
+                        OnAnimationEnded?.Invoke(_currentAnimation?.AnimationName);
+                        onAnimationEnd?.Invoke(_currentAnimation?.AnimationName);
+                        TryInvokeSpecificEndEvent(_currentAnimation?.AnimationName);
                     }
                 }
             }
@@ -160,6 +217,13 @@ public class SpriteAnimator : MonoBehaviour
 
         if (_animationDict.TryGetValue(animationName, out CustomSpriteAnimation anim))
         {
+            if (_isPlaying && _currentAnimation != null)
+            {
+                OnAnimationEnded?.Invoke(_currentAnimation?.AnimationName);
+                onAnimationEnd?.Invoke(_currentAnimation?.AnimationName);
+                TryInvokeSpecificEndEvent(_currentAnimation?.AnimationName);
+            }
+
             _currentAnimation = anim;
             _currentFrame = 0;
             _timer = 0f;
@@ -168,6 +232,10 @@ public class SpriteAnimator : MonoBehaviour
             _isPlaying = true;
             
             UpdateSprite();
+
+            OnAnimationStarted?.Invoke(animationName);
+            onAnimationStart?.Invoke(animationName);
+            TryInvokeSpecificStartEvent(animationName);
         }
         else
         {
@@ -180,7 +248,13 @@ public class SpriteAnimator : MonoBehaviour
     /// </summary>
     public void Stop()
     {
-        _isPlaying = false;
+        if (_isPlaying)
+        {
+            _isPlaying = false;
+            OnAnimationEnded?.Invoke(_currentAnimation?.AnimationName);
+            onAnimationEnd?.Invoke(_currentAnimation?.AnimationName);
+            TryInvokeSpecificEndEvent(_currentAnimation?.AnimationName);
+        }
     }
 
     /// <summary>
