@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 92324c529d31ed8478d83206377b05ec
+guid: 36f9b8755cb8e1e4a839536c7b443d5c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7524734132379597227
-    second: t_inventoryButton_0
+      213: -142147035152209379
+    second: spider enemy sprite sheet_0
+  - first:
+      213: -5304884799545212022
+    second: spider enemy sprite sheet_1
+  - first:
+      213: 1099513967080624902
+    second: spider enemy sprite sheet_2
+  - first:
+      213: -1533162248320307540
+    second: spider enemy sprite sheet_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: t_inventoryButton_0
+      name: spider enemy sprite sheet_0
       rect:
         serializedVersion: 2
-        x: 188
-        y: 207
-        width: 218
-        height: 191
+        x: 0
+        y: 95
+        width: 140
+        height: 85
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba93ebd53d93d6860800000000000000
-      internalID: 7524734132379597227
+      spriteID: d1aa0ef460ef60ef0800000000000000
+      internalID: -142147035152209379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider enemy sprite sheet_1
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 90
+        width: 139
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a830dbc91634166b0800000000000000
+      internalID: -5304884799545212022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider enemy sprite sheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 139
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 603db69a022424f00800000000000000
+      internalID: 1099513967080624902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider enemy sprite sheet_3
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 0
+        width: 140
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cae24d5ee0d19bae0800000000000000
+      internalID: -1533162248320307540
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 95e7d8dfec7f7d049ae047e8238c0158
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -133,11 +208,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      t_inventoryButton_0: 7524734132379597227
+      spider enemy sprite sheet_0: -142147035152209379
+      spider enemy sprite sheet_1: -5304884799545212022
+      spider enemy sprite sheet_2: 1099513967080624902
+      spider enemy sprite sheet_3: -1533162248320307540
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

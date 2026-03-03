@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 92324c529d31ed8478d83206377b05ec
+guid: fe0db0604665ce44aad6e2401eae3e4c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7524734132379597227
-    second: t_inventoryButton_0
+      213: -1362058913294850930
+    second: Crate_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: t_inventoryButton_0
+      name: Crate_0
       rect:
         serializedVersion: 2
-        x: 188
-        y: 207
-        width: 218
-        height: 191
+        x: 0
+        y: 0
+        width: 1849
+        height: 1208
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba93ebd53d93d6860800000000000000
-      internalID: 7524734132379597227
+      spriteID: e84e7e582aef81de0800000000000000
+      internalID: -1362058913294850930
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 95e7d8dfec7f7d049ae047e8238c0158
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -133,11 +133,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      t_inventoryButton_0: 7524734132379597227
+      Crate_0: -1362058913294850930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
