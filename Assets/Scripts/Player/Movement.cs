@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     private bool IsLit;
     private bool IsInventoryOpen = false;
     public bool HasAxe = false;
+    public bool AllowMovement = true;
 
 
 
@@ -183,12 +184,14 @@ public class Movement : MonoBehaviour
             _rigidBody.linearVelocityX = 0;
             _rigidBody.linearVelocityY = 0;
             _animator.Play("Idle");
+            AllowMovement = false;
         }
         else
         {
             IsInventoryOpen = false;
             Inventory.SetActive(IsInventoryOpen);
             Debug.Log("Inventory Closed");
+            AllowMovement = true;
         }
     }
 
@@ -196,7 +199,7 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(IsInventoryOpen == false)
+        if(IsInventoryOpen == false && AllowMovement == true)
         {
             // Move
             _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
