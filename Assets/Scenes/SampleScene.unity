@@ -1988,31 +1988,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &826598025 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 960618359566598385, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-  m_PrefabInstance: {fileID: 4925329803728686259}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &826598026 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6965142080199110243, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
   m_PrefabInstance: {fileID: 4925329803728686259}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &826598033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826598025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe3401a302307b4ab23a2d2647703bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol
-  patrolPointsParent: {fileID: 940915113}
-  speed: 3
-  waitTime: 1
 --- !u!1001 &851596004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2232,11 +2212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee60293b00f8d9146a441627f6f4672b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
---- !u!4 &940915113 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7937886408632977940, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-  m_PrefabInstance: {fileID: 4925329803728686259}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &952270546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2724,19 +2699,7 @@ MonoBehaviour:
           m_CallState: 2
     onAnimationEnd:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
-          m_MethodName: StopAttack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!114 &1030423178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5741,18 +5704,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1695455236}
     m_Modifications:
-    - target: {fileID: 572300322942457883, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1719217461602866877, guid: 90fed0f889621494d9b33471b1d085c4, type: 3}
-    - target: {fileID: 777263917943362475, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 777263917943362475, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.92
-      objectReference: {fileID: 0}
     - target: {fileID: 960618359566598385, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: m_Name
       value: Patrolling Spider
@@ -5762,25 +5713,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1030423180}
     - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: _startingAnimation
-      value: Idle
-      objectReference: {fileID: 0}
-    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: _animations.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: '_animations.Array.data[0]'
+      propertyPath: '_animations.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: 8dc40eef2bb403542a4d73ebb8ac75c7, type: 2}
-    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: '_animations.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 6090aed4ecbff904fba73ea9c498ce18, type: 2}
-    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: '_animations.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: a5ff5f5428912e4438d7b041f846a636, type: 2}
+      objectReference: {fileID: 11400000, guid: 234dc8c11fd925341b0ea1839f0119c2, type: 2}
     - target: {fileID: 6965142080199110243, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.7399993
@@ -5821,14 +5760,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2579692860753231839, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 960618359566598385, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 826598033}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

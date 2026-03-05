@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6965142080199110243}
   - component: {fileID: 572300322942457883}
   - component: {fileID: 2660978529091654807}
-  - component: {fileID: 2579692860753231839}
   - component: {fileID: 8927422059593000791}
   - component: {fileID: 777263917943362475}
   - component: {fileID: 1341357041840034884}
+  - component: {fileID: 5195721347503425492}
   m_Layer: 7
   m_Name: Patrolling Spider
   m_TagString: Enemy
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960618359566598385}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.124439, y: 17.2129, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -142147035152209379, guid: 36f9b8755cb8e1e4a839536c7b443d5c, type: 3}
+  m_Sprite: {fileID: 1719217461602866877, guid: 90fed0f889621494d9b33471b1d085c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,8 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
   _animations:
-  - {fileID: 11400000, guid: 7310d7ad66042b743ad1ee8cb5187707, type: 2}
-  _startingAnimation: Walk
+  - {fileID: 11400000, guid: 8dc40eef2bb403542a4d73ebb8ac75c7, type: 2}
+  - {fileID: 11400000, guid: 6090aed4ecbff904fba73ea9c498ce18, type: 2}
+  - {fileID: 11400000, guid: a5ff5f5428912e4438d7b041f846a636, type: 2}
+  _startingAnimation: Idle
   onAnimationStart:
     m_PersistentCalls:
       m_Calls: []
@@ -119,22 +121,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _specificEvents: []
---- !u!114 &2579692860753231839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960618359566598385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2a98a1a0608a1429aae17aaa4d60e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PatrollingEnemy
-  LeftTarget: {fileID: 776968214113666350}
-  RightTarget: {fileID: 3244780832156062119}
-  _moveSpeed: 5
-  _playerHealth: {fileID: 0}
 --- !u!50 &8927422059593000791
 Rigidbody2D:
   serializedVersion: 5
@@ -200,7 +186,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.8, y: 1.7}
+    oldSize: {x: 2.82, y: 1.84}
     newSize: {x: 2.8, y: 1.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -221,6 +207,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   health: 5
+  _playerHealth: {fileID: 0}
+--- !u!114 &5195721347503425492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960618359566598385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe3401a302307b4ab23a2d2647703bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol
+  patrolPointsParent: {fileID: 7937886408632977940}
+  speed: 3
+  waitTime: 1
 --- !u!1 &3061267285988975567
 GameObject:
   m_ObjectHideFlags: 0
