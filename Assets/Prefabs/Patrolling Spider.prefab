@@ -114,6 +114,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6090aed4ecbff904fba73ea9c498ce18, type: 2}
   - {fileID: 11400000, guid: a5ff5f5428912e4438d7b041f846a636, type: 2}
   - {fileID: 11400000, guid: 234dc8c11fd925341b0ea1839f0119c2, type: 2}
+  - {fileID: 11400000, guid: f5d036fe0bcb0c24faa467ee43ed834e, type: 2}
   _startingAnimation: Idle
   onAnimationStart:
     m_PersistentCalls:
@@ -121,7 +122,26 @@ MonoBehaviour:
   onAnimationEnd:
     m_PersistentCalls:
       m_Calls: []
-  _specificEvents: []
+  _specificEvents:
+  - AnimationName: Explosion
+    onAnimationStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onAnimationEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1341357041840034884}
+          m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+          m_MethodName: Die
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!50 &8927422059593000791
 Rigidbody2D:
   serializedVersion: 5
