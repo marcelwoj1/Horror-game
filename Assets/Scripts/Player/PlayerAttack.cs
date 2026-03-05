@@ -3,46 +3,49 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public Movement _movement;
-    public GameObject AttackPoint;
+    public Transform attackPoint;
+    public Vector2 attackSize = new Vector2(1, 1);
+    public LayerMask enemyLayer;
     
     private SpriteRenderer _spriteRenderer;
 
-    public bool IsAttcking;
-
-    public void Attack()
-    {
-        IsAttcking = true;
-    }
-
-    public void StopAttack()
-    {
-        IsAttcking = false;
-    }
 
     void Update()
     {
-        if (AttackPoint != null)
+        if (attackPoint != null)
         {
-            float xPos = Mathf.Abs(AttackPoint.transform.localPosition.x);
+            float xPos = Mathf.Abs(attackPoint.transform.localPosition.x);
 
             if (_movement._spriteRenderer.flipX) // Right
             {
-                AttackPoint.transform.localPosition = new Vector3(xPos, AttackPoint.transform.localPosition.y, AttackPoint.transform.localPosition.z);
+                attackPoint.transform.localPosition = new Vector3(xPos, attackPoint.transform.localPosition.y, attackPoint.transform.localPosition.z);
             }
             else // Left
             {
-                AttackPoint.transform.localPosition = new Vector3(-xPos, AttackPoint.transform.localPosition.y, AttackPoint.transform.localPosition.z);
+                attackPoint.transform.localPosition = new Vector3(-xPos, attackPoint.transform.localPosition.y, attackPoint.transform.localPosition.z);
             }
         }
     }
-
-    void OnTriggerEnter2D(Collider2D collision)
+    public void Attack()
     {
-        if (collision.CompareTag("Enemy") && IsAttcking)
-        {
-            Debug.Log("Enemy hit");
-            IsAttcking = false;
-        }
+        Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(
+        attackPoint.position,
+        attackSize,
+        0f,
+        enemyLayer
+    );
+
+    foreach (Collider2D enemy in enemiesHit)
+    {
+        enemy.GetComponent<Enemy>().TakeDamage(1);
     }
-    
+    }
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPoint.position, attackSize);
+    }
 }
+
