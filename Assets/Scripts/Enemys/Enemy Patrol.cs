@@ -12,12 +12,18 @@ public class EnemyPatrol : MonoBehaviour
 
     private float waitTimer;
     private bool waiting;
+
+    private Rigidbody2D rb;
     private SpriteAnimator _animator;
+
+    // ⭐ New — prevents patrol from cancelling knockback
+    public bool isKnockedBack;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<SpriteAnimator>();
-        // Store world positions of patrol points
+
         foreach (Transform point in patrolPointsParent)
         {
             patrolPoints.Add(point.position);
@@ -28,8 +34,12 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (patrolPoints.Count == 0) return;
 
+        if (isKnockedBack) return; // ⭐ STOP PATROL DURING KNOCKBACK
+
         if (waiting)
         {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+
             waitTimer += Time.deltaTime;
 
             if (waitTimer >= waitTime)
@@ -47,25 +57,27 @@ public class EnemyPatrol : MonoBehaviour
 
     void MoveToPoint()
     {
-        _animator.Play("Walk");
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            patrolPoints[currentPoint],
-            speed * Time.deltaTime
-        );
+        Vector3 target = patrolPoints[currentPoint];
 
-        if (Vector3.Distance(transform.position, patrolPoints[currentPoint]) < 0.05f)
+        float direction = Mathf.Sign(target.x - transform.position.x);
+
+        rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
+
+        _animator.Play("Walk");
+
+        if (Mathf.Abs(transform.position.x - target.x) < 0.1f)
         {
             waiting = true;
             _animator.Play("Idle");
         }
-        Vector3 direction = patrolPoints[currentPoint] - transform.position;
 
-        if (direction.x > 0)
+        // Flip sprite
+        if (direction > 0)
             transform.localScale = new Vector3(1, 1, 1);
-        else if (direction.x < 0)
+        else if (direction < 0)
             transform.localScale = new Vector3(-1, 1, 1);
     }
+
     void OnDrawGizmos()
     {
         if (patrolPointsParent == null) return;

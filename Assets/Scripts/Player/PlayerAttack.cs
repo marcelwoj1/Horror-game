@@ -6,6 +6,8 @@ public class PlayerAttack : MonoBehaviour
     public Transform attackPoint;
     public Vector2 attackSize = new Vector2(1, 1);
     public LayerMask enemyLayer;
+    public int attackDamage = 1;
+    public float knockbackForce = 10f;
     
     private SpriteRenderer _spriteRenderer;
 
@@ -34,10 +36,23 @@ public class PlayerAttack : MonoBehaviour
         0f,
         enemyLayer
     );
+    
 
-    foreach (Collider2D enemy in enemiesHit)
+    foreach (Collider2D hitCollider in enemiesHit)
     {
-        enemy.GetComponent<Enemy>().TakeDamage(1);
+        Enemy enemy = hitCollider.GetComponent<Enemy>();
+
+        if(enemy != null)
+        {
+            
+            Vector2 knockbackDir = (enemy.transform.position - transform.position);
+
+            knockbackDir.Normalize();
+
+            knockbackDir.y = 0.2f; 
+
+            enemy.TakeDamage(1, knockbackDir * knockbackForce);
+        }
     }
     }
     void OnDrawGizmosSelected()

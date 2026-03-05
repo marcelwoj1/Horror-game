@@ -1,38 +1,59 @@
 using UnityEngine;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-    public int health;
-    public PlayerHealth _playerHealth;
+    public int health = 3;
+
     private SpriteAnimator _animator;
+    private Rigidbody2D rb;
+    private EnemyPatrol patrol;
+    [HideInInspector] public bool isDead = false;
 
     void Start()
     {
         _animator = GetComponent<SpriteAnimator>();
+        rb = GetComponent<Rigidbody2D>();
+        patrol = GetComponent<EnemyPatrol>();
     }
-    public void TakeDamage(int damage)
+
+    public void TakeDamage(int damage, Vector2 knockback)
     {
+        if (patrol.isKnockedBack) return;
+        if (isDead) return;
+
         health -= damage;
+
         if (health <= 0)
         {
             _animator.Play("Explosion");
+            isDead = true;
         }
         else
         {
+            StartCoroutine(KnockbackRoutine(knockback));
+
             _animator.Play("Hurt");
+
+            GetComponent<Rigidbody2D>().AddForce(knockback, ForceMode2D.Impulse);
         }
+
     }
 
-    public void Die()
+    IEnumerator KnockbackRoutine(Vector2 knockback)
+    {
+        patrol.isKnockedBack = true;
+
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(knockback, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(0.35f);
+
+        patrol.isKnockedBack = false;
+    }
+
+    void Die()
     {
         Destroy(gameObject);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Player"))
-        {
-            _playerHealth.TakeDamage(1);
-            _animator.Play("Attack");
-        }
     }
 }
