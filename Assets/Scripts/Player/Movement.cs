@@ -18,8 +18,8 @@ public class Movement : MonoBehaviour
     private float _JUMP_BUFFER = 0.5f;
     private bool IsLit;
     private bool IsInventoryOpen = false;
-    public bool HasAxe = false;
-    public bool AllowMovement = true;
+    [HideInInspector] public bool HasAxe = false;
+    [HideInInspector] public bool AllowMovement = true;
 
 
 
@@ -32,6 +32,8 @@ public class Movement : MonoBehaviour
     private Transform _feetLocation;
     private SpriteAnimator _animator;
     public SpriteRenderer _spriteRenderer;
+    private PlayerAttack _playerAttack;
+
 
 
     // Config
@@ -79,7 +81,7 @@ public class Movement : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _feetLocation = transform.Find("FeetLocation").transform;
         _animator = GetComponent<SpriteAnimator>();
-        
+        _playerAttack = GetComponent<PlayerAttack>();
     }
 
     
@@ -139,8 +141,14 @@ public class Movement : MonoBehaviour
         if (_animator != null)
         {
             // Handle Flipping
-            if (_movementDirection.x > 0) _animator.SetFlip(true);
-            else if (_movementDirection.x < 0) _animator.SetFlip(false);
+            if (_movementDirection.x > 0) 
+            {
+                _animator.SetFlip(true);
+            }
+            else if (_movementDirection.x < 0) 
+            {
+                _animator.SetFlip(false);
+            }
 
             // Handle States
             if (AirState != AirStates.Grounded)
@@ -159,7 +167,7 @@ public class Movement : MonoBehaviour
                     _animator.Play("Idle");
                 }
                 
-                if(Input.GetKeyDown(KeyCode.Mouse0) && HasAxe == true)
+                if(Input.GetKeyDown(KeyCode.Mouse0) && HasAxe == true && IsInventoryOpen == false)
                 {
                     _animator.Play("Attack");
                 }

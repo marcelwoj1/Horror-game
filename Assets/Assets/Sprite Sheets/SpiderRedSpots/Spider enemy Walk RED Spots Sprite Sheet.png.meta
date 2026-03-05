@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 36f9b8755cb8e1e4a839536c7b443d5c
+guid: f5133e73af3d887429f4289755d87d42
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -142147035152209379
-    second: spider enemy sprite sheet_0
+      213: 1607911563433789606
+    second: Spider enemy Walk RED Spots Sprite Sheet_0
   - first:
-      213: -5304884799545212022
-    second: spider enemy sprite sheet_1
+      213: 4186795765824769779
+    second: Spider enemy Walk RED Spots Sprite Sheet_1
   - first:
-      213: 1099513967080624902
-    second: spider enemy sprite sheet_2
+      213: 1724443996521430704
+    second: Spider enemy Walk RED Spots Sprite Sheet_2
   - first:
-      213: -1533162248320307540
-    second: spider enemy sprite sheet_3
+      213: 7305169391445050384
+    second: Spider enemy Walk RED Spots Sprite Sheet_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,12 +109,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spider enemy sprite sheet_0
+      name: Spider enemy Walk RED Spots Sprite Sheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 95
-        width: 140
+        x: 68
+        y: 595
+        width: 141
         height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d1aa0ef460ef60ef0800000000000000
-      internalID: -142147035152209379
+      spriteID: 6a8c6b04c03705610800000000000000
+      internalID: 1607911563433789606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spider enemy sprite sheet_1
+      name: Spider enemy Walk RED Spots Sprite Sheet_1
       rect:
         serializedVersion: 2
-        x: 138
-        y: 90
+        x: 69
+        y: 408
         width: 139
-        height: 92
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,19 +146,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a830dbc91634166b0800000000000000
-      internalID: -5304884799545212022
+      spriteID: 3fe4811019c7a1a30800000000000000
+      internalID: 4186795765824769779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spider enemy sprite sheet_2
+      name: Spider enemy Walk RED Spots Sprite Sheet_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2
-        width: 139
+        x: 69
+        y: 229
+        width: 140
         height: 89
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -168,19 +168,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 603db69a022424f00800000000000000
-      internalID: 1099513967080624902
+      spriteID: 0bef6b7ada47ee710800000000000000
+      internalID: 1724443996521430704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spider enemy sprite sheet_3
+      name: Spider enemy Walk RED Spots Sprite Sheet_3
       rect:
         serializedVersion: 2
-        x: 138
-        y: 0
-        width: 140
+        x: 68
+        y: 45
+        width: 141
         height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -190,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cae24d5ee0d19bae0800000000000000
-      internalID: -1533162248320307540
+      spriteID: 01483296bdc216560800000000000000
+      internalID: 7305169391445050384
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spider enemy sprite sheet_0: -142147035152209379
-      spider enemy sprite sheet_1: -5304884799545212022
-      spider enemy sprite sheet_2: 1099513967080624902
-      spider enemy sprite sheet_3: -1533162248320307540
+      Spider enemy Walk RED Spots Sprite Sheet_0: 1607911563433789606
+      Spider enemy Walk RED Spots Sprite Sheet_1: 4186795765824769779
+      Spider enemy Walk RED Spots Sprite Sheet_2: 1724443996521430704
+      Spider enemy Walk RED Spots Sprite Sheet_3: 7305169391445050384
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
