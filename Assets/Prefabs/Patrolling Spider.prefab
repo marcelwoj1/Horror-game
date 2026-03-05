@@ -113,6 +113,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8dc40eef2bb403542a4d73ebb8ac75c7, type: 2}
   - {fileID: 11400000, guid: 6090aed4ecbff904fba73ea9c498ce18, type: 2}
   - {fileID: 11400000, guid: a5ff5f5428912e4438d7b041f846a636, type: 2}
+  - {fileID: 11400000, guid: 234dc8c11fd925341b0ea1839f0119c2, type: 2}
   _startingAnimation: Idle
   onAnimationStart:
     m_PersistentCalls:

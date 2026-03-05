@@ -1993,6 +1993,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6965142080199110243, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
   m_PrefabInstance: {fileID: 4925329803728686259}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &826598027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1341357041840034884, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+  m_PrefabInstance: {fileID: 4925329803728686259}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6160b8e5475ff4baa834933dbf7d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
 --- !u!1001 &851596004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5714,12 +5725,48 @@ PrefabInstance:
       objectReference: {fileID: 1030423180}
     - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: _animations.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: '_animations.Array.data[3]'
+      propertyPath: '_animations.Array.data[4]'
       value: 
-      objectReference: {fileID: 11400000, guid: 234dc8c11fd925341b0ea1839f0119c2, type: 2}
+      objectReference: {fileID: 11400000, guid: f5d036fe0bcb0c24faa467ee43ed834e, type: 2}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].AnimationName
+      value: Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].onAnimationEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].onAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].onAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 826598027}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].onAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].onAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Die
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].onAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Enemy, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].onAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6965142080199110243, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.7399993

@@ -16,11 +16,11 @@ public class Enemy : MonoBehaviour
         _animator.Play("Hurt");
         if (health <= 0)
         {
-            Die();
+            _animator.Play("Explosion");
         }
     }
 
-    void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }
