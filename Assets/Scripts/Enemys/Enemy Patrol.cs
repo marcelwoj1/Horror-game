@@ -15,8 +15,6 @@ public class EnemyPatrol : MonoBehaviour
 
     private Rigidbody2D rb;
     private SpriteAnimator _animator;
-
-    // ⭐ New — prevents patrol from cancelling knockback
     public bool isKnockedBack;
 
     void Start()
@@ -34,7 +32,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (patrolPoints.Count == 0) return;
 
-        if (isKnockedBack) return; // ⭐ STOP PATROL DURING KNOCKBACK
+        if (isKnockedBack) return;
 
         if (waiting)
         {
