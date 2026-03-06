@@ -3,88 +3,143 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
+    public Transform player;
+    private float startY;
+
+    [Header("Movement")]
+    public float patrolSpeed = 2f;
+    public float chaseSpeed = 4f;
+
+    [Header("Vision")]
+    public float viewDistance = 6f;
+    public float viewAngle = 60f;
+    public LayerMask visionMask;
+
+    [Header("Patrol")]
     public Transform patrolPointsParent;
-    public float speed = 3f;
-    public float waitTime = 1f;
+    
+    List<Vector3> patrolPoints = new List<Vector3>();
+    int currentPoint;
 
-    private List<Vector3> patrolPoints = new List<Vector3>();
-    private int currentPoint = 0;
-
-    private float waitTimer;
-    private bool waiting;
-
-    private Rigidbody2D rb;
-    private SpriteAnimator _animator;
     public bool isKnockedBack;
+    private SpriteAnimator _animator;
+
+    enum EnemyState
+    {
+        Patrol,
+        Chase,
+        Search
+    }
+
+    EnemyState currentState;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<SpriteAnimator>();
-
+        startY = transform.position.y;
         foreach (Transform point in patrolPointsParent)
         {
             patrolPoints.Add(point.position);
         }
+
+        currentState = EnemyState.Patrol;
+        _animator = GetComponent<SpriteAnimator>();
     }
 
     void Update()
     {
-        if (patrolPoints.Count == 0) return;
-
-        if (isKnockedBack) return;
-
-        if (waiting)
-        {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-
-            waitTimer += Time.deltaTime;
-
-            if (waitTimer >= waitTime)
-            {
-                waiting = false;
-                waitTimer = 0f;
-                currentPoint = (currentPoint + 1) % patrolPoints.Count;
-            }
-
+        if (isKnockedBack)
             return;
-        }
+            
+        DetectPlayer();
 
-        MoveToPoint();
+        switch (currentState)
+        {
+            case EnemyState.Patrol:
+                Patrol();
+                break;
+
+            case EnemyState.Chase:
+                ChasePlayer();
+                break;
+
+            case EnemyState.Search:
+                Search();
+                break;
+        }
     }
 
-    void MoveToPoint()
+    void DetectPlayer()
+    {
+        Vector2 direction = player.position - transform.position;
+        float distance = direction.magnitude;
+
+        if (distance < viewDistance)
+        {
+            Vector2 facing = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+
+            float angle = Vector2.Angle(facing, direction);
+
+            if (angle < viewAngle / 2)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, viewDistance, ~visionMask);
+
+                if (hit.collider != null && hit.collider.CompareTag("Player"))
+                {
+                    currentState = EnemyState.Chase;
+                }
+            }
+        }
+    }
+
+    void Patrol()
     {
         Vector3 target = patrolPoints[currentPoint];
 
-        float direction = Mathf.Sign(target.x - transform.position.x);
-
-        rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
-
+        transform.position = Vector2.MoveTowards(transform.position, target, patrolSpeed * Time.deltaTime);
         _animator.Play("Walk");
 
-        if (Mathf.Abs(transform.position.x - target.x) < 0.1f)
+        if (Vector2.Distance(transform.position, target) < 0.2f)
         {
-            waiting = true;
-            _animator.Play("Idle");
-        }
+            currentPoint++;
 
-        // Flip sprite
-        if (direction > 0)
-            transform.localScale = new Vector3(1, 1, 1);
-        else if (direction < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
+            if (currentPoint >= patrolPoints.Count)
+                currentPoint = 0;
+        }
+        if (target.x > transform.position.x)
+            transform.localScale = new Vector3(1,1,1);
+        else
+            transform.localScale = new Vector3(-1,1,1);
     }
 
-    void OnDrawGizmos()
+    void ChasePlayer()
     {
-        if (patrolPointsParent == null) return;
+        float direction = Mathf.Sign(player.position.x - transform.position.x);
 
-        Gizmos.color = Color.red;
+        Vector3 target = new Vector3(player.position.x, startY, transform.position.z);
 
-        foreach (Transform point in patrolPointsParent)
+        Vector3 move = new Vector3(direction * chaseSpeed * Time.deltaTime, 0, 0);
+        _animator.Play("Walk");
+        float distance = Vector2.Distance(transform.position, player.position);
+        transform.position += move;
+
+        if (distance > viewDistance * 1.5f)
         {
-            Gizmos.DrawSphere(point.position, 0.2f);
+            currentState = EnemyState.Search;
         }
+        if (player.position.x > transform.position.x)
+            transform.localScale = new Vector3(1,1,1);
+        else
+            transform.localScale = new Vector3(-1,1,1);
     }
+
+    void Search()
+    {
+        // Simple version: return to patrol
+        currentState = EnemyState.Patrol;
+    }
+    void OnDrawGizmos()
+{
+    Gizmos.color = Color.yellow;
+    Gizmos.DrawWireSphere(transform.position, viewDistance);
+}
 }
