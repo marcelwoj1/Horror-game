@@ -5,13 +5,18 @@ public class Hiding : MonoBehaviour
     Movement _movement;
     SpriteRenderer _spriteRenderer;
 
-    bool IsHiding;
+    [HideInInspector] public bool IsHiding;
 
     public void Hide()
     {
         IsHiding = true;
         _movement.AllowMovement = false;
         _spriteRenderer.color = new Color(0.1f, 0.1f, 0.1f, 0.1f);
+        Physics2D.IgnoreLayerCollision(
+                LayerMask.NameToLayer("Player"),
+                LayerMask.NameToLayer("Enemy"),
+                true
+        );
     }
 
     public void UnHide()
@@ -19,6 +24,11 @@ public class Hiding : MonoBehaviour
         IsHiding = false;
         _movement.AllowMovement = true;
         _spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+        Physics2D.IgnoreLayerCollision(
+                LayerMask.NameToLayer("Player"),
+                LayerMask.NameToLayer("Enemy"),
+                false
+        );
     }
 
     public void Start()

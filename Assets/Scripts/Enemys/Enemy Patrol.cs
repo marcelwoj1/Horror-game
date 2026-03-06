@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyPatrol : MonoBehaviour
 {
     public Transform player;
+    public Hiding _hiding;
     private float startY;
 
     [Header("Movement")]
@@ -83,7 +84,7 @@ public class EnemyPatrol : MonoBehaviour
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, viewDistance, ~visionMask);
 
-                if (hit.collider != null && hit.collider.CompareTag("Player"))
+                if (hit.collider != null && hit.collider.CompareTag("Player") && !_hiding.IsHiding)
                 {
                     currentState = EnemyState.Chase;
                 }
@@ -113,6 +114,9 @@ public class EnemyPatrol : MonoBehaviour
 
     void ChasePlayer()
     {
+        if (_hiding.IsHiding)
+            currentState = EnemyState.Search;
+
         float direction = Mathf.Sign(player.position.x - transform.position.x);
 
         Vector3 target = new Vector3(player.position.x, startY, transform.position.z);

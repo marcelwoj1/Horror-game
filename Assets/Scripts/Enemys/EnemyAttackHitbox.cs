@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyAttackHitbox : MonoBehaviour
 {
     private Enemy enemy;
+    public Hiding _hiding;
 
     public int damage = 1;
     private SpriteAnimator _animator;
@@ -17,6 +18,7 @@ public class EnemyAttackHitbox : MonoBehaviour
     {
         if (!collision.CompareTag("Player")) return;
         if (enemy.isDead == true) return;
+        if (_hiding.IsHiding == true) return;
         
         _animator.Play("Attack");
 
