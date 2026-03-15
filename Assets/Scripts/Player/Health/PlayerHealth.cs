@@ -7,11 +7,18 @@ public class PlayerHealth : MonoBehaviour
     public int MaxHealth = 5;
     public Action OnDeath;
     public Action OnHealthChanged;
+    private SpriteAnimator _animator;
+
+    void Start()
+    {
+        _animator = GetComponent<SpriteAnimator>();
+    }
 
     public void TakeDamage(int damage)
     {
         Health -= damage;
         OnHealthChanged?.Invoke();
+        _animator.Play("Hurt");
         if (Health <= 0)
         {
             Die();

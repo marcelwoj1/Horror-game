@@ -1723,7 +1723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &715760575
 Transform:
   m_ObjectHideFlags: 0
@@ -1733,7 +1733,7 @@ Transform:
   m_GameObject: {fileID: 715760574}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.6664464, w: 0.74555296}
-  m_LocalPosition: {x: -0.63, y: -0.25, z: 0}
+  m_LocalPosition: {x: -0.76, y: -0.24999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1802,7 +1802,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 793bd7f2024b8fd4696ba697a9be2934, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::Torch
   _movement: {fileID: 1030423176}
   TorchLight: {fileID: 715760574}
 --- !u!1 &737723758
@@ -2725,8 +2725,8 @@ Transform:
   m_Children:
   - {fileID: 1649327235}
   - {fileID: 1832840459}
-  - {fileID: 715760575}
   - {fileID: 893397244}
+  - {fileID: 715760575}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1030423173
@@ -2857,6 +2857,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 670216ddd37c78549b1d8bcd9399df81, type: 2}
   - {fileID: 11400000, guid: 8f7510db604ceb745b73e4066c1ad299, type: 2}
   - {fileID: 11400000, guid: b2135517564ed994ca371d0f26704772, type: 2}
+  - {fileID: 11400000, guid: 8133887c6e8be5148ba878cfc0f42267, type: 2}
+  - {fileID: 11400000, guid: 59df5b223a465c84caedb4bef2a46ccf, type: 2}
+  - {fileID: 11400000, guid: 384d96a4b3a75524f9401a363760db09, type: 2}
+  - {fileID: 11400000, guid: efa17ee182dc0584a8b39136105753b5, type: 2}
+  - {fileID: 11400000, guid: 035e152b3b43ec442a457b2e7b047065, type: 2}
   _startingAnimation: 
   onAnimationStart:
     m_PersistentCalls:
@@ -5812,6 +5817,10 @@ PrefabInstance:
       propertyPath: _playerHealth
       value: 
       objectReference: {fileID: 1030423180}
+    - target: {fileID: 2660978529091654807, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: _specificEvents.Array.data[0].AnimationName
+      value: Death
+      objectReference: {fileID: 0}
     - target: {fileID: 3244780832156062119, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.06

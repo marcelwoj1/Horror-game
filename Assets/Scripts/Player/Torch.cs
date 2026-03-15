@@ -4,7 +4,6 @@ public class Torch : MonoBehaviour
 {
     public Movement _movement;
     public GameObject TorchLight;
-
     private SpriteRenderer _spriteRenderer;
 
 

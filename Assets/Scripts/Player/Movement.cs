@@ -160,11 +160,29 @@ public class Movement : MonoBehaviour
             {
                 if (MoveState == MoveStates.Moving)
                 {
-                    _animator.Play("Walk");
+                    if(IsLit == true)
+                    {
+                        _animator.Play("TorchWalk");
+                    }
+                    else
+                    {
+                        _animator.Play("Walk");
+                    }
                 }
                 else
                 {
-                    _animator.Play("Idle");
+                    if(HasAxe == true)
+                    {
+                        _animator.Play("AxeIdle");
+                    }
+                    else if(IsLit == true)
+                    {
+                        _animator.Play("TorchIdle");
+                    }
+                    else
+                    {
+                        _animator.Play("Idle");
+                    }
                 }
                 
                 if(Input.GetKeyDown(KeyCode.Mouse0) && HasAxe == true && IsInventoryOpen == false)
@@ -223,6 +241,7 @@ public class Movement : MonoBehaviour
     public void PickAxeUp()
     {
         HasAxe = true;
+        _animator.Play("AquireAxe");
     }
 
 }

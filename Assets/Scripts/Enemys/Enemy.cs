@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            _animator.Play("Explosion");
+            _animator.Play("Death");
             isDead = true;
         }
         else

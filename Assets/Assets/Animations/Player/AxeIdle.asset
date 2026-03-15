@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c86e1d3ee12ab14db8d856b0706c119, type: 3}
-  m_Name: Walk
+  m_Name: AxeIdle
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
-  AnimationName: Walk
+  AnimationName: AxeIdle
   Frames:
-  - {fileID: 8020143640844766479, guid: 8b563817547d48643a225dc103b789f7, type: 3}
-  - {fileID: -6251682230944352461, guid: 8b563817547d48643a225dc103b789f7, type: 3}
-  FrameRate: 4
+  - {fileID: -6604560580270809641, guid: e640fe77b5c4d6e40952b2165d29b2d4, type: 3}
+  FrameRate: 10
   Loop: 1
   PingPong: 0
   Uninterruptible: 0

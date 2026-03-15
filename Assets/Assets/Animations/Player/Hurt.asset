@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c86e1d3ee12ab14db8d856b0706c119, type: 3}
-  m_Name: Walk
+  m_Name: Hurt
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
-  AnimationName: Walk
+  AnimationName: Hurt
   Frames:
-  - {fileID: 8020143640844766479, guid: 8b563817547d48643a225dc103b789f7, type: 3}
-  - {fileID: -6251682230944352461, guid: 8b563817547d48643a225dc103b789f7, type: 3}
-  FrameRate: 4
-  Loop: 1
+  - {fileID: 989763977084697835, guid: c10d6723b58801048ac142638dc7faed, type: 3}
+  FrameRate: 6
+  Loop: 0
   PingPong: 0
-  Uninterruptible: 0
+  Uninterruptible: 1
