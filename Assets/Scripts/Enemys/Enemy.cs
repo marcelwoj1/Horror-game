@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockback)
     {
-        if (patrol.isKnockedBack) return;
+        if (patrol != null && patrol.isKnockedBack) return;
         if (isDead) return;
 
         health -= damage;
@@ -42,14 +42,14 @@ public class Enemy : MonoBehaviour
 
     IEnumerator KnockbackRoutine(Vector2 knockback)
     {
-        patrol.isKnockedBack = true;
+        if (patrol != null) patrol.isKnockedBack = true;
 
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(knockback, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.35f);
 
-        patrol.isKnockedBack = false;
+        if (patrol != null) patrol.isKnockedBack = false;
     }
 
     void Die()
