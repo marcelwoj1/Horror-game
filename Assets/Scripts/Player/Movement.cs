@@ -201,12 +201,10 @@ public class Movement : MonoBehaviour
     }
     public void InventoryButton()
     {
-        Debug.Log("Inventory Button Pressed");
         if(IsInventoryOpen == false)
         {
             IsInventoryOpen = true;
             Inventory.SetActive(IsInventoryOpen);
-            Debug.Log("Inventory Opened");
             _rigidBody.linearVelocityX = 0;
             _rigidBody.linearVelocityY = 0;
             _animator.Play("Idle");
@@ -216,7 +214,6 @@ public class Movement : MonoBehaviour
         {
             IsInventoryOpen = false;
             Inventory.SetActive(IsInventoryOpen);
-            Debug.Log("Inventory Closed");
             AllowMovement = true;
         }
     }

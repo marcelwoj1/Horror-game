@@ -4,12 +4,15 @@ public class Hiding : MonoBehaviour
 {
     Movement _movement;
     SpriteRenderer _spriteRenderer;
+    Rigidbody2D _rigidBody;
 
     [HideInInspector] public bool IsHiding;
 
     public void Hide()
     {
         IsHiding = true;
+        _rigidBody.linearVelocityX = 0;
+        _rigidBody.linearVelocityY = 0;
         _movement.AllowMovement = false;
         _spriteRenderer.color = new Color(0.1f, 0.1f, 0.1f, 0.1f);
         Physics2D.IgnoreLayerCollision(
@@ -35,6 +38,7 @@ public class Hiding : MonoBehaviour
     {
         _movement = GetComponent<Movement>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
     public void Interact()
     {
