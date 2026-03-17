@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask enemyLayer;
     public int attackDamage = 1;
     public float knockbackForce = 10f;
+    public LayerMask hittableLayers;
     
     private SpriteRenderer _spriteRenderer;
 
@@ -34,12 +35,13 @@ public class PlayerAttack : MonoBehaviour
         attackPoint.position,
         attackSize,
         0f,
-        enemyLayer
+        hittableLayers
     );
     
 
     foreach (Collider2D hitCollider in enemiesHit)
     {
+        //Enemy
         Enemy enemy = hitCollider.GetComponent<Enemy>();
 
         if(enemy != null)
@@ -52,6 +54,13 @@ public class PlayerAttack : MonoBehaviour
             knockbackDir.y = 0.2f; 
 
             enemy.TakeDamage(1, knockbackDir * knockbackForce);
+        }
+
+        //WoodenPlank
+        Doors door = hitCollider.GetComponent<Doors>();
+        if (door != null)
+        {
+            door.breakPlank();
         }
     }
     }

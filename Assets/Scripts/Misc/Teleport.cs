@@ -24,6 +24,7 @@ public class Teleport : MonoBehaviour
     private TextMeshPro promptText;
     private Transform playerTransform;
     private bool playerInRange = false;
+    public bool DoorUnlocked = false;
 
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class Teleport : MonoBehaviour
         
         if (promptText != null)
         {
-            promptText.gameObject.SetActive(false);
+            promptText.gameObject.SetActive(true);
         }
     }
 
@@ -51,7 +52,7 @@ public class Teleport : MonoBehaviour
             }
 
             // Teleport when E is pressed and player is in range
-            if (playerInRange && Input.GetKeyDown(interactKey))
+            if (playerInRange && Input.GetKeyDown(interactKey) && DoorUnlocked)
             {
                 TeleportPlayer(playerTransform);
             }

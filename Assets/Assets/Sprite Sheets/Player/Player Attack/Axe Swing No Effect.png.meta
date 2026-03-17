@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 4f3268919fc928248a663f0ad005aec4
+guid: d99e8575299298f4083f222cdd060b73
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 585489585357299884
-    second: spritesheet (2)_0
+      213: 857631501985848696
+    second: Axe Swing No Effect_0
   - first:
-      213: 3213048799308102398
-    second: spritesheet (2)_1
+      213: 3350523441379214486
+    second: Axe Swing No Effect_1
+  - first:
+      213: 9178197335876578535
+    second: Axe Swing No Effect_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet (2)_0
+      name: Axe Swing No Effect_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 30
-        width: 358
-        height: 637
+        x: 341
+        y: 295
+        width: 1108
+        height: 1399
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +121,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ca0a9e20da3102800800000000000000
-      internalID: 585489585357299884
+      spriteID: 87d1d00ae4be6eb00800000000000000
+      internalID: 857631501985848696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet (2)_1
+      name: Axe Swing No Effect_1
       rect:
         serializedVersion: 2
-        x: 365
-        y: 15
-        width: 397
-        height: 666
+        x: 1507
+        y: 275
+        width: 1387
+        height: 1346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +143,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: efa31c80cda079c20800000000000000
-      internalID: 3213048799308102398
+      spriteID: 694070f61537f7e20800000000000000
+      internalID: 3350523441379214486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Axe Swing No Effect_2
+      rect:
+        serializedVersion: 2
+        x: 3478
+        y: 312
+        width: 887
+        height: 1303
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ec2c5b49d18f5f70800000000000000
+      internalID: 9178197335876578535
       vertices: []
       indices: 
       edges: []
@@ -160,8 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spritesheet (2)_0: 585489585357299884
-      spritesheet (2)_1: 3213048799308102398
+      Axe Swing No Effect_0: 857631501985848696
+      Axe Swing No Effect_1: 3350523441379214486
+      Axe Swing No Effect_2: 9178197335876578535
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
