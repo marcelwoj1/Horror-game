@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
   AnimationName: Jump
   Frames:
-  - {fileID: 8598634611415830664, guid: 9419c0820bdcb6f42b83a2d748af80c5, type: 3}
+  - {fileID: 7460046300004610927, guid: 572633d26d0399942808308e63509693, type: 3}
   FrameRate: 10
   Loop: 1
   PingPong: 0

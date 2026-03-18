@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
   AnimationName: Attack
   Frames:
-  - {fileID: 9063933339346851416, guid: 29d615d722ca39d41bbbc8a96c8f7a41, type: 3}
-  - {fileID: 7022364634811699035, guid: c4ed3f2b551a0f346b6d4535f8672fe6, type: 3}
-  - {fileID: -3366556924485211908, guid: b319036d3d066104785c0f40e0d6d0c0, type: 3}
+  - {fileID: 9037424478200103672, guid: d5593ce88e4a6c745831ab184eceb61f, type: 3}
+  - {fileID: 1761485489658156177, guid: d5593ce88e4a6c745831ab184eceb61f, type: 3}
+  - {fileID: 3498593838400571870, guid: d5593ce88e4a6c745831ab184eceb61f, type: 3}
   FrameRate: 6
   Loop: 0
   PingPong: 0

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c86e1d3ee12ab14db8d856b0706c119, type: 3}
   m_Name: Jump
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
-  AnimationName: Jump
+  AnimationName: Walk
   Frames:
-  - {fileID: 8020143640844766479, guid: 879bfba2d850703499cc14ff67445d1b, type: 3}
-  - {fileID: -6251682230944352461, guid: 879bfba2d850703499cc14ff67445d1b, type: 3}
-  - {fileID: 2788568348960109317, guid: 879bfba2d850703499cc14ff67445d1b, type: 3}
-  - {fileID: -5962389079421231736, guid: 879bfba2d850703499cc14ff67445d1b, type: 3}
+  - {fileID: -617906275, guid: 879bfba2d850703499cc14ff67445d1b, type: 3}
+  - {fileID: 656851252, guid: 879bfba2d850703499cc14ff67445d1b, type: 3}
+  - {fileID: 1395798630, guid: 879bfba2d850703499cc14ff67445d1b, type: 3}
+  - {fileID: -132214685, guid: 879bfba2d850703499cc14ff67445d1b, type: 3}
   FrameRate: 3
   Loop: 1
   PingPong: 0

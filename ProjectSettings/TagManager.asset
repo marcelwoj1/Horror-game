@@ -16,7 +16,7 @@ TagManager:
   - UI
   - Ground
   - Enemy
-  - 
+  - Door
   - 
   - 
   - 
@@ -47,8 +47,11 @@ TagManager:
   - name: Background
     uniqueID: 644522649
     locked: 0
-  - name: BehindPlayer
+  - name: Wall
     uniqueID: 1466861353
+    locked: 0
+  - name: BehindPlayer
+    uniqueID: 1343459397
     locked: 0
   - name: Player
     uniqueID: 1183979343

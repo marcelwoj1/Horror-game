@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
   AnimationName: Walk
   Frames:
-  - {fileID: 8020143640844766479, guid: 8b563817547d48643a225dc103b789f7, type: 3}
-  - {fileID: -6251682230944352461, guid: 8b563817547d48643a225dc103b789f7, type: 3}
+  - {fileID: 4035959289877228764, guid: 3ae0eb7c6ce69594dab4485c25d8d21e, type: 3}
+  - {fileID: -982904232830982447, guid: 3ae0eb7c6ce69594dab4485c25d8d21e, type: 3}
+  - {fileID: -350908408369970039, guid: 3ae0eb7c6ce69594dab4485c25d8d21e, type: 3}
   FrameRate: 4
   Loop: 1
   PingPong: 0

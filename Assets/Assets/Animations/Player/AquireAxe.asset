@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
   AnimationName: AquireAxe
   Frames:
-  - {fileID: 9177935232571102746, guid: ea9f4cdd6e21f3c43b7481ab4412c507, type: 3}
+  - {fileID: -5825250732961213246, guid: cdd48005e527a7c458ca86c0f1d8f41d, type: 3}
   FrameRate: 2
   Loop: 0
   PingPong: 0

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
   AnimationName: TorchWalk
   Frames:
-  - {fileID: 585489585357299884, guid: 4f3268919fc928248a663f0ad005aec4, type: 3}
-  - {fileID: 3213048799308102398, guid: 4f3268919fc928248a663f0ad005aec4, type: 3}
+  - {fileID: 8250009267416140270, guid: e1c338c8409c0c64a96626810400a495, type: 3}
+  - {fileID: 3956765204961011002, guid: e1c338c8409c0c64a96626810400a495, type: 3}
   FrameRate: 4
   Loop: 1
   PingPong: 0
