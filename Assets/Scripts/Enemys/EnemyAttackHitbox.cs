@@ -3,15 +3,16 @@ using UnityEngine;
 public class EnemyAttackHitbox : MonoBehaviour
 {
     private Enemy enemy;
-    public Hiding _hiding;
 
     public int damage = 1;
     private SpriteAnimator _animator;
+    private Hiding _hiding;
 
     void Start()
     {
         enemy = GetComponentInParent<Enemy>();
         _animator = GetComponentInParent<SpriteAnimator>();
+        _hiding = GameObject.Find("Player").GetComponent<Hiding>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
