@@ -29,41 +29,45 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+    
     public void Attack()
     {
         Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(
-        attackPoint.position,
-        attackSize,
-        0f,
-        hittableLayers
-    );
+            attackPoint.position,
+            attackSize,
+            0f,
+            hittableLayers
+        );
     
 
-    foreach (Collider2D hitCollider in enemiesHit)
-    {
-        //Enemy
-        Enemy enemy = hitCollider.GetComponent<Enemy>();
-
-        if(enemy != null)
+        foreach (Collider2D hitCollider in enemiesHit)
         {
-            
-            Vector2 knockbackDir = (enemy.transform.position - transform.position);
+            //Enemy
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
 
-            knockbackDir.Normalize();
+            if(enemy != null)
+            {
+                
+                Vector2 knockbackDir = (enemy.transform.position - transform.position);
 
-            knockbackDir.y = 0.2f; 
+                knockbackDir.Normalize();
 
-            enemy.TakeDamage(1, knockbackDir * knockbackForce);
+                knockbackDir.y = 0.2f; 
+
+                enemy.TakeDamage(1, knockbackDir * knockbackForce);
+            }
+
+            //WoodenPlank
+            Doors door = hitCollider.GetComponent<Doors>();
+            if (door != null)
+            {
+                door.breakPlank();
+            }
         }
 
-        //WoodenPlank
-        Doors door = hitCollider.GetComponent<Doors>();
-        if (door != null)
-        {
-            door.breakPlank();
-        }
     }
-    }
+
+
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
