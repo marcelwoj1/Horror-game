@@ -6,6 +6,7 @@ public class Interactable : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float interactionDistance = 2.5f;
     [SerializeField] private KeyCode interactionKey = KeyCode.E;
+    [SerializeField] private bool singleUse = true;
 
     [Header("Events")]
     public UnityEvent OnInteract;
@@ -65,11 +66,18 @@ public class Interactable : MonoBehaviour
 
     public void Interact()
     {
-        if(_interactionUsed == false)
+        // If it's single use and already triggered, don't do anything
+        if (singleUse && _interactionUsed) return;
+
+        OnInteract?.Invoke();
+
+        if (singleUse)
         {
-            OnInteract?.Invoke();
             _interactionUsed = true;
-            _interactionImage.SetActive(false);
+            if (_interactionImage != null)
+            {
+                _interactionImage.SetActive(false);
+            }
         }
     }
 
