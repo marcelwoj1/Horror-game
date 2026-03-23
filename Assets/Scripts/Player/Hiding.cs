@@ -42,9 +42,9 @@ public class Hiding : MonoBehaviour
     }
     public void Update()
     {
-        if (IsHiding && Input.GetKeyDown(KeyCode.F))
+        if (IsHiding && Input.GetKeyDown(KeyCode.E))
         {
-            UnHide();
+            //UnHide();
         }
     }
 
