@@ -22,6 +22,19 @@ public class InvenotryManager : MonoBehaviour
         }
     }
 
+    public void RemoveItem(string itemName)
+    {
+        for(int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            Inventory ItemInSlot = slot.GetComponentInChildren<Inventory>();
+            if(ItemInSlot != null)
+            {
+                ItemInSlot.RemoveItem(itemName);
+            }
+        }
+    }
+
     void SpawnNewItem(Item item, InventorySlot slot)
     {
         GameObject newItem = Instantiate(InventoryPrefab, slot.transform);

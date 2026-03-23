@@ -27,6 +27,14 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         ItemName = newItem.itemName;
         CheckIfBottomSlot();
     }
+    public void RemoveItem(string itemName)
+    {
+        if(ItemName == itemName)
+        {
+            Destroy(gameObject);
+            equippedItem.SetItem("");
+        }
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {

@@ -25,6 +25,16 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(int healAmount)
+    {
+        Health += healAmount;
+        OnHealthChanged?.Invoke();
+        if (Health > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
+    }
+
     public void Die()
     {
         OnDeath?.Invoke();

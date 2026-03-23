@@ -9,12 +9,16 @@ public class EquippedItem : MonoBehaviour
     private SpriteAnimator _animator;
     public GameObject TorchLight;
     private bool TorchIsLit;
+    private InvenotryManager _inventoryManager;
+    private PlayerHealth _playerHealth;
 
     void Start()
     {
         _movement = GameObject.Find("Player").GetComponent<Movement>();
         _animator = GameObject.Find("Player").GetComponent<SpriteAnimator>();
         _hiding = GameObject.Find("Player").GetComponent<Hiding>();
+        _inventoryManager = GameObject.Find("InventoryManager").GetComponent<InvenotryManager>();
+        _playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
     }
 
     public void SetItem(string item)
@@ -55,14 +59,17 @@ public class EquippedItem : MonoBehaviour
 
         case "BugSpray":
             _hiding.BugSprayUsed();
+            _inventoryManager.RemoveItem(ItemEquipped);
             break;
 
-        case "JuicyMorsel":
-            Debug.Log("Juicy Morsel Used");
+        case "JuicyMorsels":
+            _playerHealth.Heal(2);
+            _inventoryManager.RemoveItem(ItemEquipped);
             break;
 
         case "OrangeJuice":
-            Debug.Log("Orange Juice Used");
+            _playerHealth.Heal(1);
+            _inventoryManager.RemoveItem(ItemEquipped);
             break;
 
         default:
