@@ -5,6 +5,7 @@ public class Hiding : MonoBehaviour
     Movement _movement;
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidBody;
+    public GameObject PieTimer;
 
     [HideInInspector] public bool IsHiding;
 
@@ -58,5 +59,17 @@ public class Hiding : MonoBehaviour
         {
             UnHide();
         }
+    }
+    public void BugSprayUsed()
+    {
+        IsHiding = true;
+        PieTimer.SetActive(true);
+
+    }
+
+    public void BugSprayEnded()
+    {
+        IsHiding = false;
+        PieTimer.SetActive(false);
     }
 }
