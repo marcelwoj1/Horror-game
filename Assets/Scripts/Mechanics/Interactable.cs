@@ -13,6 +13,7 @@ public class Interactable : MonoBehaviour
     private GameObject _player;
     private GameObject _interactionImage;
     private bool _isPlayerInRange;
+    private bool _interactionUsed;
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class Interactable : MonoBehaviour
         if (inRange != _isPlayerInRange)
         {
             _isPlayerInRange = inRange;
-            if (_interactionImage != null)
+            if (_interactionImage != null && _interactionUsed == false)
             {
                 _interactionImage.SetActive(_isPlayerInRange);
             }
@@ -64,7 +65,12 @@ public class Interactable : MonoBehaviour
 
     public void Interact()
     {
-        OnInteract?.Invoke();
+        if(_interactionUsed == false)
+        {
+            OnInteract?.Invoke();
+            _interactionUsed = true;
+            _interactionImage.SetActive(false);
+        }
     }
 
     private void OnDrawGizmosSelected()

@@ -8796,10 +8796,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1837049474}
     m_Modifications:
-    - target: {fileID: 3309149890016784021, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
-      propertyPath: SpawnerName
-      value: BugSpray
-      objectReference: {fileID: 0}
     - target: {fileID: 5846645404525125586, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: m_Name
       value: BugSprayDraw
