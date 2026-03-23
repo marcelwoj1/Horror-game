@@ -2713,6 +2713,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
       propertyPath: slotSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5311364282529927603, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
+      propertyPath: EquipSlot
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7662742096793910751, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
@@ -4158,6 +4162,7 @@ GameObject:
   - component: {fileID: 1030423181}
   - component: {fileID: 1030423182}
   - component: {fileID: 1030423183}
+  - component: {fileID: 1030423184}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -4376,6 +4381,9 @@ MonoBehaviour:
   image: {fileID: 0}
   SlotSize: 0
   isBottomSlot: 0
+  IsEquiped: 0
+  ItemName: 
+  equippedItem: {fileID: 0}
   parentAfterDrag: {fileID: 0}
   item: {fileID: 0}
 --- !u!114 &1030423180
@@ -4465,6 +4473,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.69, y: 3.4453363}
   m_Direction: 0
+--- !u!114 &1030423184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030423170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f73e58db95ac24a92760e78d697157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EquippedItem
+  ItemEquipped: 
 --- !u!1 &1034119357
 GameObject:
   m_ObjectHideFlags: 0

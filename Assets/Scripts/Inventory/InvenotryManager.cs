@@ -13,7 +13,7 @@ public class InvenotryManager : MonoBehaviour
             Inventory ItemInSlot = slot.GetComponentInChildren<Inventory>();
             if(ItemInSlot == null)
             {
-                if(item.SlotSize == slot.slotSize)
+                if(item.SlotSize <= slot.slotSize && slot.EquipSlot == false)
                 {
                     SpawnNewItem(item, slot);
                     return;

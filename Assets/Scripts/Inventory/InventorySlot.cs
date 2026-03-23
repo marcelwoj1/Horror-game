@@ -5,13 +5,14 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public int slotSize;
     public bool BottomSlot;
+    public bool EquipSlot;
     public void OnDrop(PointerEventData eventData)
     {
         if(transform.childCount == 0)
         {
             GameObject droppedObject = eventData.pointerDrag;
             Inventory inventory = droppedObject.GetComponent<Inventory>();
-            if(inventory.SlotSize == slotSize)
+            if(inventory.SlotSize <= slotSize)
             {
                 inventory.parentAfterDrag = transform;
                 if(BottomSlot)
@@ -21,6 +22,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                 else
                 {
                     inventory.transform.eulerAngles = new Vector3(0,0,0);
+                }
+                if(EquipSlot)
+                {
+                    inventory.IsEquiped = true;
+                    inventory.CheckIfEquiped();
                 }
             }
         }

@@ -7,16 +7,26 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public Image image;
     public int SlotSize;
     public bool isBottomSlot;
+    public bool IsEquiped;
+    public string ItemName;
+    private EquippedItem equippedItem;
     
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public Item item;
+
+    void Start()
+    {
+        equippedItem = GameObject.Find("Player").GetComponent<EquippedItem>();
+    }
 
     public void Initialize(Item newItem)
     {
         item = newItem;
         SlotSize = newItem.SlotSize;
         image.sprite = newItem.itemImage;
+        ItemName = newItem.itemName;
         CheckIfBottomSlot();
+        CheckIfEquiped();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -46,6 +56,13 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         else
         {
             transform.eulerAngles = new Vector3(0,0,0);
+        }
+    }
+    public void CheckIfEquiped()
+    {
+        if(IsEquiped)
+        {
+            equippedItem.SetItem(ItemName);
         }
     }
 }
