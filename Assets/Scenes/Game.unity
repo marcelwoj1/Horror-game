@@ -1057,6 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionDistance: 2.5
   interactionKey: 101
+  singleUse: 0
   OnInteract:
     m_PersistentCalls:
       m_Calls:
@@ -4859,6 +4860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionDistance: 2.5
   interactionKey: 101
+  singleUse: 0
   OnInteract:
     m_PersistentCalls:
       m_Calls:
@@ -5629,6 +5631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionDistance: 2.5
   interactionKey: 101
+  singleUse: 0
   OnInteract:
     m_PersistentCalls:
       m_Calls:
@@ -6174,6 +6177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionDistance: 2.5
   interactionKey: 101
+  singleUse: 0
   OnInteract:
     m_PersistentCalls:
       m_Calls:
@@ -6549,6 +6553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionDistance: 2.5
   interactionKey: 101
+  singleUse: 1
   OnInteract:
     m_PersistentCalls:
       m_Calls:
@@ -6744,6 +6749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionDistance: 2.5
   interactionKey: 101
+  singleUse: 1
   OnInteract:
     m_PersistentCalls:
       m_Calls:
@@ -9235,6 +9241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionDistance: 2.5
   interactionKey: 101
+  singleUse: 0
   OnInteract:
     m_PersistentCalls:
       m_Calls:
