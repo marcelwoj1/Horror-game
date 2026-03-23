@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7003526093621839597}
   - component: {fileID: 7308204697145148763}
   - component: {fileID: 8853528053557532739}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 1942201544919418782}
   - component: {fileID: 8491616918686238959}
   - component: {fileID: 7819331135544700356}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
