@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99b161a16a097547b7ed85c1bb5e8a0, type: 3}
+  m_Name: BugSpray
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  itemName: BugSpray
+  SlotSize: 1
+  itemImage: {fileID: 5162182423526965453, guid: b2cf2687e636c6a429e90f3b95c560a5, type: 3}

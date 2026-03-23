@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     private bool IsLit;
     private bool IsInventoryOpen = false;
     [HideInInspector] public bool HasAxe = false;
+    public bool HasFlashlight = false;
     [HideInInspector] public bool AllowMovement = true;
 
 
@@ -195,8 +196,11 @@ public class Movement : MonoBehaviour
         // Torch
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(IsLit == false){IsLit = true;} else {IsLit = false;}
-            TorchLight.SetActive(IsLit);
+            if(HasFlashlight == true)
+            {
+                if(IsLit == false){IsLit = true;} else {IsLit = false;}
+                TorchLight.SetActive(IsLit);
+            }
         }
     }
     public void InventoryButton()
@@ -239,6 +243,10 @@ public class Movement : MonoBehaviour
     {
         HasAxe = true;
         _animator.Play("AquireAxe");
+    }
+    public void PickFlashlightUp()
+    {
+        HasFlashlight = true;
     }
 
 }
