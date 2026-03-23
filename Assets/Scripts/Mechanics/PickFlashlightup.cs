@@ -11,6 +11,6 @@ public class PickFlashlightup : MonoBehaviour
 
     public void PickUp()
     {
-        _movement.PickFlashlightUp();
+        //_movement.PickFlashlightUp();
     }
 }

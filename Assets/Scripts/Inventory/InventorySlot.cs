@@ -28,6 +28,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                     inventory.IsEquiped = true;
                     inventory.CheckIfEquiped();
                 }
+                else
+                {
+                    inventory.IsEquiped = false;
+                    inventory.CheckIfEquiped();
+                }
             }
         }
     }

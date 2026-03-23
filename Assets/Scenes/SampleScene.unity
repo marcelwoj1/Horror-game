@@ -4287,10 +4287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06fbe6e8a54a0b449844f5167f1ad1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  HasAxe: 0
-  HasFlashlight: 0
+  IsInventoryOpen: 0
+  AxeEquipped: 0
+  FlashlightEquipped: 0
   AllowMovement: 1
-  TorchLight: {fileID: 715760574}
   Inventory: {fileID: 1027944333}
   _spriteRenderer: {fileID: 1030423174}
   _moveSpeed: 8
@@ -4383,7 +4383,6 @@ MonoBehaviour:
   isBottomSlot: 0
   IsEquiped: 0
   ItemName: 
-  equippedItem: {fileID: 0}
   parentAfterDrag: {fileID: 0}
   item: {fileID: 0}
 --- !u!114 &1030423180
@@ -4486,6 +4485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EquippedItem
   ItemEquipped: 
+  TorchLight: {fileID: 715760574}
 --- !u!1 &1034119357
 GameObject:
   m_ObjectHideFlags: 0

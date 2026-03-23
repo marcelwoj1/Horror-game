@@ -16,10 +16,9 @@ public class Movement : MonoBehaviour
     private float _MOVE_THRESHOLD = 0f;
     private float _GROUND_CHECK_RADIUS = 0.15f;
     private float _JUMP_BUFFER = 0.5f;
-    private bool IsLit;
-    private bool IsInventoryOpen = false;
-    [HideInInspector] public bool HasAxe = false;
-    public bool HasFlashlight = false;
+    [HideInInspector] public bool IsInventoryOpen = false;
+    [HideInInspector] public bool AxeEquipped = false;
+    [HideInInspector] public bool FlashlightEquipped = false;
     [HideInInspector] public bool AllowMovement = true;
 
 
@@ -27,7 +26,6 @@ public class Movement : MonoBehaviour
     // | VARIABLES |
 
     // Components
-    public GameObject TorchLight;
     public GameObject Inventory;
     private Rigidbody2D _rigidBody;
     private Transform _feetLocation;
@@ -161,7 +159,7 @@ public class Movement : MonoBehaviour
             {
                 if (MoveState == MoveStates.Moving)
                 {
-                    if(IsLit == true)
+                    if(FlashlightEquipped == true)
                     {
                         _animator.Play("TorchWalk");
                     }
@@ -172,11 +170,11 @@ public class Movement : MonoBehaviour
                 }
                 else
                 {
-                    if(HasAxe == true)
+                    if(AxeEquipped == true)
                     {
                         _animator.Play("AxeIdle");
                     }
-                    else if(IsLit == true)
+                    else if(FlashlightEquipped == true)
                     {
                         _animator.Play("TorchIdle");
                     }
@@ -185,23 +183,9 @@ public class Movement : MonoBehaviour
                         _animator.Play("Idle");
                     }
                 }
-                
-                if(Input.GetKeyDown(KeyCode.Mouse0) && HasAxe == true && IsInventoryOpen == false)
-                {
-                    _animator.Play("Attack");
-                }
             }
         }
 
-        // Torch
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if(HasFlashlight == true)
-            {
-                if(IsLit == false){IsLit = true;} else {IsLit = false;}
-                TorchLight.SetActive(IsLit);
-            }
-        }
     }
     public void InventoryButton()
     {
@@ -241,12 +225,7 @@ public class Movement : MonoBehaviour
     }
     public void PickAxeUp()
     {
-        HasAxe = true;
         _animator.Play("AquireAxe");
-    }
-    public void PickFlashlightUp()
-    {
-        HasFlashlight = true;
     }
 
 }

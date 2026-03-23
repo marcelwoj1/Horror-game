@@ -26,7 +26,6 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         image.sprite = newItem.itemImage;
         ItemName = newItem.itemName;
         CheckIfBottomSlot();
-        CheckIfEquiped();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -63,6 +62,10 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if(IsEquiped)
         {
             equippedItem.SetItem(ItemName);
+        }
+        else
+        {
+            equippedItem.SetItem("");
         }
     }
 }
