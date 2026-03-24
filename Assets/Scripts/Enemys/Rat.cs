@@ -5,7 +5,14 @@ public class Rat : MonoBehaviour
     private float startY;
     private SpriteAnimator _animator;
     public float speed = 6f;
+    public float offsetMagnitude = 2f;
+    public float offsetSpeed = 2f;
+    public float flipDebounceTime = 0.5f;
+    
     private Transform player;
+    private float _noiseTime;
+    private float _direction = 1f;
+    private float _flipTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,19 +24,26 @@ public class Rat : MonoBehaviour
 
     void Update()
     {
-        float direction = Mathf.Sign(player.position.x - transform.position.x);
+        _noiseTime += Time.deltaTime * offsetSpeed;
+        float xOffset = (Mathf.PerlinNoise(_noiseTime, 0f) - 0.5f) * 2f * offsetMagnitude;
+        float targetX = player.position.x + xOffset;
 
-        Vector3 target = new Vector3(player.position.x, startY, transform.position.z);
+        float targetDirection = Mathf.Sign(targetX - transform.position.x);
+        
+        if (targetDirection != _direction && _flipTimer <= 0)
+        {
+            _direction = targetDirection;
+            _flipTimer = flipDebounceTime;
+        }
 
-        Vector3 move = new Vector3(direction * speed * Time.deltaTime, 0, 0);
+        if (_flipTimer > 0)
+            _flipTimer -= Time.deltaTime;
+
+        Vector3 move = new Vector3(_direction * speed * Time.deltaTime, 0, 0);
         _animator.Play("Walk");
-        float distance = Vector2.Distance(transform.position, player.position);
         transform.position += move;
 
-        if (player.position.x > transform.position.x)
-            transform.localScale = new Vector3(1,1,1);
-        else
-            transform.localScale = new Vector3(-1,1,1);
+        transform.localScale = new Vector3(_direction, 1, 1);
     }
     
 }
