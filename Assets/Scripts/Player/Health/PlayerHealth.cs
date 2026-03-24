@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (Health <= 0) return;
         Health -= damage;
         OnHealthChanged?.Invoke();
         _animator.Play("Hurt");

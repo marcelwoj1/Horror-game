@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         if (patrol != null) patrol.isKnockedBack = false;
     }
 
-    void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }

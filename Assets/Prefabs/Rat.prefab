@@ -114,6 +114,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1159664495e8ec94aa990705f8976b71, type: 2}
   - {fileID: 11400000, guid: 14c994054593a344db891b062303f349, type: 2}
   - {fileID: 11400000, guid: 41577bdc9c5567b429fd424e03002681, type: 2}
+  - {fileID: 11400000, guid: 0464e4bc2f6bce046b04219731b93fc6, type: 2}
   _startingAnimation: Walk
   onAnimationStart:
     m_PersistentCalls:
@@ -121,7 +122,26 @@ MonoBehaviour:
   onAnimationEnd:
     m_PersistentCalls:
       m_Calls: []
-  _specificEvents: []
+  _specificEvents:
+  - AnimationName: Death
+    onAnimationStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onAnimationEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4322603726514860253}
+          m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+          m_MethodName: Die
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &4322603726514860253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6160b8e5475ff4baa834933dbf7d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  health: 3
+  health: 1
   isDead: 0
 --- !u!61 &7003526093621839597
 BoxCollider2D:
