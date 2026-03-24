@@ -20,6 +20,7 @@ public class Movement : MonoBehaviour
     [HideInInspector] public bool AxeEquipped = false;
     [HideInInspector] public bool FlashlightEquipped = false;
     [HideInInspector] public bool AllowMovement = true;
+    public bool isKnockedBack = false;
 
 
 
@@ -212,14 +213,17 @@ public class Movement : MonoBehaviour
 
         if(IsInventoryOpen == false && AllowMovement == true)
         {
-            // Move
-            _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
-            
-            if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
+            if (!isKnockedBack)
             {
-                _lastJumpInput = -100f;
-                _rigidBody.linearVelocityY = 0;
-                _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+                // Move
+                _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
+
+                if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
+                {
+                    _lastJumpInput = -100f;
+                    _rigidBody.linearVelocityY = 0;
+                    _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+                }
             }
         }
     }

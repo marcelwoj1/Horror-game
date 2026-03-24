@@ -5,29 +5,46 @@ public class EnemyAttackHitbox : MonoBehaviour
     private Enemy enemy;
 
     public int damage = 1;
+    public float detectionDistance = 1.5f;
+    public float damageCooldown = 1.0f;
+    public float knockbackForce = 15f;
     private SpriteAnimator _animator;
     private Hiding _hiding;
+    private Transform _playerTransform;
+    private PlayerHealth _playerHealth;
+    private float _nextDamageTime;
 
     void Start()
     {
         enemy = GetComponentInParent<Enemy>();
         _animator = GetComponentInParent<SpriteAnimator>();
-        _hiding = GameObject.Find("Player").GetComponent<Hiding>();
+        GameObject player = GameObject.Find("Player");
+        if (player != null)
+        {
+            _hiding = player.GetComponent<Hiding>();
+            _playerTransform = player.transform;
+            _playerHealth = player.GetComponent<PlayerHealth>();
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if (!collision.CompareTag("Player")) return;
-        if (enemy.isDead == true) return;
-        if (_hiding.IsHiding == true) return;
-        
-        _animator.Play("Attack");
+        if (_playerTransform == null || enemy == null || _hiding == null || _playerHealth == null) return;
+        if (enemy.isDead) return;
+        if (_hiding.IsHiding) return;
+        if (Time.time < _nextDamageTime) return;
 
-        PlayerHealth ph = collision.GetComponent<PlayerHealth>();
-
-        if (ph != null)
+        float distance = Vector2.Distance(transform.position, _playerTransform.position);
+        if (distance <= detectionDistance)
         {
-            ph.TakeDamage(damage);
+            _animator.Play("Attack");
+
+            // Direction for knockback (based on enemy facing direction)
+            float side = enemy.transform.localScale.x;
+            Vector2 knockbackDir = new Vector2(side, 1f).normalized;
+
+            _playerHealth.TakeDamage(damage, knockbackDir * knockbackForce);
+            _nextDamageTime = Time.time + damageCooldown;
         }
     }
 }

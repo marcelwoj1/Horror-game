@@ -14,14 +14,33 @@ public class PatrollingEnemy : MonoBehaviour
     [Header("Speed")]
     public float _moveSpeed;
 
-    [Header("Player Health")]
-    public PlayerHealth _playerHealth;
+    [Header("Distance Based Damage")]
+    public float detectionRange = 1.5f;
+    public float damageCooldown = 1.0f;
+    public float knockbackForce = 15f;
+    private float _nextDamageTime;
+    private Transform _playerTransform;
+    private PlayerHealth _playerHealth;
 
     public void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _movementDirection = (RightTarget.position - transform.position).normalized;
         _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
+
+        if (_playerHealth != null)
+        {
+            _playerTransform = _playerHealth.transform;
+        }
+        else
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                _playerTransform = player.transform;
+                _playerHealth = player.GetComponent<PlayerHealth>();
+            }
+        }
     }
     public void Update()
     {
@@ -37,13 +56,24 @@ public class PatrollingEnemy : MonoBehaviour
             _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
             transform.localScale = new Vector3(-1, 1, 1);
         }
+
+        CheckDistanceDamage();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void CheckDistanceDamage()
     {
-        if(collision.CompareTag("Player"))
+        if (_playerTransform == null || _playerHealth == null) return;
+        if (Time.time < _nextDamageTime) return;
+
+        float distance = Vector2.Distance(transform.position, _playerTransform.position);
+        if (distance <= detectionRange)
         {
-            _playerHealth.TakeDamage(1);
+            // Direction for knockback (based on enemy facing direction)
+            float side = transform.localScale.x;
+            Vector2 knockbackDir = new Vector2(side, 1f).normalized;
+
+            _playerHealth.TakeDamage(1, knockbackDir * knockbackForce);
+            _nextDamageTime = Time.time + damageCooldown;
         }
     }
 }

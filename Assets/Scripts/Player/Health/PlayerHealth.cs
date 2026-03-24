@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class PlayerHealth : MonoBehaviour
     public Action OnDeath;
     public Action OnHealthChanged;
     private SpriteAnimator _animator;
+    private Movement _movement;
 
     void Start()
     {
         _animator = GetComponent<SpriteAnimator>();
+        _movement = GetComponent<Movement>();
     }
 
     public void TakeDamage(int damage)
@@ -23,6 +26,25 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void TakeDamage(int damage, Vector2 knockback)
+    {
+        TakeDamage(damage);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.AddForce(knockback, ForceMode2D.Impulse);
+            StartCoroutine(KnockbackRoutine());
+        }
+    }
+
+    IEnumerator KnockbackRoutine()
+    {
+        if (_movement != null) _movement.isKnockedBack = true;
+        yield return new WaitForSeconds(0.35f);
+        if (_movement != null) _movement.isKnockedBack = false;
     }
 
     public void Heal(int healAmount)
