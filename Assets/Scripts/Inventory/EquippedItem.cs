@@ -8,7 +8,7 @@ public class EquippedItem : MonoBehaviour
     private Hiding _hiding;
     private SpriteAnimator _animator;
     public GameObject TorchLight;
-    private bool TorchIsLit;
+    [HideInInspector] public bool TorchIsLit;
     private InvenotryManager _inventoryManager;
     private PlayerHealth _playerHealth;
 

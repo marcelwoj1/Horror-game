@@ -68,7 +68,7 @@ public class Movement : MonoBehaviour
 
 
     // Methods
-    bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle( new Vector2(_feetLocation.position.x, _feetLocation.position.y) , _GROUND_CHECK_RADIUS, _groundLayer);
     }
