@@ -35,6 +35,12 @@ public class Draws : MonoBehaviour
             {
                 Instantiate(prefab, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
                 DrawerOpened = true;
+
+                // Play the "DrawsOpen" sound at this drawer's position
+                if (SoundService.Instance != null)
+                {
+                    SoundService.Instance.Play("DrawsOpen", (Vector2)transform.position);
+                }
             }
             else
                 Debug.LogWarning("No prefab found for: " + SpawnerName);
