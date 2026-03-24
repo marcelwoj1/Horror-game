@@ -43,11 +43,7 @@ public class Hiding : MonoBehaviour
         _movement.AllowMovement = true;
         _spriteRenderer.sortingLayerName = "Player";
         //_spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
-        Physics2D.IgnoreLayerCollision(
-                LayerMask.NameToLayer("Player"),
-                LayerMask.NameToLayer("Enemy"),
-                false
-        );
+  
         _rigidBody.gravityScale = 2;
     }
 

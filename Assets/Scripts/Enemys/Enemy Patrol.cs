@@ -25,6 +25,15 @@ public class EnemyPatrol : MonoBehaviour
     public bool isKnockedBack;
     private SpriteAnimator _animator;
 
+    [Header("Chase Randomness")]
+    public float offsetMagnitude = 2f;
+    public float offsetSpeed = 2f;
+    public float flipDebounceTime = 0.5f;
+
+    private float _noiseTime;
+    private float _chaseDirection = 1f;
+    private float _flipTimer;
+
     enum EnemyState
     {
         Patrol,
@@ -117,23 +126,34 @@ public class EnemyPatrol : MonoBehaviour
         if (_hiding.IsHiding)
             currentState = EnemyState.Search;
 
-        float direction = Mathf.Sign(player.position.x - transform.position.x);
+        // Calculate offset target
+        _noiseTime += Time.deltaTime * offsetSpeed;
+        float xOffset = (Mathf.PerlinNoise(_noiseTime, 0f) - 0.5f) * 2f * offsetMagnitude;
+        float targetX = player.position.x + xOffset;
 
-        Vector3 target = new Vector3(player.position.x, startY, transform.position.z);
+        float targetDirection = Mathf.Sign(targetX - transform.position.x);
 
-        Vector3 move = new Vector3(direction * chaseSpeed * Time.deltaTime, 0, 0);
+        // Debounce flip
+        if (targetDirection != _chaseDirection && _flipTimer <= 0)
+        {
+            _chaseDirection = targetDirection;
+            _flipTimer = flipDebounceTime;
+        }
+
+        if (_flipTimer > 0)
+            _flipTimer -= Time.deltaTime;
+
+        Vector3 move = new Vector3(_chaseDirection * chaseSpeed * Time.deltaTime, 0, 0);
         _animator.Play("Walk");
-        float distance = Vector2.Distance(transform.position, player.position);
         transform.position += move;
 
+        float distance = Vector2.Distance(transform.position, player.position);
         if (distance > viewDistance * 1.5f)
         {
             currentState = EnemyState.Search;
         }
-        if (player.position.x > transform.position.x)
-            transform.localScale = new Vector3(1,1,1);
-        else
-            transform.localScale = new Vector3(-1,1,1);
+
+        transform.localScale = new Vector3(_chaseDirection, 1, 1);
     }
 
     void Search()
