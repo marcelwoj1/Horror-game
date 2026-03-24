@@ -2320,6 +2320,15 @@ MonoBehaviour:
     Pitch: 1
     PitchVariance: 0.1
     Loop: 0
+  - GroupName: DrawsOpen
+    Clips:
+    - {fileID: 8300000, guid: 1af9770518dd33e41be217b7598c7869, type: 3}
+    - {fileID: 8300000, guid: ecc79f3b6b10f23439590033aece6b47, type: 3}
+    - {fileID: 8300000, guid: 86415bb70f8b08e41b97e5f0d57fe987, type: 3}
+    Volume: 5
+    Pitch: 1
+    PitchVariance: 0.1
+    Loop: 0
   _poolSize: 16
 --- !u!1 &656812883
 GameObject:
@@ -4489,6 +4498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EquippedItem
   ItemEquipped: 
   TorchLight: {fileID: 715760574}
+  TorchIsLit: 0
 --- !u!1 &1034119357
 GameObject:
   m_ObjectHideFlags: 0
