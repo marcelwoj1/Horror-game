@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
         Health -= damage;
         OnHealthChanged?.Invoke();
         _animator.Play("Hurt");
+        SoundService.Instance?.Play("PlayerHurt");
         if (Health <= 0)
         {
             Die();

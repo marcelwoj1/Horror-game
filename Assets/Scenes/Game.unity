@@ -2325,7 +2325,27 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 1af9770518dd33e41be217b7598c7869, type: 3}
     - {fileID: 8300000, guid: ecc79f3b6b10f23439590033aece6b47, type: 3}
     - {fileID: 8300000, guid: 86415bb70f8b08e41b97e5f0d57fe987, type: 3}
-    Volume: 5
+    Volume: 3
+    Pitch: 1
+    PitchVariance: 0.1
+    Loop: 0
+  - GroupName: PlayerHurt
+    Clips:
+    - {fileID: 8300000, guid: cd971f565a954cd489d80cd5e7d3ff99, type: 3}
+    - {fileID: 8300000, guid: b6b0e4ae311de094b93ef31a82f4033d, type: 3}
+    - {fileID: 8300000, guid: 1dc0534a9842d984488f2d227e867824, type: 3}
+    Volume: 2
+    Pitch: 1
+    PitchVariance: 0.1
+    Loop: 0
+  - GroupName: PlayerAttack
+    Clips:
+    - {fileID: 8300000, guid: 43566a3802ba7694da8a36f48d62e8bc, type: 3}
+    - {fileID: 8300000, guid: 01016dadb8bf40b4ba0e6209d483895e, type: 3}
+    - {fileID: 8300000, guid: 94b78d9d70328b242a737ef71f843614, type: 3}
+    - {fileID: 8300000, guid: 58adc2d71c7902e469beeb105ae2c9ad, type: 3}
+    - {fileID: 8300000, guid: 417741f0c7ae0494ea3f029a26662b2a, type: 3}
+    Volume: 2
     Pitch: 1
     PitchVariance: 0.1
     Loop: 0
@@ -4302,6 +4322,7 @@ MonoBehaviour:
   AxeEquipped: 0
   FlashlightEquipped: 0
   AllowMovement: 1
+  isKnockedBack: 0
   Inventory: {fileID: 1027944333}
   _spriteRenderer: {fileID: 1030423174}
   _moveSpeed: 8

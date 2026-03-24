@@ -32,6 +32,7 @@ public class PlayerAttack : MonoBehaviour
     
     public void Attack()
     {
+        SoundService.Instance?.Play("PlayerAttack");
         Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(
             attackPoint.position,
             attackSize,
