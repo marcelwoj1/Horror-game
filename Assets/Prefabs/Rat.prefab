@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b155bade6f1582b488ca5ee52c8972ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
-  speed: 5
+  speed: 4
   offsetMagnitude: 2
   offsetSpeed: 2
   flipDebounceTime: 0.5
