@@ -8,13 +8,19 @@ public class PlayerHealth : MonoBehaviour
     public int MaxHealth = 5;
     public Action OnDeath;
     public Action OnHealthChanged;
+    
+    [Header("Feedback")]
+    [SerializeField] private float damageShakeMagnitude = 1.5f;
+    
     private SpriteAnimator _animator;
     private Movement _movement;
+    private CameraTrack _cameraTrack;
 
     void Start()
     {
         _animator = GetComponent<SpriteAnimator>();
         _movement = GetComponent<Movement>();
+        _cameraTrack = FindObjectOfType<CameraTrack>();
     }
 
     public void TakeDamage(int damage)
@@ -24,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke();
         _animator.Play("Hurt");
         SoundService.Instance?.Play("PlayerHurt");
+        _cameraTrack?.Shake(damageShakeMagnitude);
         if (Health <= 0)
         {
             Die();

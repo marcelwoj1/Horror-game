@@ -17,14 +17,20 @@ public class CameraTrack : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool showGizmos = true;
 
+    [Header("Shake Settings")]
+    [SerializeField] private float shakeDecay = 5f;
+
     private Camera cam;
     private Transform previousBoundsTransform;
     private float camHalfHeight;
     private float camHalfWidth;
+    private Vector3 currentCameraPos;
+    private float currentShakeMagnitude = 0f;
 
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        currentCameraPos = transform.position;
         
         // Initialize static variables from serialized fields
         if (Target == null && initialTarget != null)
@@ -51,13 +57,32 @@ public class CameraTrack : MonoBehaviour
         if (boundsChanged)
         {
             // Snap instantly to new bounds
-            transform.position = targetPosition;
+            currentCameraPos = targetPosition;
         }
         else
         {
             // Smooth follow
-            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+            currentCameraPos = Vector3.Lerp(currentCameraPos, targetPosition, smoothSpeed * Time.deltaTime);
         }
+
+        Vector3 finalPos = currentCameraPos;
+        if (currentShakeMagnitude > 0f)
+        {
+            Vector2 shakeOffset = Random.insideUnitCircle * currentShakeMagnitude;
+            finalPos += new Vector3(shakeOffset.x, shakeOffset.y, 0f);
+            currentShakeMagnitude = Mathf.Lerp(currentShakeMagnitude, 0f, shakeDecay * Time.deltaTime);
+            if (currentShakeMagnitude < 0.01f) currentShakeMagnitude = 0f;
+        }
+
+        transform.position = finalPos;
+    }
+
+    /// <summary>
+    /// Applies a screen shake effect with the given magnitude.
+    /// </summary>
+    public void Shake(float magnitude)
+    {
+        currentShakeMagnitude = magnitude;
     }
 
     /// <summary>
@@ -89,7 +114,7 @@ public class CameraTrack : MonoBehaviour
         Vector3 desiredPosition = new Vector3(
             Target.position.x + offset.x,
             Target.position.y + offset.y,
-            transform.position.z
+            currentCameraPos.z
         );
 
         // Get bounds from transform (position = center, lossyScale = world size)
