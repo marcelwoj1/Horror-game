@@ -2394,7 +2394,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.01
+  m_Intensity: 2
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 0000000099a26a2629876e574f179246eb4a6a99d7e579ef45901350
@@ -4384,6 +4384,7 @@ GameObject:
   - component: {fileID: 1030423182}
   - component: {fileID: 1030423183}
   - component: {fileID: 1030423184}
+  - component: {fileID: 1030423185}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -4515,7 +4516,7 @@ MonoBehaviour:
   isKnockedBack: 0
   Inventory: {fileID: 1027944333}
   _spriteRenderer: {fileID: 1030423174}
-  _moveSpeed: 4
+  _moveSpeed: 12
   _jumpPower: 10
   _groundLayer:
     serializedVersion: 2
@@ -4710,6 +4711,18 @@ MonoBehaviour:
   ItemEquipped: 
   TorchLight: {fileID: 715760574}
   TorchIsLit: 0
+--- !u!114 &1030423185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030423170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4798ac13ff36c54c8a94a5a2a5963b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Respawn
 --- !u!1 &1034119357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4745,8 +4758,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 157.17, y: 49.79}
-  m_SizeDelta: {x: 312.3168, y: 100}
+  m_AnchoredPosition: {x: 143.12106, y: 34.038193}
+  m_SizeDelta: {x: 284.219, y: 68.4964}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1034119359
 MonoBehaviour:
@@ -4768,7 +4781,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 150, y: 150}
+  m_CellSize: {x: 100, y: 100}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -8873,8 +8886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 16.900024, y: -8.830017}
-  m_SizeDelta: {x: 491, y: 118}
+  m_AnchoredPosition: {x: 10, y: -8.830017}
+  m_SizeDelta: {x: 373.0685, y: 89.658}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1683809606
 MonoBehaviour:
@@ -10225,8 +10238,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
-  m_SizeDelta: {x: 491, y: 100}
+  m_AnchoredPosition: {x: 2.9689941, y: 1.3075981}
+  m_SizeDelta: {x: 305.6835, y: 83.654}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030771107
 MonoBehaviour:
@@ -10248,8 +10261,8 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 40, y: 40}
-  m_Spacing: {x: 36, y: 0}
+  m_CellSize: {x: 50, y: 50}
+  m_Spacing: {x: 20, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 5
 --- !u!114 &2030771108
