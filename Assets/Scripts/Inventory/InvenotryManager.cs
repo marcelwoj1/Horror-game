@@ -16,6 +16,10 @@ public class InvenotryManager : MonoBehaviour
                 if(item.SlotSize <= slot.slotSize && slot.EquipSlot == false)
                 {
                     SpawnNewItem(item, slot);
+                    if (item.itemName == "Axe")
+                    {
+                        FindAnyObjectByType<QuestService>()?.SatisfyQuest("Axe");
+                    }
                     return;
                 }
             }

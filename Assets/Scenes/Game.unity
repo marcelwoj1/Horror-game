@@ -2412,7 +2412,7 @@ MonoBehaviour:
     description: Find the axe
     isCompleted: 0
   - identifier: Dave Blunts
-    description: Find the cup
+    description: I shit myself
     isCompleted: 0
 --- !u!1 &619394800
 GameObject:
@@ -2589,6 +2589,13 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 94b78d9d70328b242a737ef71f843614, type: 3}
     - {fileID: 8300000, guid: 58adc2d71c7902e469beeb105ae2c9ad, type: 3}
     - {fileID: 8300000, guid: 417741f0c7ae0494ea3f029a26662b2a, type: 3}
+    Volume: 2
+    Pitch: 1
+    PitchVariance: 0.1
+    Loop: 0
+  - GroupName: QuestDone
+    Clips:
+    - {fileID: 8300000, guid: 1cc76f6907d60db42bb7ffe69d5755c0, type: 3}
     Volume: 2
     Pitch: 1
     PitchVariance: 0.1

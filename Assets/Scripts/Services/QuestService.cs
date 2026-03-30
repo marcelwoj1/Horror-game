@@ -48,6 +48,7 @@ public class QuestService : MonoBehaviour
             currentQuest.isCompleted = true;
             _currentQuestIndex++;
             UpdateQuestText();
+            SoundService.Instance?.Play("QuestDone");
         }
         else
         {
