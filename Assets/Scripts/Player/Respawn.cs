@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class Respawn : MonoBehaviour
 {
     private PlayerHealth playerHealth;
+    public GameObject DeathPanel;
 
     private void Awake()
     {
@@ -34,7 +35,13 @@ public class Respawn : MonoBehaviour
 
     private void ReloadScene()
     {
-        // Reloads the currently active scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject obj in objects)
+        {
+            Destroy(obj);
+        }
+        
+        DeathPanel.SetActive(true);
     }
 }
