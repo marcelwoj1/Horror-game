@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionDistance: 2.5
   interactionKey: 101
+  singleUse: 1
   OnInteract:
     m_PersistentCalls:
       m_Calls:
@@ -226,10 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a941b40ffc8d5443b25484fff53793f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Draws
-  SpawnerName: BugSpray
+  SpawnerName: JuicyMorsel
   RatPrefab: {fileID: 6987371143988917975, guid: 12d3c68b759ab1e469bbf88848e04012, type: 3}
   BugSprayPrefab: {fileID: 5118953354196886609, guid: 5ddbaa097e89cac409f3a2fd333f73de, type: 3}
   OrangeJuicePrefab: {fileID: 5451841369676921778, guid: 3710aed023f3d334a941cb177c987628, type: 3}
   FlashlightPrefab: {fileID: 5373014507852787714, guid: ad970587cbb910849b46fa4298c771f1, type: 3}
   JuicyMorselPrefab: {fileID: 6902581186310448193, guid: 01c0da1ee118f6747badb6ddd05b2cc6, type: 3}
+  KeyPrefab: {fileID: 1918415279274132908, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
   DrawerOpened: 0

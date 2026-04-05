@@ -22,7 +22,7 @@ public class ItemInformation : MonoBehaviour
             case "Flashlight":
                 itemInfoText.text = FlashlightInfo;
                 break;
-            case "JuicyMorsel":
+            case "JuicyMorsels":
                 itemInfoText.text = JuicyMorselInfo;
                 break;
             case "Key":

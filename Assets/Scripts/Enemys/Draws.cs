@@ -9,7 +9,7 @@ public class Draws : MonoBehaviour
     public GameObject OrangeJuicePrefab;
     public GameObject FlashlightPrefab;
     public GameObject JuicyMorselPrefab;
-
+    public GameObject KeyPrefab;
     public bool DrawerOpened = false;
 
     private Dictionary<string, GameObject> prefabDict;
@@ -22,7 +22,8 @@ public class Draws : MonoBehaviour
             { "BugSpray", BugSprayPrefab },
             { "OrangeJuice", OrangeJuicePrefab },
             { "Flashlight", FlashlightPrefab },
-            { "JuicyMorsel", JuicyMorselPrefab }
+            { "JuicyMorsel", JuicyMorselPrefab },
+            { "Key", KeyPrefab }
         };
     }
 

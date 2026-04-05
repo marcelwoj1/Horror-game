@@ -21,6 +21,7 @@ public class Movement : MonoBehaviour
     [HideInInspector] public bool FlashlightEquipped = false;
     [HideInInspector] public bool AllowMovement = true;
     public bool isKnockedBack = false;
+    private QuestService _questService;
 
 
 
@@ -82,6 +83,7 @@ public class Movement : MonoBehaviour
         _feetLocation = transform.Find("FeetLocation").transform;
         _animator = GetComponent<SpriteAnimator>();
         _playerAttack = GetComponent<PlayerAttack>();
+        _questService = GameObject.Find("QuestService").GetComponent<QuestService>();
     }
 
     
@@ -230,6 +232,7 @@ public class Movement : MonoBehaviour
     public void PickAxeUp()
     {
         _animator.Play("AquireAxe");
+        _questService.SatisfyQuest("Axe");
     }
 
 }

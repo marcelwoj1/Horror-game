@@ -25,12 +25,17 @@ public class Teleport : MonoBehaviour
     private Transform playerTransform;
     private bool playerInRange = false;
     public bool DoorUnlocked = false;
+    private GameObject _player;
+    private GameObject _lock;
+    private QuestService _questService;
 
     private void Awake()
     {
         // Find the TextMeshPro component in children
         promptText = GetComponentInChildren<TextMeshPro>();
-        
+        _player = GameObject.Find("Player");
+        _lock = GameObject.Find("Lock");
+        _questService = GameObject.Find("QuestService").GetComponent<QuestService>();
         if (promptText != null)
         {
             promptText.gameObject.SetActive(true);
@@ -65,6 +70,25 @@ public class Teleport : MonoBehaviour
                 promptText.gameObject.SetActive(false);
             }
             playerInRange = false;
+        }
+    }
+    public void UnlockDoor()
+    {
+        DoorUnlocked = true;
+    }
+    public void NoKeyInDoor()
+    {
+        if (_player == null) return;
+
+        // Check distance to player
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
+        bool inRange = distance <= interactionDistance;
+
+        if (inRange)
+        {
+            Destroy(_lock);
+            UnlockDoor();
+            _questService.SatisfyQuest("DoorUnlock");
         }
     }
 

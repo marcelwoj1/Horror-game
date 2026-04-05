@@ -3,10 +3,11 @@ using UnityEngine;
 public class Doors : MonoBehaviour
 {
     public Teleport teleport;
+    private QuestService _questService;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        _questService = GameObject.Find("QuestService").GetComponent<QuestService>();
     }
 
     // Update is called once per frame
@@ -14,7 +15,8 @@ public class Doors : MonoBehaviour
     {
         if(transform.childCount == 0)
         {
-            teleport.DoorUnlocked = true;
+            teleport.UnlockDoor();
+            _questService.SatisfyQuest("Door");
         }
     }
 

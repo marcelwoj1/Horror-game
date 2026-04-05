@@ -11,6 +11,7 @@ public class EquippedItem : MonoBehaviour
     [HideInInspector] public bool TorchIsLit;
     private InvenotryManager _inventoryManager;
     private PlayerHealth _playerHealth;
+    public Teleport _teleport;
 
     void Start()
     {
@@ -69,6 +70,11 @@ public class EquippedItem : MonoBehaviour
 
         case "OrangeJuice":
             _playerHealth.Heal(1);
+            _inventoryManager.RemoveItem(ItemEquipped);
+            break;
+
+        case "Key":
+            _teleport.NoKeyInDoor();
             _inventoryManager.RemoveItem(ItemEquipped);
             break;
 
