@@ -7,12 +7,6 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
-
-    public void OptionsMenu()
-    {
-        Debug.Log("Options Menu");
-    }
-
     public void QuitGame()
     {
         Application.Quit();
