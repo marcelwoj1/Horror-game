@@ -69,7 +69,7 @@ public class EquippedItem : MonoBehaviour
             break;
 
         case "OrangeJuice":
-            _playerHealth.Heal(1);
+            _movement.OrangeJuiceUsed();
             _inventoryManager.RemoveItem(ItemEquipped);
             break;
 

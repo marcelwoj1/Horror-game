@@ -34,11 +34,11 @@ public class Movement : MonoBehaviour
     private SpriteAnimator _animator;
     public SpriteRenderer _spriteRenderer;
     private PlayerAttack _playerAttack;
-
+    public GameObject OrangeJuiceTimer;
 
 
     // Config
-    public float _moveSpeed = 5;
+    public float _moveSpeed = 6;
     public float _jumpPower = 30;
     [SerializeField] LayerMask _groundLayer;
 
@@ -234,5 +234,16 @@ public class Movement : MonoBehaviour
         _animator.Play("AquireAxe");
         _questService.SatisfyQuest("Axe");
     }
-
+    public void OrangeJuiceUsed()
+    {
+        OrangeJuiceTimer.SetActive(true);
+        _playerAttack.attackDamage = 3;
+        _moveSpeed = 12;
+    }
+    public void OrangeJuiceEnded()
+    {
+        OrangeJuiceTimer.SetActive(false);
+        _playerAttack.attackDamage = 1;
+        _moveSpeed = 6;
+    }
 }

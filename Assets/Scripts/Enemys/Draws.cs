@@ -22,7 +22,7 @@ public class Draws : MonoBehaviour
             { "BugSpray", BugSprayPrefab },
             { "OrangeJuice", OrangeJuicePrefab },
             { "Flashlight", FlashlightPrefab },
-            { "JuicyMorsel", JuicyMorselPrefab },
+            { "JuicyMorsels", JuicyMorselPrefab },
             { "Key", KeyPrefab }
         };
     }

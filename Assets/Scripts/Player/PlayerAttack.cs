@@ -55,7 +55,7 @@ public class PlayerAttack : MonoBehaviour
 
                 knockbackDir.y = 0.2f; 
 
-                enemy.TakeDamage(1, knockbackDir * knockbackForce);
+                enemy.TakeDamage(attackDamage, knockbackDir * knockbackForce);
             }
 
             //WoodenPlank

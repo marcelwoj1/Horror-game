@@ -6,7 +6,7 @@ public class Hiding : MonoBehaviour
     Movement _movement;
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidBody;
-    public GameObject PieTimer;
+    public GameObject BugSprayTimer;
     private Coroutine hideCoroutine;
     [HideInInspector] public bool IsHiding;
 
@@ -75,13 +75,13 @@ public class Hiding : MonoBehaviour
     public void BugSprayUsed()
     {
         IsHiding = true;
-        PieTimer.SetActive(true);
+        BugSprayTimer.SetActive(true);
 
     }
 
     public void BugSprayEnded()
     {
         IsHiding = false;
-        PieTimer.SetActive(false);
+        BugSprayTimer.SetActive(false);
     }
 }
