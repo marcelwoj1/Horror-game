@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class Rat : MonoBehaviour
 {
-    private float startY;
-    private SpriteAnimator _animator;
+
+    [Header("Settings")]
     public float speed = 6f;
     public float offsetMagnitude = 2f;
     public float offsetSpeed = 2f;
     public float flipDebounceTime = 0.5f;
     
+    [Header("References")]
     private Transform player;
+    private Hiding _hiding;
+    private float startY;
+    private SpriteAnimator _animator;
     private float _noiseTime;
     private float _direction = 1f;
     private float _flipTimer;
@@ -26,11 +30,18 @@ public class Rat : MonoBehaviour
         startY = transform.position.y;
         _animator = GetComponent<SpriteAnimator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        _hiding = player.GetComponent<Hiding>();
     }
 
     void Update()
     {
         if (Time.time < _awakeTime + 1f) 
+        {
+            _animator.Play("Idle");
+            return;
+        }
+
+        if(_hiding.IsHiding)
         {
             _animator.Play("Idle");
             return;
