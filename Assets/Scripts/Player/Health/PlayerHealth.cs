@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
     {
         _animator = GetComponent<SpriteAnimator>();
         _movement = GetComponent<Movement>();
-        _cameraTrack = FindObjectOfType<CameraTrack>();
+        _cameraTrack = FindFirstObjectByType<CameraTrack>();
         if (HurtVignette != null)
         {
             _vignetteGraphic = HurtVignette.GetComponentInChildren<Graphic>();

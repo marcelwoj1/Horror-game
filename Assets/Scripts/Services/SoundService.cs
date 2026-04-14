@@ -60,7 +60,7 @@ public class SoundService : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         // Build lookup dictionary
         foreach (var group in _soundGroups)

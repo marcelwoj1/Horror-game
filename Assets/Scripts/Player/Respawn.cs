@@ -13,7 +13,7 @@ public class Respawn : MonoBehaviour
         // Fallback in case Respawn is on a different GameObject
         if (playerHealth == null)
         {
-            playerHealth = FindObjectOfType<PlayerHealth>();
+            playerHealth = FindFirstObjectByType<PlayerHealth>();
         }
     }
 

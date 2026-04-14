@@ -189,6 +189,10 @@ public class Movement : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            InventoryButton();
+        }
     }
     public void InventoryButton()
     {

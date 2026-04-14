@@ -838,7 +838,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Axe
+  m_Text: 
 --- !u!222 &84950082
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1892,7 +1892,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Axe
+  m_Text: 
 --- !u!222 &262827551
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4237,7 +4237,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Axe
+  m_Text: 
 --- !u!222 &684135600
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4731,7 +4731,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Juicy Morsels
+  m_Text: 
 --- !u!222 &749872323
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5171,7 +5171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Axe
+  m_Text: 
 --- !u!222 &853384754
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5494,63 +5494,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1adb5805977440d42aa480059e5cd9be, type: 3}
---- !u!1001 &962502216
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1918415279274132908, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_Name
-      value: Key
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -36.119137
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.7122402
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584359245264944623, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
 --- !u!1 &984434254
 GameObject:
   m_ObjectHideFlags: 0
@@ -5809,7 +5752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1027944334
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7399,7 +7342,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Axe
+  m_Text: 
 --- !u!222 &1132471664
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12192,7 +12135,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Use the Bug spray to temporarily evade mosters
+  m_Text: 
 --- !u!222 &1848400281
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12454,7 +12397,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Axe
+  m_Text: 
 --- !u!222 &1882488407
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14033,4 +13976,3 @@ SceneRoots:
   - {fileID: 229968492}
   - {fileID: 98334496}
   - {fileID: 1695455236}
-  - {fileID: 962502216}
