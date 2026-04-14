@@ -21,7 +21,8 @@ public class Teleport : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool showGizmos = true;
 
-    private TextMeshPro promptText;
+    [Header("Prompt Text")]
+    public GameObject promptText;
     private Transform playerTransform;
     private bool playerInRange = false;
     public bool DoorUnlocked = false;
@@ -31,8 +32,6 @@ public class Teleport : MonoBehaviour
 
     private void Awake()
     {
-        // Find the TextMeshPro component in children
-        promptText = GetComponentInChildren<TextMeshPro>();
         _player = GameObject.Find("Player");
         _lock = GameObject.Find("Lock");
         _questService = GameObject.Find("QuestService").GetComponent<QuestService>();
@@ -70,6 +69,14 @@ public class Teleport : MonoBehaviour
                 promptText.gameObject.SetActive(false);
             }
             playerInRange = false;
+        }
+        if(DoorUnlocked == false)
+        {
+            promptText.SetActive(false);
+        }
+        else
+        {
+            promptText.SetActive(true);
         }
     }
     public void UnlockDoor()
