@@ -43,7 +43,6 @@ public class InvenotryManager : MonoBehaviour
     {
         GameObject newItem = Instantiate(InventoryPrefab, slot.transform);
         Inventory inventory = newItem.GetComponent<Inventory>();
-        inventory.isBottomSlot = slot.BottomSlot;
         inventory.Initialize(item);
     }
 }

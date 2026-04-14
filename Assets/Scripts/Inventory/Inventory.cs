@@ -6,7 +6,6 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
     public Image image;
     public int SlotSize;
-    public bool isBottomSlot;
     public bool IsEquiped;
     public string ItemName;
     private EquippedItem equippedItem;
@@ -25,7 +24,6 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         SlotSize = newItem.SlotSize;
         image.sprite = newItem.itemImage;
         ItemName = newItem.itemName;
-        CheckIfBottomSlot();
     }
     public void RemoveItem(string itemName)
     {
@@ -53,17 +51,6 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
-    }
-    public void CheckIfBottomSlot()
-    {
-        if(isBottomSlot)
-        {
-            transform.eulerAngles = new Vector3(0,0,270.701996f);
-        }
-        else
-        {
-            transform.eulerAngles = new Vector3(0,0,0);
-        }
     }
     public void CheckIfEquiped()
     {

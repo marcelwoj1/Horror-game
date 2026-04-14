@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public int slotSize;
-    public bool BottomSlot;
     public bool EquipSlot;
     public void OnDrop(PointerEventData eventData)
     {
@@ -15,14 +14,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             if(inventory.SlotSize <= slotSize)
             {
                 inventory.parentAfterDrag = transform;
-                if(BottomSlot)
-                {
-                    inventory.transform.eulerAngles = new Vector3(0,0,270.701996f);
-                }
-                else
-                {
-                    inventory.transform.eulerAngles = new Vector3(0,0,0);
-                }
                 if(EquipSlot)
                 {
                     inventory.IsEquiped = true;
