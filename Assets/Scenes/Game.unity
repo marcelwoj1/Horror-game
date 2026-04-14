@@ -5089,7 +5089,7 @@ MonoBehaviour:
   isKnockedBack: 0
   Inventory: {fileID: 1027944333}
   _spriteRenderer: {fileID: 1030423174}
-  OrangeJuiceTimer: {fileID: 0}
+  OrangeJuiceTimer: {fileID: 1927145442}
   _moveSpeed: 6
   _jumpPower: 10
   _groundLayer:
@@ -5213,7 +5213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1941ab748584812408e8fcc10af001ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hiding
-  BugSprayTimer: {fileID: 0}
+  BugSprayTimer: {fileID: 1267881425}
   IsHiding: 0
 --- !u!114 &1030423182
 MonoBehaviour:
@@ -6733,7 +6733,7 @@ GameObject:
   - component: {fileID: 1267881428}
   - component: {fileID: 1267881427}
   m_Layer: 5
-  m_Name: BugSpray
+  m_Name: BugSprayTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11026,7 +11026,7 @@ GameObject:
   - component: {fileID: 1927145445}
   - component: {fileID: 1927145444}
   m_Layer: 5
-  m_Name: OrangeJuice
+  m_Name: OrangeJuiceTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
