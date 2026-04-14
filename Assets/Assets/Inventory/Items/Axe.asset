@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: Assembly-CSharp::Item
   itemName: Axe
-  SlotSize: 2
+  SlotSize: 1
   itemImage: {fileID: 3310002292416464744, guid: c924a5cf17611a94ba913cb5696f2756, type: 3}
+  ItemDescription: Use the axe to defeat enemies and beat obstacles

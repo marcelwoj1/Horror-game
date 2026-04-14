@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: OrangeJuice
   SlotSize: 1
   itemImage: {fileID: 3575650006281804355, guid: 6c711f199ea44a94599ec483989a2674, type: 3}
+  ItemDescription: Use the orange juice for an added boost

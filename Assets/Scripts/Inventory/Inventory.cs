@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public int SlotSize;
     public bool IsEquiped;
     public string ItemName;
+    public string ItemDescription;
     private EquippedItem equippedItem;
     
     [HideInInspector] public Transform parentAfterDrag;
@@ -24,6 +25,7 @@ public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         SlotSize = newItem.SlotSize;
         image.sprite = newItem.itemImage;
         ItemName = newItem.itemName;
+        ItemDescription = newItem.ItemDescription;
     }
     public void RemoveItem(string itemName)
     {

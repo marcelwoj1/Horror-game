@@ -13,6 +13,12 @@ public class Rat : MonoBehaviour
     private float _noiseTime;
     private float _direction = 1f;
     private float _flipTimer;
+    private float _awakeTime;
+
+    void Awake()
+    {
+        _awakeTime = Time.time;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +30,12 @@ public class Rat : MonoBehaviour
 
     void Update()
     {
+        if (Time.time < _awakeTime + 1f) 
+        {
+            _animator.Play("Idle");
+            return;
+        }
+
         _noiseTime += Time.deltaTime * offsetSpeed;
         float xOffset = (Mathf.PerlinNoise(_noiseTime, 0f) - 0.5f) * 2f * offsetMagnitude;
         float targetX = player.position.x + xOffset;

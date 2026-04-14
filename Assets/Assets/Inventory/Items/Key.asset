@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: Key
   SlotSize: 1
   itemImage: {fileID: -508019085657350288, guid: a2708148f321a484182fd6d244c16e71, type: 3}
+  ItemDescription: Use the key to unlock doors

@@ -16,6 +16,7 @@ public class InvenotryManager : MonoBehaviour
                 if(item.SlotSize <= slot.slotSize && slot.EquipSlot == false)
                 {
                     SpawnNewItem(item, slot);
+                    slot.DisplayItemInfo();
                     if (item.itemName == "Axe")
                     {
                         FindAnyObjectByType<QuestService>()?.SatisfyQuest("Axe");
@@ -34,7 +35,11 @@ public class InvenotryManager : MonoBehaviour
             Inventory ItemInSlot = slot.GetComponentInChildren<Inventory>();
             if(ItemInSlot != null)
             {
-                ItemInSlot.RemoveItem(itemName);
+                if(ItemInSlot.item.itemName == itemName)
+                {
+                    ItemInSlot.RemoveItem(itemName);
+                    return;
+                }
             }
         }
     }
