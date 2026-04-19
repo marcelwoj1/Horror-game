@@ -20,13 +20,13 @@ public class Hiding : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    public void Update()
-    {
-        if (_playerManager.IsHiding && Input.GetKeyDown(KeyCode.E))
-        {
-            UnHide();
-        }
-    }
+    //public void Update()
+    //{
+    //    if (_playerManager.IsHiding && Input.GetKeyDown(KeyCode.E))
+    //    {
+    //        UnHide();
+    //    }
+    //}
     
     public void Hide()
     {
@@ -38,6 +38,7 @@ public class Hiding : MonoBehaviour
         {
             return;
         }
+        Debug.Log("Run Hide");
         _playerManager.IsHiding = true;
 
         // Change Sprite Layer

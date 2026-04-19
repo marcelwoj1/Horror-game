@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Crate : MonoBehaviour
 {
+    [Header("Components")]
     private Hiding _hiding;
     private PlayerManager _playerManager;
+    
+    [Header("Variables")]
+    public bool _isPlayerNear = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -12,36 +16,36 @@ public class Crate : MonoBehaviour
         _hiding = _playerManager.GetComponent<Hiding>();
     }
 
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log("Crate");
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                if(_playerManager.IsHiding == false)
-                {
-                    _hiding.Hide();
-                }
-                else
-                {
-                    _hiding.UnHide();
-                }
-            }
-        }
-    }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if(_isPlayerNear == true && Input.GetKeyDown(KeyCode.E))
         {
             if(_playerManager.IsHiding == false)
             {
+                Debug.Log("Hiding");
                 _hiding.Hide();
             }
             else
             {
+                Debug.Log("UnHiding");
                 _hiding.UnHide();
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            _isPlayerNear = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            _isPlayerNear = false;
         }
     }
 }
