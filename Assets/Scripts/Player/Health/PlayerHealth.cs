@@ -5,29 +5,40 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Variables")]
     public int Health = 5;
     public int MaxHealth = 5;
+
+    [Header("Components")]
+    private SpriteAnimator _animator;
+    private Coroutine _hurtFlashRoutine;
+    private Graphic _vignetteGraphic;
+    private Rigidbody2D _rigidBody;
+    
     public GameObject HurtVignette;
     public Action OnDeath;
     public Action OnHealthChanged;
-    
-    [Header("Feedback")]
+
+    [Header("Config")]
     [SerializeField] private float damageShakeMagnitude = 1.5f;
     [SerializeField] private float hurtFadeInDuration = 0.1f;
     [SerializeField] private float hurtFadeOutDuration = 0.5f;
     [SerializeField] private float hurtFadeMaxAlpha = 0.8f;
+
+    [Header("Scripts")]    
     
-    private SpriteAnimator _animator;
     private Movement _movement;
     private CameraTrack _cameraTrack;
-    private Coroutine _hurtFlashRoutine;
-    private Graphic _vignetteGraphic;
+    private PlayerManager _playerManager;
 
     void Start()
     {
         _animator = GetComponent<SpriteAnimator>();
         _movement = GetComponent<Movement>();
+        _playerManager = GetComponent<PlayerManager>();
         _cameraTrack = FindFirstObjectByType<CameraTrack>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+
         if (HurtVignette != null)
         {
             _vignetteGraphic = HurtVignette.GetComponentInChildren<Graphic>();
@@ -41,27 +52,32 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 knockback)
     {
-        if (Health <= 0) return;
+        if (Health <= 0)
+        {
+            _animator.Play("Death");
+            _playerManager.AllowMovement = false;
+            return;
+        }
+        //Health Change 
         Health -= damage;
         OnHealthChanged?.Invoke();
-        //_animator.Play("Hurt");
         SoundService.Instance?.Play("PlayerHurt");
+
         _cameraTrack?.Shake(damageShakeMagnitude);
-        
+
+        _rigidBody.linearVelocity = Vector2.zero;
+        _rigidBody.AddForce(knockback, ForceMode2D.Impulse);
+        StartCoroutine(KnockbackRoutine());
+
         if (HurtVignette != null)
         {
             if (_hurtFlashRoutine != null) StopCoroutine(_hurtFlashRoutine);
             _hurtFlashRoutine = StartCoroutine(HurtFadeRoutine());
         }
 
-        if (Health <= 0)
-        {
-            _animator.Play("Death");
-            _movement.AllowMovement = false;
-            
-        }
+        
     }
 
     private IEnumerator HurtFadeRoutine()
@@ -114,21 +130,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage, Vector2 knockback)
-    {
-        TakeDamage(damage);
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            if (Health > 0)
-            {
-                rb.linearVelocity = Vector2.zero;
-                rb.AddForce(knockback, ForceMode2D.Impulse);
-                StartCoroutine(KnockbackRoutine());
-            }
-        }
-    }
-
     IEnumerator KnockbackRoutine()
     {
         if (_movement != null) _movement.isKnockedBack = true;
@@ -146,11 +147,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(1);
-        }
-    }
+    //public void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.H))
+    //    {
+    //        TakeDamage(1);
+    //    }
+    //}
 }

@@ -8,14 +8,14 @@ public class PieTimer : MonoBehaviour
 
     private float timeRemaining;
     private Hiding _hiding;
-    private Movement _movement;
+    private PlayerManager _playerManager;
 
     void Start()
     {
         timeRemaining = duration;
         timerImage.fillAmount = 1f;
         _hiding = GameObject.Find("Player").GetComponent<Hiding>();
-        _movement = GameObject.Find("Player").GetComponent<Movement>();
+        _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
     }
 
     void OnEnable()
@@ -47,7 +47,7 @@ public class PieTimer : MonoBehaviour
         }
         else if(gameObject.name == "OrangeJuiceTimer")
         {
-            _movement.OrangeJuiceEnded();
+            _playerManager.OrangeJuiceEnded();
         }
     }
 }

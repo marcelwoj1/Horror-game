@@ -12,6 +12,7 @@ public class EquippedItem : MonoBehaviour
     private InvenotryManager _inventoryManager;
     private PlayerHealth _playerHealth;
     public Teleport _teleport;
+    private PlayerManager _playerManager;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class EquippedItem : MonoBehaviour
         _hiding = GameObject.Find("Player").GetComponent<Hiding>();
         _inventoryManager = GameObject.Find("InventoryManager").GetComponent<InvenotryManager>();
         _playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
     }
 
     public void SetItem(string item)
@@ -41,7 +43,7 @@ public class EquippedItem : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) && ItemEquipped != "" && _movement.IsInventoryOpen == false)
+        if(Input.GetKeyDown(KeyCode.Mouse0) && ItemEquipped != "" && _playerManager.IsInventoryOpen == false)
         {
             if (EventSystem.current.IsPointerOverGameObject())
             return;
@@ -69,7 +71,7 @@ public class EquippedItem : MonoBehaviour
             break;
 
         case "OrangeJuice":
-            _movement.OrangeJuiceUsed();
+            _playerManager.OrangeJuiceUsed();
             _inventoryManager.RemoveItem(ItemEquipped);
             break;
 

@@ -1,0 +1,92 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PlayerManager : MonoBehaviour
+{
+    [Header("Scripts")]
+    public Movement _movement;
+    public PlayerAttack _playerAttack;
+    public QuestService _questService;
+
+    [Header("Variables")]
+    public bool IsInventoryOpen = false;
+    public bool AllowMovement = true;
+    public bool isTutorial = false;
+
+    [Header("Components")]
+    public GameObject Inventory;
+    public Rigidbody2D _rigidBody;
+    public SpriteAnimator _animator;
+    public IntroductionService introductionService;
+    public GameObject OrangeJuiceTimer;
+
+    void Start()
+    {
+        _movement = GetComponent<Movement>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<SpriteAnimator>();
+        _playerAttack = GetComponent<PlayerAttack>();
+        _questService = GameObject.Find("QuestService").GetComponent<QuestService>();
+        if(SceneManager.GetActiveScene().name == "Demo")
+        {
+            isTutorial = true;
+        }
+        AllowMovement = true;
+    }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            InventoryButton();
+        }
+    }
+
+    public void InventoryButton()
+    {
+        if(IsInventoryOpen == false)
+        {
+            IsInventoryOpen = true;
+            Inventory.SetActive(IsInventoryOpen);
+            _rigidBody.linearVelocityX = 0;
+            _rigidBody.linearVelocityY = 0;
+            _animator.Play("Idle");
+            AllowMovement = false;
+            if(isTutorial == true)
+            {
+                introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
+                introductionService.InventoryTutorial();
+            }
+        }
+        else
+        {
+            IsInventoryOpen = false;
+            Inventory.SetActive(IsInventoryOpen);
+            AllowMovement = true;
+            if(isTutorial == true)
+            {
+                introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
+                introductionService.ItemTutorial();
+            }
+        }
+    }
+
+    public void PickAxeUp()
+    {
+        _animator.Play("AquireAxe");
+        _questService.SatisfyQuest("Axe");
+    }
+
+    public void OrangeJuiceUsed()
+    {
+        OrangeJuiceTimer.SetActive(true);
+        _playerAttack.attackDamage = 3;
+        _movement._moveSpeed = 12;
+    }
+
+    public void OrangeJuiceEnded()
+    {
+        OrangeJuiceTimer.SetActive(false);
+        _playerAttack.attackDamage = 1;
+        _movement._moveSpeed = 6;
+    }
+}

@@ -11,69 +11,47 @@ public class Movement : MonoBehaviour
 {
     
 
-    // | CONSTANTS |
+    [Header("Variables")]
     private float _JUMP_THRESHOLD = 0f;
     private float _FALL_THRESHOLD = 0f;
     private float _MOVE_THRESHOLD = 0f;
     private float _GROUND_CHECK_RADIUS = 0.15f;
     private float _JUMP_BUFFER = 0.5f;
-    [HideInInspector] public bool IsInventoryOpen = false;
-    [HideInInspector] public bool AxeEquipped = false;
-    [HideInInspector] public bool FlashlightEquipped = false;
-    [HideInInspector] public bool AllowMovement = true;
+    public bool AxeEquipped = false;
+    public bool FlashlightEquipped = false;
     public bool isKnockedBack = false;
-    private QuestService _questService;
-    private bool isTutorial;
-    public bool IsHiding = false;
 
-
-
-    // | VARIABLES |
-
-    // Components
+    [Header("Components")]
     public GameObject Inventory;
     private Rigidbody2D _rigidBody;
     private Transform _feetLocation;
     private SpriteAnimator _animator;
     public SpriteRenderer _spriteRenderer;
-    private PlayerAttack _playerAttack;
-    public GameObject OrangeJuiceTimer;
-    private IntroductionService introductionService;
+    private PlayerManager _playerManager;
 
-
-    // Config
+    [Header("Config")]
     public float _moveSpeed = 6;
     public float _jumpPower = 30;
     [SerializeField] LayerMask _groundLayer;
 
-
-    // Input
+    [Header("Input")]
     private Vector2 _movementDirection;
     private float _lastJumpInput = -100f;
     
-    
-
-    // State machine
     public enum MoveStates
     {
         Idle,
         Moving,
     }
-
     public enum AirStates
     {
         Jumping,
         Falling,
         Grounded
     }
-    
     public MoveStates MoveState;
     public AirStates AirState;
 
-
-
-
-    // Methods
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle( new Vector2(_feetLocation.position.x, _feetLocation.position.y) , _GROUND_CHECK_RADIUS, _groundLayer);
@@ -86,28 +64,17 @@ public class Movement : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _feetLocation = transform.Find("FeetLocation").transform;
         _animator = GetComponent<SpriteAnimator>();
-        _playerAttack = GetComponent<PlayerAttack>();
-        _questService = GameObject.Find("QuestService").GetComponent<QuestService>();
-        if(SceneManager.GetActiveScene().name == "Demo")
-        {
-            isTutorial = true;
-        }
+        _playerManager = GetComponent<PlayerManager>();
     }
 
     
     void Update()
     {
-
-
-        // GET INPUT
-
-
         // Movement
         _movementDirection = new Vector2(
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
         );
-
 
         // Jump
         if (Input.GetButton("Jump"))
@@ -115,25 +82,17 @@ public class Movement : MonoBehaviour
             _lastJumpInput = Time.time;
         }
 
-
-
-
-        // SET STATE MACHINE
-
-
-        // Ground
+        // State Machine when grounded
         if ( Mathf.Abs(_rigidBody.linearVelocityX) > _MOVE_THRESHOLD)
         {
             MoveState = MoveStates.Moving;
-        
         }
         else
         {
            MoveState = MoveStates.Idle; 
         }
 
-
-        // Air
+        // State Machine when in air
         if ( _rigidBody.linearVelocityY > _JUMP_THRESHOLD)
         {
             AirState = AirStates.Jumping;
@@ -146,6 +105,7 @@ public class Movement : MonoBehaviour
         {
             AirState = AirStates.Grounded;
         }
+
 
         // ANIMATION & FLIPPING
         if (_animator != null)
@@ -170,6 +130,7 @@ public class Movement : MonoBehaviour
             {
                 if (MoveState == MoveStates.Moving)
                 {
+                    // Walk Animations
                     if(FlashlightEquipped == true)
                     {
                         _animator.Play("TorchWalk");
@@ -181,6 +142,7 @@ public class Movement : MonoBehaviour
                 }
                 else
                 {
+                    // Idle Animations
                     if(AxeEquipped == true)
                     {
                         _animator.Play("AxeIdle");
@@ -197,37 +159,9 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.I))
+        if(_playerManager.AllowMovement == false)
         {
-            InventoryButton();
-        }
-    }
-    public void InventoryButton()
-    {
-        if(IsInventoryOpen == false)
-        {
-            IsInventoryOpen = true;
-            Inventory.SetActive(IsInventoryOpen);
-            _rigidBody.linearVelocityX = 0;
-            _rigidBody.linearVelocityY = 0;
-            _animator.Play("Idle");
-            AllowMovement = false;
-            if(isTutorial == true)
-            {
-                introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
-                introductionService.InventoryTutorial();
-            }
-        }
-        else
-        {
-            IsInventoryOpen = false;
-            Inventory.SetActive(IsInventoryOpen);
-            AllowMovement = true;
-            if(isTutorial == true)
-            {
-                introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
-                introductionService.ItemTutorial();
-            }
+            _rigidBody.linearVelocity = Vector2.zero;
         }
     }
 
@@ -235,41 +169,22 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(IsInventoryOpen == false && AllowMovement == true)
+        if(_playerManager.AllowMovement == true && isKnockedBack == false)
         {
-            if (!isKnockedBack)
-            {
-                // Move
-                _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
+            // Move
+            _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
 
-                if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
-                {
-                    _lastJumpInput = -100f;
-                    _rigidBody.linearVelocityY = 0;
-                    _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
-                }
+            // Jump
+            if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
+            {
+                _lastJumpInput = -100f;
+                _rigidBody.linearVelocityY = 0;
+                _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
             }
         }
         else
         {
             _rigidBody.linearVelocity = Vector2.zero;
         }
-    }
-    public void PickAxeUp()
-    {
-        _animator.Play("AquireAxe");
-        _questService.SatisfyQuest("Axe");
-    }
-    public void OrangeJuiceUsed()
-    {
-        OrangeJuiceTimer.SetActive(true);
-        _playerAttack.attackDamage = 3;
-        _moveSpeed = 12;
-    }
-    public void OrangeJuiceEnded()
-    {
-        OrangeJuiceTimer.SetActive(false);
-        _playerAttack.attackDamage = 1;
-        _moveSpeed = 6;
     }
 }

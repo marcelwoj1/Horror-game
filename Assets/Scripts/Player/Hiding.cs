@@ -4,6 +4,7 @@ using System.Collections;
 public class Hiding : MonoBehaviour
 {
     Movement _movement;
+    private PlayerManager _playerManager;
     SpriteRenderer _spriteRenderer;
     Rigidbody2D _rigidBody;
     public GameObject BugSprayTimer;
@@ -20,11 +21,12 @@ public class Hiding : MonoBehaviour
         {
             return;
         }
+        Debug.Log("Hiding");
         IsHiding = true;
         _spriteRenderer.sortingLayerName = "Wall";
         _rigidBody.linearVelocityX = 0;
         _rigidBody.linearVelocityY = 0;
-        _movement.AllowMovement = false;
+        _playerManager.AllowMovement = false;
         //_spriteRenderer.color = new Color(0.1f, 0.1f, 0.1f, 0.1f);
         Physics2D.IgnoreLayerCollision(
                 LayerMask.NameToLayer("Player"),
@@ -40,7 +42,7 @@ public class Hiding : MonoBehaviour
     public void UnHide()
     {
         IsHiding = false;
-        _movement.AllowMovement = true;
+        _playerManager.AllowMovement = true;
         _spriteRenderer.sortingLayerName = "Player";
         //_spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
   
@@ -61,6 +63,7 @@ public class Hiding : MonoBehaviour
     public void Start()
     {
         _movement = GetComponent<Movement>();
+        _playerManager = GetComponent<PlayerManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidBody = GetComponent<Rigidbody2D>();
     }
