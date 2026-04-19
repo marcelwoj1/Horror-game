@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
         if (Health <= 0) return;
         Health -= damage;
         OnHealthChanged?.Invoke();
-        _animator.Play("Hurt");
+        //_animator.Play("Hurt");
         SoundService.Instance?.Play("PlayerHurt");
         _cameraTrack?.Shake(damageShakeMagnitude);
         
@@ -58,7 +58,9 @@ public class PlayerHealth : MonoBehaviour
 
         if (Health <= 0)
         {
-            Die();
+            _animator.Play("Death");
+            _movement.AllowMovement = false;
+            
         }
     }
 
@@ -118,9 +120,12 @@ public class PlayerHealth : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.AddForce(knockback, ForceMode2D.Impulse);
-            StartCoroutine(KnockbackRoutine());
+            if (Health > 0)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.AddForce(knockback, ForceMode2D.Impulse);
+                StartCoroutine(KnockbackRoutine());
+            }
         }
     }
 
@@ -139,11 +144,6 @@ public class PlayerHealth : MonoBehaviour
         {
             Health = MaxHealth;
         }
-    }
-
-    public void Die()
-    {
-        OnDeath?.Invoke();
     }
 
     public void Update()
