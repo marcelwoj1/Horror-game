@@ -7,7 +7,7 @@ public class IntroObjects : MonoBehaviour
     public GameObject panel;
     public Text HintText;
     public string Hint;
-    private bool isInteracted = false;
+    public bool isInteracted = false;
     
     void Start()
     {
@@ -19,6 +19,7 @@ public class IntroObjects : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !isInteracted)
         {
+            Debug.Log("Interacted");
             ObjectLight.SetActive(true);
             panel.SetActive(true);
             HintText.text = Hint;

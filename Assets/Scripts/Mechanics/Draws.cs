@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Draws : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Draws : MonoBehaviour
     public GameObject JuicyMorselPrefab;
     public GameObject KeyPrefab;
     public bool DrawerOpened = false;
+
+    public bool isTutorial;
+    private IntroductionService introductionService;
 
     private Dictionary<string, GameObject> prefabDict;
 
@@ -25,6 +29,10 @@ public class Draws : MonoBehaviour
             { "JuicyMorsels", JuicyMorselPrefab },
             { "Key", KeyPrefab }
         };
+        if(SceneManager.GetActiveScene().name == "Demo")
+        {
+            isTutorial = true;
+        }
     }
 
 
@@ -45,6 +53,11 @@ public class Draws : MonoBehaviour
             }
             else
                 Debug.LogWarning("No prefab found for: " + SpawnerName);
+        }
+        if(isTutorial == true)
+        {
+            introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
+            introductionService.DrawerTutorial();
         }
     }
 

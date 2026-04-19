@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 
 
@@ -22,6 +23,8 @@ public class Movement : MonoBehaviour
     [HideInInspector] public bool AllowMovement = true;
     public bool isKnockedBack = false;
     private QuestService _questService;
+    private bool isTutorial;
+    public bool IsHiding = false;
 
 
 
@@ -35,6 +38,7 @@ public class Movement : MonoBehaviour
     public SpriteRenderer _spriteRenderer;
     private PlayerAttack _playerAttack;
     public GameObject OrangeJuiceTimer;
+    private IntroductionService introductionService;
 
 
     // Config
@@ -84,6 +88,10 @@ public class Movement : MonoBehaviour
         _animator = GetComponent<SpriteAnimator>();
         _playerAttack = GetComponent<PlayerAttack>();
         _questService = GameObject.Find("QuestService").GetComponent<QuestService>();
+        if(SceneManager.GetActiveScene().name == "Demo")
+        {
+            isTutorial = true;
+        }
     }
 
     
@@ -204,12 +212,22 @@ public class Movement : MonoBehaviour
             _rigidBody.linearVelocityY = 0;
             _animator.Play("Idle");
             AllowMovement = false;
+            if(isTutorial == true)
+            {
+                introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
+                introductionService.InventoryTutorial();
+            }
         }
         else
         {
             IsInventoryOpen = false;
             Inventory.SetActive(IsInventoryOpen);
             AllowMovement = true;
+            if(isTutorial == true)
+            {
+                introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
+                introductionService.ItemTutorial();
+            }
         }
     }
 
@@ -231,6 +249,10 @@ public class Movement : MonoBehaviour
                     _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
                 }
             }
+        }
+        else
+        {
+            _rigidBody.linearVelocity = Vector2.zero;
         }
     }
     public void PickAxeUp()
