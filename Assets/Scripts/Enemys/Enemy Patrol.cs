@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    public Transform player;
-    public Hiding _hiding;
+    private Transform player;
+    private Hiding _hiding;
     private float startY;
 
     [Header("Movement")]
@@ -53,6 +53,8 @@ public class EnemyPatrol : MonoBehaviour
 
         currentState = EnemyState.Patrol;
         _animator = GetComponent<SpriteAnimator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        _hiding = player.GetComponent<Hiding>();
     }
 
     void Update()
