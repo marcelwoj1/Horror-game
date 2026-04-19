@@ -4,19 +4,19 @@ public class Torch : MonoBehaviour
 {
     public Movement _movement;
     public GameObject TorchLight;
-    private Hiding _hiding;
+    private PlayerManager _playerManager;
     private EquippedItem _equippedItem;
     float xpos;
     float ypos;
 
     void Start()
     {
-        _hiding = GameObject.Find("Player").GetComponent<Hiding>();
+        _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         _equippedItem = GameObject.Find("Player").GetComponent<EquippedItem>();
     }
     void Update()
     {
-        if(_movement.AirState != Movement.AirStates.Grounded || _hiding.IsHiding == true)
+        if(_movement.AirState != Movement.AirStates.Grounded || _playerManager.IsHiding == true)
         {
             TorchLight.SetActive(false);
             _equippedItem.TorchIsLit = false;

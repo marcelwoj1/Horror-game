@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyPatrol : MonoBehaviour
 {
     private Transform player;
-    private Hiding _hiding;
+    private PlayerManager _playerManager;
     private float startY;
 
     [Header("Movement")]
@@ -54,7 +54,7 @@ public class EnemyPatrol : MonoBehaviour
         currentState = EnemyState.Patrol;
         _animator = GetComponent<SpriteAnimator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        _hiding = player.GetComponent<Hiding>();
+        _playerManager = player.GetComponent<PlayerManager>();
     }
 
     void Update()
@@ -95,7 +95,7 @@ public class EnemyPatrol : MonoBehaviour
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, viewDistance, ~visionMask);
 
-                if (hit.collider != null && hit.collider.CompareTag("Player") && !_hiding.IsHiding)
+                if (hit.collider != null && hit.collider.CompareTag("Player") && _playerManager.IsHiding == false)
                 {
                     currentState = EnemyState.Chase;
                 }
@@ -125,7 +125,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void ChasePlayer()
     {
-        if (_hiding.IsHiding)
+        if (_playerManager.IsHiding)
             currentState = EnemyState.Search;
 
         // Calculate offset target

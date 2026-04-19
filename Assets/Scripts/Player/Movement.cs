@@ -5,12 +5,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
-
-
 public class Movement : MonoBehaviour
 {
-    
-
     [Header("Variables")]
     private float _JUMP_THRESHOLD = 0f;
     private float _FALL_THRESHOLD = 0f;
@@ -169,17 +165,20 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(_playerManager.AllowMovement == true && isKnockedBack == false)
+        if(_playerManager.AllowMovement == true)
         {
-            // Move
-            _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
-
-            // Jump
-            if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
+            if (!isKnockedBack)
             {
-                _lastJumpInput = -100f;
-                _rigidBody.linearVelocityY = 0;
-                _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+                // Move
+                _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
+
+                // Jump
+                if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
+                {
+                    _lastJumpInput = -100f;
+                    _rigidBody.linearVelocityY = 0;
+                    _rigidBody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+                }
             }
         }
         else

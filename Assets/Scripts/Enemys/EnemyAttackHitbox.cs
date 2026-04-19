@@ -4,15 +4,18 @@ public class EnemyAttackHitbox : MonoBehaviour
 {
     private Enemy enemy;
 
+    [Header("Variables")]
     public int damage = 1;
     public float detectionDistance = 1.5f;
     public float damageCooldown = 1.0f;
     public float knockbackForce = 15f;
+    private float _nextDamageTime;
+
+    [Header("Components")]
     private SpriteAnimator _animator;
-    private Hiding _hiding;
+    private PlayerManager _playerManager;
     private Transform _playerTransform;
     private PlayerHealth _playerHealth;
-    private float _nextDamageTime;
 
     void Start()
     {
@@ -21,7 +24,7 @@ public class EnemyAttackHitbox : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         if (player != null)
         {
-            _hiding = player.GetComponent<Hiding>();
+            _playerManager = player.GetComponent<PlayerManager>();
             _playerTransform = player.transform;
             _playerHealth = player.GetComponent<PlayerHealth>();
         }
@@ -29,9 +32,9 @@ public class EnemyAttackHitbox : MonoBehaviour
 
     private void Update()
     {
-        if (_playerTransform == null || enemy == null || _hiding == null || _playerHealth == null) return;
+        if (_playerTransform == null || enemy == null || _playerManager == null || _playerHealth == null) return;
         if (enemy.isDead) return;
-        if (_hiding.IsHiding) return;
+        if (_playerManager.IsHiding) return;
         if (Time.time < _nextDamageTime) return;
 
         float distance = Vector2.Distance(transform.position, _playerTransform.position);

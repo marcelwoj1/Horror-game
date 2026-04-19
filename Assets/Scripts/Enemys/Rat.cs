@@ -11,7 +11,7 @@ public class Rat : MonoBehaviour
     
     [Header("References")]
     private Transform player;
-    private Hiding _hiding;
+    private PlayerManager _playerManager;
     private float startY;
     private SpriteAnimator _animator;
     private float _noiseTime;
@@ -30,7 +30,7 @@ public class Rat : MonoBehaviour
         startY = transform.position.y;
         _animator = GetComponent<SpriteAnimator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        _hiding = player.GetComponent<Hiding>();
+        _playerManager = player.GetComponent<PlayerManager>();
     }
 
     void Update()
@@ -41,7 +41,7 @@ public class Rat : MonoBehaviour
             return;
         }
 
-        if(_hiding.IsHiding)
+        if(_playerManager.IsHiding)
         {
             _animator.Play("Idle");
             return;

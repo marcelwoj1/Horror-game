@@ -67,17 +67,16 @@ public class PlayerHealth : MonoBehaviour
 
         _cameraTrack?.Shake(damageShakeMagnitude);
 
-        _rigidBody.linearVelocity = Vector2.zero;
-        _rigidBody.AddForce(knockback, ForceMode2D.Impulse);
-        StartCoroutine(KnockbackRoutine());
-
         if (HurtVignette != null)
         {
             if (_hurtFlashRoutine != null) StopCoroutine(_hurtFlashRoutine);
             _hurtFlashRoutine = StartCoroutine(HurtFadeRoutine());
         }
 
-        
+        // Knockback
+        _rigidBody.linearVelocity = Vector2.zero;
+        _rigidBody.AddForce(knockback, ForceMode2D.Impulse);
+        StartCoroutine(KnockbackRoutine());
     }
 
     private IEnumerator HurtFadeRoutine()
@@ -147,11 +146,4 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    //public void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.H))
-    //    {
-    //        TakeDamage(1);
-    //    }
-    //}
 }

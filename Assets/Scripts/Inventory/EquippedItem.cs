@@ -3,22 +3,24 @@ using UnityEngine.EventSystems;
 
 public class EquippedItem : MonoBehaviour
 {
+    [Header("Variables")]
     public string ItemEquipped;
-    private Movement _movement;
-    private Hiding _hiding;
-    private SpriteAnimator _animator;
-    public GameObject TorchLight;
     [HideInInspector] public bool TorchIsLit;
+
+    [Header("Components")]
+    public GameObject TorchLight;
     private InvenotryManager _inventoryManager;
     private PlayerHealth _playerHealth;
     public Teleport _teleport;
     private PlayerManager _playerManager;
+    private Movement _movement;
+    private SpriteAnimator _animator;
+
 
     void Start()
     {
         _movement = GameObject.Find("Player").GetComponent<Movement>();
         _animator = GameObject.Find("Player").GetComponent<SpriteAnimator>();
-        _hiding = GameObject.Find("Player").GetComponent<Hiding>();
         _inventoryManager = GameObject.Find("InventoryManager").GetComponent<InvenotryManager>();
         _playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
@@ -61,7 +63,7 @@ public class EquippedItem : MonoBehaviour
             break;
 
         case "BugSpray":
-            _hiding.BugSprayUsed();
+            _playerManager.BugSprayUsed();
             _inventoryManager.RemoveItem(ItemEquipped);
             break;
 

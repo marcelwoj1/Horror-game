@@ -7,14 +7,12 @@ public class PieTimer : MonoBehaviour
     public float duration = 15f;
 
     private float timeRemaining;
-    private Hiding _hiding;
     private PlayerManager _playerManager;
 
     void Start()
     {
         timeRemaining = duration;
         timerImage.fillAmount = 1f;
-        _hiding = GameObject.Find("Player").GetComponent<Hiding>();
         _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
     }
 
@@ -43,7 +41,7 @@ public class PieTimer : MonoBehaviour
     {
         if(gameObject.name == "BugSprayTimer")
         {
-            _hiding.BugSprayEnded();
+            _playerManager.BugSprayEnded();
         }
         else if(gameObject.name == "OrangeJuiceTimer")
         {

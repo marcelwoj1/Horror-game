@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class Crate : MonoBehaviour
 {
-    public Hiding _hiding;
+    private Hiding _hiding;
+    private PlayerManager _playerManager;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+        _hiding = _playerManager.GetComponent<Hiding>();
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -15,7 +19,7 @@ public class Crate : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                if(_hiding.IsHiding == false)
+                if(_playerManager.IsHiding == false)
                 {
                     _hiding.Hide();
                 }
@@ -30,7 +34,7 @@ public class Crate : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            if(_hiding.IsHiding == false)
+            if(_playerManager.IsHiding == false)
             {
                 _hiding.Hide();
             }

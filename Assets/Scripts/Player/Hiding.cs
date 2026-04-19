@@ -3,62 +3,14 @@ using System.Collections;
 
 public class Hiding : MonoBehaviour
 {
-    Movement _movement;
-    private PlayerManager _playerManager;
-    SpriteRenderer _spriteRenderer;
-    Rigidbody2D _rigidBody;
-    public GameObject BugSprayTimer;
+    [Header("Variables")]
     private Coroutine hideCoroutine;
-    [HideInInspector] public bool IsHiding;
 
-    public void Hide()
-    {
-        if(IsHiding == true)
-        {
-            return;
-        }
-        if(_movement.IsGrounded() == false)
-        {
-            return;
-        }
-        Debug.Log("Hiding");
-        IsHiding = true;
-        _spriteRenderer.sortingLayerName = "Wall";
-        _rigidBody.linearVelocityX = 0;
-        _rigidBody.linearVelocityY = 0;
-        _playerManager.AllowMovement = false;
-        //_spriteRenderer.color = new Color(0.1f, 0.1f, 0.1f, 0.1f);
-        Physics2D.IgnoreLayerCollision(
-                LayerMask.NameToLayer("Player"),
-                LayerMask.NameToLayer("Enemy"),
-                true
-        );
-        if (hideCoroutine != null)
-            StopCoroutine(hideCoroutine);
-
-        hideCoroutine = StartCoroutine(WaitUntilGrounded());
-    }
-
-    public void UnHide()
-    {
-        IsHiding = false;
-        _playerManager.AllowMovement = true;
-        _spriteRenderer.sortingLayerName = "Player";
-        //_spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
-  
-        _rigidBody.gravityScale = 2;
-    }
-
-    IEnumerator WaitUntilGrounded()
-    {
-        yield return new WaitUntil(() => _movement.IsGrounded() || !IsHiding);
-
-        if (!IsHiding)
-            yield break;
-
-        _rigidBody.gravityScale = 0;
-        transform.position = new Vector3(transform.position.x, transform.position.y + 1.4f, transform.position.z);
-    }
+    [Header("Components")]
+    private Movement _movement;
+    private PlayerManager _playerManager;
+    private SpriteRenderer _spriteRenderer;
+    private Rigidbody2D _rigidBody;
 
     public void Start()
     {
@@ -67,24 +19,67 @@ public class Hiding : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidBody = GetComponent<Rigidbody2D>();
     }
+
     public void Update()
     {
-        if (IsHiding && Input.GetKeyDown(KeyCode.E))
+        if (_playerManager.IsHiding && Input.GetKeyDown(KeyCode.E))
         {
             UnHide();
         }
     }
-
-    public void BugSprayUsed()
+    
+    public void Hide()
     {
-        IsHiding = true;
-        BugSprayTimer.SetActive(true);
+        if(_playerManager.IsHiding == true)
+        {
+            return;
+        }
+        if(_movement.IsGrounded() == false)
+        {
+            return;
+        }
+        _playerManager.IsHiding = true;
 
+        // Change Sprite Layer
+        _spriteRenderer.sortingLayerName = "Wall";
+
+        // Stop Movement
+        _rigidBody.linearVelocityX = 0;
+        _rigidBody.linearVelocityY = 0;
+        _playerManager.AllowMovement = false;
+
+        // Ignore Enemy Collision
+        Physics2D.IgnoreLayerCollision(
+                LayerMask.NameToLayer("Player"),
+                LayerMask.NameToLayer("Enemy"),
+                true
+        );
+
+        // Start Coroutine
+        if (hideCoroutine != null)
+            StopCoroutine(hideCoroutine);
+
+        hideCoroutine = StartCoroutine(WaitUntilGrounded());
     }
 
-    public void BugSprayEnded()
+    public void UnHide()
     {
-        IsHiding = false;
-        BugSprayTimer.SetActive(false);
+        _playerManager.IsHiding = false;
+        _playerManager.AllowMovement = true;
+        _spriteRenderer.sortingLayerName = "Player";
+        _rigidBody.gravityScale = 2;
     }
+
+    IEnumerator WaitUntilGrounded()
+    {
+        yield return new WaitUntil(() => _movement.IsGrounded() || !_playerManager.IsHiding);
+
+        if (!_playerManager.IsHiding)
+            yield break;
+
+        _rigidBody.gravityScale = 0;
+        transform.position = new Vector3(transform.position.x, transform.position.y + 1.4f, transform.position.z);
+    }
+
+    
 }
