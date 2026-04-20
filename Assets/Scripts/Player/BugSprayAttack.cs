@@ -13,6 +13,7 @@ public class BugSprayAttack : MonoBehaviour
     public Movement _movement;
     
     private SpriteRenderer _spriteRenderer;
+    private Coroutine sprayCoroutine;
 
     void Start()
     {
@@ -21,13 +22,26 @@ public class BugSprayAttack : MonoBehaviour
     }
 
     void Update()
+{
+    if (_playerManager.IsBugSprayActive && sprayCoroutine == null)
     {
-        while(_playerManager.IsBugSprayActive == true)
-        {
-            Attack();
-            Wait(1);
-        }
+        sprayCoroutine = StartCoroutine(SprayRoutine());
     }
+    else if (!_playerManager.IsBugSprayActive && sprayCoroutine != null)
+    {
+        StopCoroutine(sprayCoroutine);
+        sprayCoroutine = null;
+    }
+}
+
+IEnumerator SprayRoutine()
+{
+    while (true)
+    {
+        Attack();
+        yield return new WaitForSeconds(1f);
+    }
+}
     
     public void Attack()
     {
