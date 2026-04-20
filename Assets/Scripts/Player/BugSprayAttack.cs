@@ -7,7 +7,7 @@ public class BugSprayAttack : MonoBehaviour
     public Vector2 attackSize = new Vector2(1, 1);
     public LayerMask enemyLayer;
     public int attackDamage = 1;
-    public float knockbackForce = 0f;
+    public float knockbackForce = 5f;
     public LayerMask hittableLayers;
     public PlayerManager _playerManager;
     public Movement _movement;

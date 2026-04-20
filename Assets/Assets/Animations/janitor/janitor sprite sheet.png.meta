@@ -1,0 +1,377 @@
+fileFormatVersion: 2
+guid: 802469ec797146a4cad312295eb33542
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4154792509965047654
+    second: janitor sprite sheet_0
+  - first:
+      213: 3027781480730301278
+    second: janitor sprite sheet_1
+  - first:
+      213: -1017258421446367238
+    second: janitor sprite sheet_2
+  - first:
+      213: 4516411632240192150
+    second: janitor sprite sheet_3
+  - first:
+      213: -5326179475553171243
+    second: janitor sprite sheet_4
+  - first:
+      213: 8195327802561315775
+    second: janitor sprite sheet_5
+  - first:
+      213: 3766144221745950410
+    second: janitor sprite sheet_6
+  - first:
+      213: 726534422980728440
+    second: janitor sprite sheet_7
+  - first:
+      213: 1510510758794688736
+    second: janitor sprite sheet_8
+  - first:
+      213: -359134589904185251
+    second: janitor sprite sheet_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 150
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: janitor sprite sheet_0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 48
+        width: 404
+        height: 759
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a986418a9363756c0800000000000000
+      internalID: -4154792509965047654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_1
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 34
+        width: 191
+        height: 613
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e539f600737d40a20800000000000000
+      internalID: 3027781480730301278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1019
+        y: 61
+        width: 271
+        height: 588
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af72ae8fad8f1e1f0800000000000000
+      internalID: -1017258421446367238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 57
+        width: 287
+        height: 573
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69a6e1753748dae30800000000000000
+      internalID: 4516411632240192150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 76
+        width: 303
+        height: 564
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d84dad7cfb9516b0800000000000000
+      internalID: -5326179475553171243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_5
+      rect:
+        serializedVersion: 2
+        x: 2143
+        y: 63
+        width: 500
+        height: 596
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb3cc893737abb170800000000000000
+      internalID: 8195327802561315775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_6
+      rect:
+        serializedVersion: 2
+        x: 2682
+        y: 94
+        width: 345
+        height: 672
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aceae0e3738044430800000000000000
+      internalID: 3766144221745950410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_7
+      rect:
+        serializedVersion: 2
+        x: 3166
+        y: 94
+        width: 200
+        height: 603
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8761cd6553b251a00800000000000000
+      internalID: 726534422980728440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_8
+      rect:
+        serializedVersion: 2
+        x: 3555
+        y: 104
+        width: 314
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e8fc57388966f410800000000000000
+      internalID: 1510510758794688736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: janitor sprite sheet_9
+      rect:
+        serializedVersion: 2
+        x: 4123
+        y: 61
+        width: 191
+        height: 611
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5894364ef8140bf0800000000000000
+      internalID: -359134589904185251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: be74c61b4935a604aacba6f679cb0052
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      janitor sprite sheet_0: -4154792509965047654
+      janitor sprite sheet_1: 3027781480730301278
+      janitor sprite sheet_2: -1017258421446367238
+      janitor sprite sheet_3: 4516411632240192150
+      janitor sprite sheet_4: -5326179475553171243
+      janitor sprite sheet_5: 8195327802561315775
+      janitor sprite sheet_6: 3766144221745950410
+      janitor sprite sheet_7: 726534422980728440
+      janitor sprite sheet_8: 1510510758794688736
+      janitor sprite sheet_9: -359134589904185251
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
