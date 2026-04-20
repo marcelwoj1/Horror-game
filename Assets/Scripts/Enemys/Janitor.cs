@@ -6,15 +6,21 @@ public class Janitor : MonoBehaviour
 {
     [Header("Movement")]
     public float patrolSpeed = 2f;
+    public float chaseSpeed = 3.5f;
 
     [Header("Patrol")]
     public Transform patrolPointsParent;
     public float waitTime = 5f;
 
+    [Header("Chase")]
+    public bool chasePlayer = false;
+
     private List<Vector3> patrolPoints = new List<Vector3>();
     private int currentPoint;
 
     private bool isWaiting = false;
+
+    private Transform player;
     private SpriteAnimator _animator;
 
     void Start()
@@ -24,12 +30,20 @@ public class Janitor : MonoBehaviour
             patrolPoints.Add(point.position);
         }
 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         _animator = GetComponent<SpriteAnimator>();
     }
 
     void Update()
     {
-        Patrol();
+        if (chasePlayer)
+        {
+            Chase();
+        }
+        else
+        {
+            Patrol();
+        }
     }
 
     void Patrol()
@@ -50,11 +64,21 @@ public class Janitor : MonoBehaviour
             StartCoroutine(WaitAtPoint());
         }
 
-        // Flip sprite
-        if (target.x > transform.position.x)
-            transform.localScale = new Vector3(1, 1, 1);
-        else
-            transform.localScale = new Vector3(-1, 1, 1);
+        Flip(target.x);
+    }
+
+    void Chase()
+    {
+        if (player == null) return;
+
+        isWaiting = false; // cancel any waiting
+
+        Vector3 target = player.position;
+
+        transform.position = Vector2.MoveTowards(transform.position, target, chaseSpeed * Time.deltaTime);
+        _animator.Play("Walk");
+
+        Flip(target.x);
     }
 
     IEnumerator WaitAtPoint()
@@ -68,5 +92,13 @@ public class Janitor : MonoBehaviour
             currentPoint = 0;
 
         isWaiting = false;
+    }
+
+    void Flip(float targetX)
+    {
+        if (targetX > transform.position.x)
+            transform.localScale = new Vector3(1, 1, 1);
+        else
+            transform.localScale = new Vector3(-1, 1, 1);
     }
 }

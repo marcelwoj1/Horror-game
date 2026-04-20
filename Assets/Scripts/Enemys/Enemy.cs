@@ -4,6 +4,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour
 {
     public int health = 3;
+    public bool isAggressive = true;
 
     private SpriteAnimator _animator;
     private Rigidbody2D rb;
@@ -15,6 +16,25 @@ public class Enemy : MonoBehaviour
         _animator = GetComponent<SpriteAnimator>();
         rb = GetComponent<Rigidbody2D>();
         patrol = GetComponent<EnemyPatrol>();
+    }
+    void Update()
+    {
+        if(isAggressive == false)
+        {
+            Physics2D.IgnoreLayerCollision(
+                LayerMask.NameToLayer("Player"),
+                LayerMask.NameToLayer("Enemy"),
+                true
+        );
+        }
+        else
+        {
+            Physics2D.IgnoreLayerCollision(
+                LayerMask.NameToLayer("Player"),
+                LayerMask.NameToLayer("Enemy"),
+                false
+        );
+        }
     }
 
     public void TakeDamage(int damage, Vector2 knockback)

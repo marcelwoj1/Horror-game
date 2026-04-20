@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     public bool isTutorial = false;
     public bool IsHiding = false;
     public bool IsBugSprayActive = false;
+    public bool IsCrouching = false;
 
     [Header("Components")]
     public GameObject Inventory;
@@ -42,6 +43,25 @@ public class PlayerManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.I))
         {
             InventoryButton();
+        }
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            Crouch();
+        }
+    }
+
+    public void Crouch()
+    {
+        if(IsCrouching == false)
+        {
+            IsCrouching = true;
+            AllowMovement = false;
+            _animator.Play("Crouching");
+        }
+        else
+        {
+            IsCrouching = false;
+            AllowMovement = true;
         }
     }
 

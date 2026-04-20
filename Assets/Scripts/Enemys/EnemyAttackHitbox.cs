@@ -36,6 +36,7 @@ public class EnemyAttackHitbox : MonoBehaviour
         if (enemy.isDead) return;
         if (_playerManager.IsHiding) return;
         if (Time.time < _nextDamageTime) return;
+        if (enemy.isAggressive == false) return;
 
         float distance = Vector2.Distance(transform.position, _playerTransform.position);
         if (distance <= detectionDistance)

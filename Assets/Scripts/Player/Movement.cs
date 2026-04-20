@@ -138,8 +138,12 @@ public class Movement : MonoBehaviour
                 }
                 else
                 {
+                    if(_playerManager.IsCrouching == true)
+                    {
+                        _animator.Play("Crouch");
+                    }
                     // Idle Animations
-                    if(AxeEquipped == true)
+                    else if(AxeEquipped == true)
                     {
                         _animator.Play("AxeIdle");
                     }

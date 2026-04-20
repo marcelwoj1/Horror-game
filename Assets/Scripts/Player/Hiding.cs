@@ -19,14 +19,6 @@ public class Hiding : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidBody = GetComponent<Rigidbody2D>();
     }
-
-    //public void Update()
-    //{
-    //    if (_playerManager.IsHiding && Input.GetKeyDown(KeyCode.E))
-    //    {
-    //        UnHide();
-    //    }
-    //}
     
     public void Hide()
     {
