@@ -12,8 +12,12 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         if(transform.childCount == 0)
         {
-            ItemName.text = "";
+            ItemName.text = "Empty";
             ItemInfo.text = "";
+        }
+        else
+        {
+            DisplayItemInfo();
         }
     }
     public void OnDrop(PointerEventData eventData)

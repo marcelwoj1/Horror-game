@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Item
   itemName: BugSpray
   SlotSize: 1
-  itemImage: {fileID: 5162182423526965453, guid: b2cf2687e636c6a429e90f3b95c560a5, type: 3}
+  itemImage: {fileID: 5448214022912166041, guid: a66b06b6dfcdf5949812002147323898, type: 3}
   ItemDescription: Use the Bug spray to temporarily evade mosters

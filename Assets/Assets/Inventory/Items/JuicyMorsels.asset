@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Item
   itemName: JuicyMorsels
   SlotSize: 1
-  itemImage: {fileID: 4604547967964390315, guid: 697009ff18d866342b6107deb33dff17, type: 3}
+  itemImage: {fileID: -49165901995868191, guid: 105d4fdda442a9e43a367d5933eb5881, type: 3}
   ItemDescription: Use the Juicy Morsels to gain health

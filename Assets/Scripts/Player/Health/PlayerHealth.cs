@@ -54,6 +54,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockback)
     {
+        if(_playerManager.IsBugSprayActive == true) return;
         if (Health <= 0)
         {
             _animator.Play("Death");

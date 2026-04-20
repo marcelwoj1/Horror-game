@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public bool AllowMovement = true;
     public bool isTutorial = false;
     public bool IsHiding = false;
+    public bool IsBugSprayActive = false;
 
     [Header("Components")]
     public GameObject Inventory;
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     public IntroductionService introductionService;
     public GameObject OrangeJuiceTimer;
     public GameObject BugSprayTimer;
+    public GameObject BugSprayEffect;
 
     void Start()
     {
@@ -94,13 +96,15 @@ public class PlayerManager : MonoBehaviour
 
     public void BugSprayUsed()
     {
-        IsHiding = true;
+        IsBugSprayActive = true;
         BugSprayTimer.SetActive(true);
+        BugSprayEffect.SetActive(true);
     }
 
     public void BugSprayEnded()
     {
-        IsHiding = false;
+        IsBugSprayActive = false;
         BugSprayTimer.SetActive(false);
+        BugSprayEffect.SetActive(false);
     }
 }
