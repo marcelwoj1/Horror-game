@@ -28,7 +28,6 @@ public class JanitorKey : MonoBehaviour
         {
             _enemy.isAggressive = true;
             _janitor.chasePlayer = true;
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Janitor"), false);
         }
     }
 }

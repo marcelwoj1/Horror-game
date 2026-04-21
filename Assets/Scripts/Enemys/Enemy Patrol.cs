@@ -75,18 +75,22 @@ public class EnemyPatrol : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.Patrol:
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), false);
                 Patrol();
                 break;
 
             case EnemyState.Chase:
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), false);
                 ChasePlayer();
                 break;
 
             case EnemyState.Search:
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), false);
                 Search();
                 break;
 
             case EnemyState.Food:
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), true);
                 GoToFood();
                 break;
         }

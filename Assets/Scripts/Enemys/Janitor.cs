@@ -50,6 +50,7 @@ public class Janitor : MonoBehaviour
         if(enemy.isAggressive == true && _playerManager.IsHiding == false)
         {
             chasePlayer = true;
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Janitor"), false);
         }
         if (isWaiting)
         {

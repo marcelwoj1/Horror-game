@@ -44,7 +44,7 @@ public class Hiding : MonoBehaviour
 
         // Disable Collision
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Janitor"), true);
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyHitbox"), true);
 
         // Start Coroutine
         if (hideCoroutine != null)
@@ -61,7 +61,7 @@ public class Hiding : MonoBehaviour
         _rigidBody.gravityScale = 2;
         _capsuleCollider.enabled = true;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Janitor"), false);
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyHitbox"), false);
     }
 
     IEnumerator WaitUntilGrounded()

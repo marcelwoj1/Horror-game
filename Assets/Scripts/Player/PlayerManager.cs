@@ -85,7 +85,10 @@ public class PlayerManager : MonoBehaviour
         {
             IsInventoryOpen = false;
             Inventory.SetActive(IsInventoryOpen);
-            AllowMovement = true;
+            if(IsHiding == false)
+            {
+                AllowMovement = true;
+            }
             if(isTutorial == true)
             {
                 introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();

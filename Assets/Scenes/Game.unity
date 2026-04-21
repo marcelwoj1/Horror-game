@@ -2353,7 +2353,7 @@ MonoBehaviour:
   newCameraBounds: {fileID: 632110768}
   showGizmos: 0
   promptText: {fileID: 138613841}
-  DoorUnlocked: 0
+  DoorUnlocked: 1
   isOutro: 0
 --- !u!70 &455037225
 CapsuleCollider2D:
@@ -14460,6 +14460,10 @@ PrefabInstance:
       propertyPath: _hiding
       value: 
       objectReference: {fileID: 1030423181}
+    - target: {fileID: 6144285893444687426, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6965142080199110243, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.96
@@ -14501,7 +14505,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4501581328148392497, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
@@ -16963,6 +16968,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 11.22
       objectReference: {fileID: 0}
+    - target: {fileID: 6144285893444687426, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6965142080199110243, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.7399993
@@ -17004,7 +17013,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4501581328148392497, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
