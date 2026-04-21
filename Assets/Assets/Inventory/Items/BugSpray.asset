@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: BugSpray
   SlotSize: 1
   itemImage: {fileID: 5448214022912166041, guid: a66b06b6dfcdf5949812002147323898, type: 3}
-  ItemDescription: Use the Bug spray to temporarily evade mosters
+  ItemDescription: Will harm some monsters around you while active.

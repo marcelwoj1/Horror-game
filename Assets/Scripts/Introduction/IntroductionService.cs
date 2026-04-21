@@ -8,20 +8,19 @@ public class IntroductionService : MonoBehaviour
     public Text HintText;
 
     [Header("Tutorials")]
+    public bool StartTutorialDone;
+    public bool MovementTutorialDone;
     public bool DrawerTutorialDone;
     public bool RatTutorialDone;
     public bool InventoryTutorialDone;
     public bool ItemTutorialDone;
     public bool KeyTutorialDone;
 
-    public void StartTutorial()
+    void Start()
     {
+        StartTutorialDone = true;
         panel.SetActive(true);
         HintText.text = "Welcome to the Domatophobia! This is a tutorial level to show you the basics of the game. Click the left mouse button to continue.";
-    }
-    public void Start()
-    {
-        //panel.SetActive(false);
     }
     public void Update()
     {
@@ -29,6 +28,13 @@ public class IntroductionService : MonoBehaviour
         {
             panel.SetActive(false);
             Time.timeScale = 1f;
+            if(MovementTutorialDone == false)
+            {
+                MovementTutorialDone = true;
+                panel.SetActive(true);
+                HintText.text = "You can use the A and D keys to move left and right, and the space bar to jump. You can also use C to crouch if your feeling extra sneeky(maybe when trying to take something off someone).";
+                Time.timeScale = 0f;
+            }
         }
     }
 
@@ -65,7 +71,7 @@ public class IntroductionService : MonoBehaviour
             return;
         KeyTutorialDone = true;
         panel.SetActive(true);
-        HintText.text = "Some doors are locked and require a key to open. You will find keys in different places such as drawers or maybe attached to enemies use this key to open the door in front of you and begin the game... good luck.";
+        HintText.text = "Some doors are locked and require a key to open. You will find keys in different places such as drawers or maybe attached to enemies. Use this key to open the door in front of you and begin the game... good luck.";
         Time.timeScale = 0f;
     }
 }

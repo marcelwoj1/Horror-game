@@ -42,7 +42,7 @@ public class Draws : MonoBehaviour
         {
             if (prefabDict.TryGetValue(SpawnerName, out GameObject prefab))
             {
-                Instantiate(prefab, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
+                Instantiate(prefab, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
                 DrawerOpened = true;
 
                 // Play the "DrawsOpen" sound at this drawer's position

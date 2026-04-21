@@ -4528,6 +4528,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efa17ee182dc0584a8b39136105753b5, type: 2}
   - {fileID: 11400000, guid: 035e152b3b43ec442a457b2e7b047065, type: 2}
   - {fileID: 11400000, guid: b4812885a1d36a94ca8c6c46541e565f, type: 2}
+  - {fileID: 11400000, guid: 87193379d93fe1b47af92da5962e77f4, type: 2}
+  - {fileID: 11400000, guid: 57005f4018eaa9b428b2743286e369ac, type: 2}
   _startingAnimation: 
   onAnimationStart:
     m_PersistentCalls:
@@ -5785,6 +5787,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IntroductionService
   panel: {fileID: 1182323978}
   HintText: {fileID: 995004675}
+  StartTutorialDone: 0
+  MovementTutorialDone: 0
   DrawerTutorialDone: 0
   RatTutorialDone: 0
   InventoryTutorialDone: 0

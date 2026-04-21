@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     public bool isAggressive = true;
     public bool isDead = false;
     public bool Affectedbybugspray = true;
+    public GameObject Key;
+    public bool KeyDropped = false;
 
     private SpriteAnimator _animator;
     private Rigidbody2D rb;
@@ -24,7 +26,7 @@ public class Enemy : MonoBehaviour
         {
             Physics2D.IgnoreLayerCollision(
                 LayerMask.NameToLayer("Player"),
-                LayerMask.NameToLayer("Enemy"),
+                LayerMask.NameToLayer("Janitor"),
                 true
         );
         }
@@ -32,7 +34,7 @@ public class Enemy : MonoBehaviour
         {
             Physics2D.IgnoreLayerCollision(
                 LayerMask.NameToLayer("Player"),
-                LayerMask.NameToLayer("Enemy"),
+                LayerMask.NameToLayer("Janitor"),
                 false
         );
         }
@@ -42,6 +44,7 @@ public class Enemy : MonoBehaviour
     {
         if (patrol != null && patrol.isKnockedBack) return;
         if (isDead) return;
+        isAggressive = true;
 
         health -= damage;
 
@@ -75,6 +78,14 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        if(Key != null)
+        {
+            if(gameObject.name == "Janitor" && KeyDropped == false)
+            {
+                Instantiate(Key, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+                KeyDropped = true;
+            }
+        }
         Destroy(gameObject);
     }
 }

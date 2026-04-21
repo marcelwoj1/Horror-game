@@ -36,6 +36,7 @@ public class Teleport : MonoBehaviour
 
     [Header("Variables")]
     private bool isTutorial = false;
+    public bool isOutro = false;
 
     private void Awake()
     {
@@ -139,6 +140,10 @@ public class Teleport : MonoBehaviour
         if(isTutorial == true)
         {
             SceneManager.LoadScene("Intro");
+        }
+        if(isOutro == true)
+        {
+            SceneManager.LoadScene("Outro");
         }
         if (destination == null)
         {

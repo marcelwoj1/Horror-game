@@ -35,8 +35,6 @@ public class PlayerManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Demo")
         {
             isTutorial = true;
-            introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
-            introductionService.StartTutorial();
         }
         AllowMovement = true;
     }

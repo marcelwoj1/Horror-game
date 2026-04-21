@@ -10,9 +10,19 @@ public class IntroText : MonoBehaviour
     {
         if(finishText == true)
         {
-            SceneManager.LoadScene("Game");
+            if(SceneManager.GetActiveScene().name == "Intro")
+            {
+                SceneManager.LoadScene("Game");
+            }
+            else if(SceneManager.GetActiveScene().name == "Outro")
+            {
+                SceneManager.LoadScene("Menu");
+            }
         }
-        nextText.SetActive(true);
+        if(nextText != null)
+        {
+            nextText.SetActive(true);
+        }
         Destroy(gameObject);
     }
 }

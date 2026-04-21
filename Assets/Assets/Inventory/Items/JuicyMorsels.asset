@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: JuicyMorsels
   SlotSize: 1
   itemImage: {fileID: -49165901995868191, guid: 105d4fdda442a9e43a367d5933eb5881, type: 3}
-  ItemDescription: Use the Juicy Morsels to gain health
+  ItemDescription: Used to distract spiders for a short time.

@@ -112,7 +112,6 @@ public class EquippedItem : MonoBehaviour
 
         case "Key":
             _teleport.NoKeyInDoor();
-            _inventoryManager.RemoveItem(ItemEquipped);
             break;
 
         default:

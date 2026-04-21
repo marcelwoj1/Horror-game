@@ -7,9 +7,6 @@ public class JanitorKey : MonoBehaviour
     private Enemy _enemy;
     private Janitor _janitor;
 
-    [Header("Variables")]
-    public bool KeySpawned = false;
-
     [Header("Prefabs")]
     public GameObject KeyPrefab;
 
@@ -22,10 +19,10 @@ public class JanitorKey : MonoBehaviour
 
     public void Spawn()
     {
-        if (KeySpawned == false)
+        if (_enemy.KeyDropped == false)
         {
             Instantiate(KeyPrefab, transform.position + new Vector3(0, -1.5f, 0), Quaternion.identity);
-            KeySpawned = true;
+            _enemy.KeyDropped = true;
         }
         if(_playerManager.IsCrouching == false)
         {

@@ -1559,11 +1559,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3309149890016784021, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: SpawnerName
-      value: Key
+      value: OrangeJuice
       objectReference: {fileID: 0}
     - target: {fileID: 5846645404525125586, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: m_Name
-      value: KeyDraw
+      value: OrangeJuiceDraw
       objectReference: {fileID: 0}
     - target: {fileID: 8970578353240292933, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: m_LocalScale.x
@@ -2353,7 +2353,8 @@ MonoBehaviour:
   newCameraBounds: {fileID: 632110768}
   showGizmos: 0
   promptText: {fileID: 138613841}
-  DoorUnlocked: 1
+  DoorUnlocked: 0
+  isOutro: 0
 --- !u!70 &455037225
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2913,11 +2914,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3309149890016784021, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: SpawnerName
-      value: Rat
+      value: OrangeJuice
       objectReference: {fileID: 0}
     - target: {fileID: 5846645404525125586, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: m_Name
-      value: RatDraw
+      value: OrangeJuiceDraw
       objectReference: {fileID: 0}
     - target: {fileID: 8970578353240292933, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3062,7 +3063,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
+  m_Intensity: 0.1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 0000000099a26a2629876e574f179246eb4a6a99d7e579ef45901350
@@ -4901,7 +4902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &963955518
 Transform:
   m_ObjectHideFlags: 0
@@ -9787,6 +9788,7 @@ MonoBehaviour:
   showGizmos: 0
   promptText: {fileID: 863669482}
   DoorUnlocked: 1
+  isOutro: 0
 --- !u!70 &984434258
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -10345,7 +10347,7 @@ MonoBehaviour:
   isKnockedBack: 0
   Inventory: {fileID: 1027944333}
   _spriteRenderer: {fileID: 1030423174}
-  _moveSpeed: 6
+  _moveSpeed: 4
   _jumpPower: 10
   _groundLayer:
     serializedVersion: 2
@@ -10507,12 +10509,12 @@ MonoBehaviour:
   attackSize: {x: 2.23, y: 3.39}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 2176
   attackDamage: 1
   knockbackForce: 5
   hittableLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 2432
 --- !u!70 &1030423183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -10819,6 +10821,7 @@ MonoBehaviour:
   showGizmos: 0
   promptText: {fileID: 757315493}
   DoorUnlocked: 1
+  isOutro: 0
 --- !u!70 &1035439966
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -11980,6 +11983,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 979af33ecba04e640beecaa67b6cc66d, type: 2}
   - {fileID: 11400000, guid: 368e322c3021e2844bace32f21cc045b, type: 2}
   - {fileID: 11400000, guid: 62c47ba3eed07d642be1b260ef181181, type: 2}
+  - {fileID: 11400000, guid: 0464e4bc2f6bce046b04219731b93fc6, type: 2}
   _startingAnimation: Mopping
   onAnimationStart:
     m_PersistentCalls:
@@ -11988,13 +11992,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _specificEvents:
-  - AnimationName: Attack
+  - AnimationName: Death
     onAnimationStart:
       m_PersistentCalls:
         m_Calls: []
     onAnimationEnd:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1266208434}
+          m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+          m_MethodName: Die
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!212 &1266208431
 SpriteRenderer:
   serializedVersion: 2
@@ -12104,6 +12120,8 @@ MonoBehaviour:
   isAggressive: 0
   isDead: 0
   Affectedbybugspray: 1
+  Key: {fileID: 1918415279274132908, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
+  KeyDropped: 0
 --- !u!50 &1266208435
 Rigidbody2D:
   serializedVersion: 5
@@ -12219,7 +12237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a41c06f150bc54bb4c88fcd53ad70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JanitorKey
-  KeySpawned: 0
   KeyPrefab: {fileID: 1918415279274132908, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
 --- !u!1 &1267881425
 GameObject:
@@ -13174,7 +13191,7 @@ Transform:
   m_GameObject: {fileID: 1428958001}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.27, y: 19.3, z: 0}
+  m_LocalPosition: {x: 35.95, y: 10.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13630,6 +13647,7 @@ MonoBehaviour:
   showGizmos: 0
   promptText: {fileID: 500380097}
   DoorUnlocked: 1
+  isOutro: 0
 --- !u!70 &1530537318
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -13884,6 +13902,7 @@ MonoBehaviour:
   showGizmos: 0
   promptText: {fileID: 1963041416}
   DoorUnlocked: 1
+  isOutro: 0
 --- !u!70 &1545455425
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -14525,6 +14544,7 @@ MonoBehaviour:
   showGizmos: 0
   promptText: {fileID: 1710281189}
   DoorUnlocked: 1
+  isOutro: 0
 --- !u!70 &1609613679
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -16650,7 +16670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846645404525125586, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: m_Name
-      value: OrangeJuiceDraw
+      value: RatDraw
       objectReference: {fileID: 0}
     - target: {fileID: 8970578353240292933, guid: f93915a87b8dd8b4f9d5c025a5929ca2, type: 3}
       propertyPath: m_LocalScale.x
@@ -16997,9 +17017,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1694970484}
     m_Modifications:
     - target: {fileID: 1103153188551948494, guid: bcc74396785755f45acb07be5d65ad17, type: 3}
+      propertyPath: isOutro
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103153188551948494, guid: bcc74396785755f45acb07be5d65ad17, type: 3}
       propertyPath: destination
       value: 
       objectReference: {fileID: 1204244203}
+    - target: {fileID: 1103153188551948494, guid: bcc74396785755f45acb07be5d65ad17, type: 3}
+      propertyPath: DoorUnlocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1103153188551948494, guid: bcc74396785755f45acb07be5d65ad17, type: 3}
       propertyPath: newCameraBounds
       value: 
