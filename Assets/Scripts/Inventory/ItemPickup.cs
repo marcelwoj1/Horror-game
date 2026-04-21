@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ItemPickup : MonoBehaviour
 {
     private InvenotryManager inventoryManager;
     public Item item;
     private QuestService _questService;
+    private IntroductionService _introductionService;
 
     public void Start()
     {
@@ -19,6 +21,11 @@ public class ItemPickup : MonoBehaviour
         if(item.itemName == "Key")
         {
             _questService.SatisfyQuest("Key");
+            if(SceneManager.GetActiveScene().name == "Demo")
+            {
+                _introductionService = GameObject.Find("IntroductionService").GetComponent<IntroductionService>();
+                _introductionService.KeyTutorial();
+            }
         }
         
     }

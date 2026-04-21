@@ -4716,6 +4716,16 @@ MonoBehaviour:
   TorchIsLit: 0
   TorchLight: {fileID: 715760574}
   _teleport: {fileID: 1068946167}
+  FoodParent: {fileID: 0}
+  BugSprayPrefab: {fileID: 5118953354196886609, guid: 5ddbaa097e89cac409f3a2fd333f73de, type: 3}
+  OrangeJuicePrefab: {fileID: 5451841369676921778, guid: 3710aed023f3d334a941cb177c987628, type: 3}
+  FlashlightPrefab: {fileID: 5373014507852787714, guid: ad970587cbb910849b46fa4298c771f1, type: 3}
+  JuicyMorselPrefab: {fileID: 6902581186310448193, guid: 01c0da1ee118f6747badb6ddd05b2cc6, type: 3}
+  KeyPrefab: {fileID: 1918415279274132908, guid: 8b12f93d4f9c2714bb79bbe3be7e0c43, type: 3}
+  AxePrefab: {fileID: 8888861055668896817, guid: b0d946a887fa7fb4d97909567986929d, type: 3}
+  SpiderFoodPrefab: {fileID: 3695669881732224108, guid: 7eed35577c139b54dadcede847bb1945, type: 3}
+  forwardForce: 10
+  upForce: 5
 --- !u!114 &1030423185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4735,12 +4745,15 @@ MonoBehaviour:
   AllowMovement: 1
   isTutorial: 0
   IsHiding: 0
+  IsBugSprayActive: 0
+  IsCrouching: 0
   Inventory: {fileID: 1027944333}
   _rigidBody: {fileID: 0}
   _animator: {fileID: 0}
   introductionService: {fileID: 0}
   OrangeJuiceTimer: {fileID: 1927145442}
   BugSprayTimer: {fileID: 1267881425}
+  BugSprayEffect: {fileID: 0}
 --- !u!1 &1031696214
 GameObject:
   m_ObjectHideFlags: 0
@@ -5776,6 +5789,7 @@ MonoBehaviour:
   RatTutorialDone: 0
   InventoryTutorialDone: 0
   ItemTutorialDone: 0
+  KeyTutorialDone: 0
 --- !u!1 &1267881425
 GameObject:
   m_ObjectHideFlags: 0
