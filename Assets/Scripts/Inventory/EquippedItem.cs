@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class EquippedItem : MonoBehaviour
 {
@@ -17,9 +18,16 @@ public class EquippedItem : MonoBehaviour
     private SpriteAnimator _animator;
     public Transform FoodParent;
     private SpriteRenderer _spriteRenderer;
+    private Dictionary<string, GameObject> prefabDict;
 
     [Header("Throwing Variables")]
-    public GameObject prefab;
+    public GameObject BugSprayPrefab;
+    public GameObject OrangeJuicePrefab;
+    public GameObject FlashlightPrefab;
+    public GameObject JuicyMorselPrefab;
+    public GameObject KeyPrefab;
+    public GameObject AxePrefab;
+    public GameObject SpiderFoodPrefab;
     public float forwardForce = 10f;
     public float upForce = 5f;
 
@@ -32,6 +40,17 @@ public class EquippedItem : MonoBehaviour
         _playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        prefabDict = new Dictionary<string, GameObject>
+        {
+            { "BugSpray", BugSprayPrefab },
+            { "OrangeJuice", OrangeJuicePrefab },
+            { "Flashlight", FlashlightPrefab },
+            { "JuicyMorsels", JuicyMorselPrefab },
+            { "Key", KeyPrefab },
+            { "Axe", AxePrefab },
+            { "SpiderFood", SpiderFoodPrefab }
+        };
     }
 
     public void SetItem(string item)
@@ -58,6 +77,13 @@ public class EquippedItem : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
             return;
 
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("Throwing " + ItemEquipped);
+            _inventoryManager.RemoveItem(ItemEquipped);
+            ThrowItem(ItemEquipped);
+            return;
+        }
 
             switch (ItemEquipped)
     {
@@ -76,7 +102,7 @@ public class EquippedItem : MonoBehaviour
             break;
 
         case "JuicyMorsels":
-            ThrowItem();
+            ThrowItem("SpiderFood");
             _inventoryManager.RemoveItem(ItemEquipped);
             break;
 
@@ -101,18 +127,25 @@ public class EquippedItem : MonoBehaviour
             TorchLight.SetActive(TorchIsLit);
         }
     }
-    void ThrowItem()
+    void ThrowItem(string item)
     {
-        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity, FoodParent);
-
-        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-        if(_spriteRenderer.flipX == true)
+        if (prefabDict.TryGetValue(item, out GameObject prefab))
         {
-            rb.AddForce(new Vector2(forwardForce, upForce), ForceMode2D.Impulse);
+            GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity, FoodParent);
+
+            Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+            if(_spriteRenderer.flipX == true)
+            {
+                rb.AddForce(new Vector2(forwardForce, upForce), ForceMode2D.Impulse);
+            }
+            else
+            {
+                rb.AddForce(new Vector2(-forwardForce, upForce), ForceMode2D.Impulse);
+            }
         }
         else
         {
-            rb.AddForce(new Vector2(-forwardForce, upForce), ForceMode2D.Impulse);
+            Debug.LogWarning("No prefab found for: " + item);
         }
     }
 }
