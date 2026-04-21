@@ -600,7 +600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &161727332
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5787,6 +5787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IntroductionService
   panel: {fileID: 1182323978}
   HintText: {fileID: 995004675}
+  playerManager: {fileID: 0}
   StartTutorialDone: 0
   MovementTutorialDone: 0
   DrawerTutorialDone: 0

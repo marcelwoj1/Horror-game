@@ -3015,7 +3015,7 @@ MonoBehaviour:
     description: Find the axe
     isCompleted: 0
   - identifier: Door
-    description: Free the door
+    description: Get through the door barricade
     isCompleted: 0
   - identifier: Key
     description: Find the Key
@@ -3024,7 +3024,7 @@ MonoBehaviour:
     description: Unlock the door
     isCompleted: 0
   - identifier: Boss
-    description: Find the Boss
+    description: Enter the room
     isCompleted: 0
   - identifier: FinalBoss
     description: Kill the Boss
@@ -9999,8 +9999,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0018613, y: -0.10611}
-  m_SizeDelta: {x: 800, y: 423.26}
+  m_AnchoredPosition: {x: 0.0018613, y: 0.00098848}
+  m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027944335
 MonoBehaviour:
@@ -14185,8 +14185,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.2462, y: -0.10693}
-  m_SizeDelta: {x: 814.5, y: 406.14}
+  m_AnchoredPosition: {x: 0.0019021, y: 0.0015087}
+  m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1573252668
 MonoBehaviour:

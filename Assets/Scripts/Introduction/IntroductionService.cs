@@ -6,6 +6,7 @@ public class IntroductionService : MonoBehaviour
     [Header("Tutorial Panel")]
     public GameObject panel;
     public Text HintText;
+    public PlayerManager playerManager;
 
     [Header("Tutorials")]
     public bool StartTutorialDone;
@@ -18,9 +19,11 @@ public class IntroductionService : MonoBehaviour
 
     void Start()
     {
+        playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         StartTutorialDone = true;
-        panel.SetActive(true);
         HintText.text = "Welcome to the Domatophobia! This is a tutorial level to show you the basics of the game. Click the left mouse button to continue.";
+        panel.SetActive(true);
+        playerManager.AllowMovement = false;
     }
     public void Update()
     {
@@ -28,6 +31,7 @@ public class IntroductionService : MonoBehaviour
         {
             panel.SetActive(false);
             Time.timeScale = 1f;
+            playerManager.AllowMovement = true;
             if(MovementTutorialDone == false)
             {
                 MovementTutorialDone = true;
