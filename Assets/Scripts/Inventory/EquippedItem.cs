@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
+
 public class EquippedItem : MonoBehaviour
 {
     [Header("Variables")]
@@ -72,18 +73,16 @@ public class EquippedItem : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Q) && ItemEquipped != "" && _playerManager.IsInventoryOpen == false)
+        {
+            Debug.Log("Throwing " + ItemEquipped);
+            ThrowItem(ItemEquipped);
+            _inventoryManager.RemoveItem(ItemEquipped);
+        }
         if(Input.GetKeyDown(KeyCode.Mouse0) && ItemEquipped != "" && _playerManager.IsInventoryOpen == false)
         {
             if (EventSystem.current.IsPointerOverGameObject())
             return;
-
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Debug.Log("Throwing " + ItemEquipped);
-            _inventoryManager.RemoveItem(ItemEquipped);
-            ThrowItem(ItemEquipped);
-            return;
-        }
 
             switch (ItemEquipped)
     {

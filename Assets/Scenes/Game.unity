@@ -4674,7 +4674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 949166515}
   - component: {fileID: 949166516}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10567,7 +10567,6 @@ MonoBehaviour:
   TorchLight: {fileID: 715760574}
   _teleport: {fileID: 1384721886}
   FoodParent: {fileID: 1695455236}
-  RatPrefab: {fileID: 0}
   BugSprayPrefab: {fileID: 5118953354196886609, guid: 5ddbaa097e89cac409f3a2fd333f73de, type: 3}
   OrangeJuicePrefab: {fileID: 5451841369676921778, guid: 3710aed023f3d334a941cb177c987628, type: 3}
   FlashlightPrefab: {fileID: 5373014507852787714, guid: ad970587cbb910849b46fa4298c771f1, type: 3}
@@ -11958,7 +11957,7 @@ GameObject:
   - component: {fileID: 1266208436}
   - component: {fileID: 1266208437}
   - component: {fileID: 1266208438}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Janitor
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -12913,7 +12912,7 @@ GameObject:
   - component: {fileID: 1403639450}
   - component: {fileID: 1403639452}
   - component: {fileID: 1403639451}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

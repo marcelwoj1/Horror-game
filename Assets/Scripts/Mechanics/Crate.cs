@@ -27,14 +27,11 @@ public class Crate : MonoBehaviour
                     Debug.Log("Hiding");
                     _hiding.Hide();
                 }
-            }
             else
             {
-                if(_playerManager.IsHiding == true)
-                {
-                    Debug.Log("UnHiding");
-                    _hiding.UnHide();
-                }
+                Debug.Log("UnHiding");
+                _hiding.UnHide();
+            }
             }
         }
     }
