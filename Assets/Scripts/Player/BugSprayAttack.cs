@@ -3,12 +3,17 @@ using System.Collections;
 
 public class BugSprayAttack : MonoBehaviour
 {
+    [Header("Attack")]
     public Transform attackPoint;
     public Vector2 attackSize = new Vector2(1, 1);
-    public LayerMask enemyLayer;
     public int attackDamage = 1;
     public float knockbackForce = 5f;
+    
+    [Header("Layers")]
+    public LayerMask enemyLayer;
     public LayerMask hittableLayers;
+    
+    [Header("Player Components")]
     public PlayerManager _playerManager;
     public Movement _movement;
     

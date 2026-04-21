@@ -2353,7 +2353,7 @@ MonoBehaviour:
   newCameraBounds: {fileID: 632110768}
   showGizmos: 0
   promptText: {fileID: 138613841}
-  DoorUnlocked: 1
+  DoorUnlocked: 0
   isOutro: 0
 --- !u!70 &455037225
 CapsuleCollider2D:

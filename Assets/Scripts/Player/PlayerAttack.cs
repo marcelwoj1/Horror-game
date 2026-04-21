@@ -2,14 +2,19 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Player")]
     public Movement _movement;
+    
+    [Header("Attack")]
     public Transform attackPoint;
     public Vector2 attackSize = new Vector2(1, 1);
-    public LayerMask enemyLayer;
     public int attackDamage = 1;
     public float knockbackForce = 10f;
-    public LayerMask hittableLayers;
     
+    [Header("Layers")]
+    public LayerMask hittableLayers;
+    public LayerMask enemyLayer;
+
     private SpriteRenderer _spriteRenderer;
 
 

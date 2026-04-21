@@ -4,15 +4,22 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public Image image;
+    [Header("Item Slot")]
     public int SlotSize;
     public bool IsEquiped;
+
+    [Header("Item Info")]
     public string ItemName;
     public string ItemDescription;
+    public Item item;
+    
+    [Header("Item Image")]
+    public Image image;
+    
     private EquippedItem equippedItem;
     
     [HideInInspector] public Transform parentAfterDrag;
-    [HideInInspector] public Item item;
+    
 
     void Start()
     {

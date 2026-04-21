@@ -9,19 +9,27 @@ public class EquippedItem : MonoBehaviour
     public string ItemEquipped;
     [HideInInspector] public bool TorchIsLit;
 
-    [Header("Components")]
+    [Header("Torch")]
     public GameObject TorchLight;
+    
+    [Header("Player Components")]
+    private PlayerManager _playerManager;
+    private Movement _movement;
     private InvenotryManager _inventoryManager;
     private PlayerHealth _playerHealth;
     public Teleport _teleport;
-    private PlayerManager _playerManager;
-    private Movement _movement;
+    
     private SpriteAnimator _animator;
+
+    [Header("Enemy Parent")]
     public Transform FoodParent;
+    
+    [Header("Components")]
     private SpriteRenderer _spriteRenderer;
     private Dictionary<string, GameObject> prefabDict;
 
-    [Header("Throwing Variables")]
+
+    [Header("Item Prefabs")]
     public GameObject BugSprayPrefab;
     public GameObject OrangeJuicePrefab;
     public GameObject FlashlightPrefab;
@@ -29,6 +37,8 @@ public class EquippedItem : MonoBehaviour
     public GameObject KeyPrefab;
     public GameObject AxePrefab;
     public GameObject SpiderFoodPrefab;
+
+    [Header("Throwing Force")]
     public float forwardForce = 10f;
     public float upForce = 5f;
 
