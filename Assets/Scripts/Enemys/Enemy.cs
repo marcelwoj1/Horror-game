@@ -5,11 +5,12 @@ public class Enemy : MonoBehaviour
 {
     public int health = 3;
     public bool isAggressive = true;
+    public bool isDead = false;
+    public bool Affectedbybugspray = true;
 
     private SpriteAnimator _animator;
     private Rigidbody2D rb;
     private EnemyPatrol patrol;
-    [HideInInspector] public bool isDead = false;
 
     void Start()
     {

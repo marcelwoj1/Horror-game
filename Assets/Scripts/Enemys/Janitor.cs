@@ -1,104 +1,126 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Janitor : MonoBehaviour
 {
+    private Transform player;
+    private PlayerManager _playerManager;
+    private SpriteAnimator _animator;
+    private Enemy enemy;
+
     [Header("Movement")]
     public float patrolSpeed = 2f;
-    public float chaseSpeed = 3.5f;
+    public float chaseSpeed = 4f;
+    public float patrolRange = 4f;
 
-    [Header("Patrol")]
-    public Transform patrolPointsParent;
-    public float waitTime = 5f;
-
-    [Header("Chase")]
+    [Header("Chase Toggle")]
     public bool chasePlayer = false;
 
-    private List<Vector3> patrolPoints = new List<Vector3>();
-    private int currentPoint;
+    [Header("Wait")]
+    public float waitTime = 5f;
 
-    private bool isWaiting = false;
+    private float leftPoint;
+    private float rightPoint;
+    private float targetX;
 
-    private Transform player;
-    private SpriteAnimator _animator;
+    private bool isWaiting;
 
     void Start()
     {
-        foreach (Transform point in patrolPointsParent)
-        {
-            patrolPoints.Add(point.position);
-        }
+        float startX = transform.position.x;
+
+        leftPoint = startX - patrolRange;
+        rightPoint = startX + patrolRange;
+
+        targetX = rightPoint;
+
+        _animator = GetComponent<SpriteAnimator>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        _animator = GetComponent<SpriteAnimator>();
+        _playerManager = player.GetComponent<PlayerManager>();
+        enemy = GetComponent<Enemy>();
     }
 
     void Update()
     {
+        if(_playerManager.IsHiding == true)
+        {
+            chasePlayer = false;
+        }
+        if(enemy.isAggressive == true && _playerManager.IsHiding == false)
+        {
+            chasePlayer = true;
+        }
+        if (isWaiting)
+        {
+            _animator.Play("Mopping");
+            if(chasePlayer == true)
+            {
+                isWaiting = false;
+            }
+            return;
+        }
+
         if (chasePlayer)
-        {
             Chase();
-        }
         else
-        {
             Patrol();
-        }
     }
 
     void Patrol()
     {
-        if (isWaiting)
-        {
-            _animator.Play("Mopping");
-            return;
-        }
+        Vector3 target = new Vector3(targetX, transform.position.y, transform.position.z);
 
-        Vector3 target = patrolPoints[currentPoint];
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            target,
+            patrolSpeed * Time.deltaTime
+        );
 
-        transform.position = Vector2.MoveTowards(transform.position, target, patrolSpeed * Time.deltaTime);
         _animator.Play("Walk");
 
-        if (Vector2.Distance(transform.position, target) < 0.2f)
+        if (Mathf.Abs(transform.position.x - targetX) < 0.05f)
         {
-            StartCoroutine(WaitAtPoint());
+            StartCoroutine(Wait());
         }
 
-        Flip(target.x);
+        Flip(targetX);
     }
 
     void Chase()
     {
         if (player == null) return;
 
-        isWaiting = false; // cancel any waiting
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            player.position,
+            chaseSpeed * Time.deltaTime
+        );
 
-        Vector3 target = player.position;
-
-        transform.position = Vector2.MoveTowards(transform.position, target, chaseSpeed * Time.deltaTime);
         _animator.Play("Walk");
 
-        Flip(target.x);
+        Flip(player.position.x);
     }
 
-    IEnumerator WaitAtPoint()
+    IEnumerator Wait()
     {
         isWaiting = true;
 
         yield return new WaitForSeconds(waitTime);
 
-        currentPoint++;
-        if (currentPoint >= patrolPoints.Count)
-            currentPoint = 0;
+        targetX = Mathf.Approximately(targetX, rightPoint)
+            ? leftPoint
+            : rightPoint;
 
         isWaiting = false;
     }
 
-    void Flip(float targetX)
+    void Flip(float targetXPos)
     {
-        if (targetX > transform.position.x)
-            transform.localScale = new Vector3(1, 1, 1);
-        else
-            transform.localScale = new Vector3(-1, 1, 1);
+        transform.localScale = new Vector3(
+            targetXPos > transform.position.x ? 1 : -1,
+            1,
+            1
+        );
     }
 }

@@ -18,17 +18,23 @@ public class Crate : MonoBehaviour
 
     void Update()
     {
-        if(_isPlayerNear == true && Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E))
         {
-            if(_playerManager.IsHiding == false)
+            if(_isPlayerNear == true)
             {
-                Debug.Log("Hiding");
-                _hiding.Hide();
+                if(_playerManager.IsHiding == false)
+                {
+                    Debug.Log("Hiding");
+                    _hiding.Hide();
+                }
             }
             else
             {
-                Debug.Log("UnHiding");
-                _hiding.UnHide();
+                if(_playerManager.IsHiding == true)
+                {
+                    Debug.Log("UnHiding");
+                    _hiding.UnHide();
+                }
             }
         }
     }

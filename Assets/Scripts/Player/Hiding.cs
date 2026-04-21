@@ -11,6 +11,7 @@ public class Hiding : MonoBehaviour
     private PlayerManager _playerManager;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidBody;
+    private CapsuleCollider2D _capsuleCollider;
 
     public void Start()
     {
@@ -18,6 +19,7 @@ public class Hiding : MonoBehaviour
         _playerManager = GetComponent<PlayerManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        _capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
     
     public void Hide()
@@ -41,12 +43,8 @@ public class Hiding : MonoBehaviour
         _rigidBody.linearVelocityY = 0;
         _playerManager.AllowMovement = false;
 
-        // Ignore Enemy Collision
-        Physics2D.IgnoreLayerCollision(
-                LayerMask.NameToLayer("Player"),
-                LayerMask.NameToLayer("Enemy"),
-                true
-        );
+        // Disable Collision
+        _capsuleCollider.enabled = false;
 
         // Start Coroutine
         if (hideCoroutine != null)
@@ -61,6 +59,7 @@ public class Hiding : MonoBehaviour
         _playerManager.AllowMovement = true;
         _spriteRenderer.sortingLayerName = "Player";
         _rigidBody.gravityScale = 2;
+        _capsuleCollider.enabled = true;
     }
 
     IEnumerator WaitUntilGrounded()

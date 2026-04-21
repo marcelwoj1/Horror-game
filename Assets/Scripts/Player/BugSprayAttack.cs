@@ -45,14 +45,12 @@ IEnumerator SprayRoutine()
     
     public void Attack()
     {
-        //SoundService.Instance?.Play("PlayerAttack");
         Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(
             attackPoint.position,
             attackSize,
             0f,
             hittableLayers
         );
-    
 
         foreach (Collider2D hitCollider in enemiesHit)
         {
@@ -61,6 +59,7 @@ IEnumerator SprayRoutine()
 
             if(enemy != null)
             {
+                if(enemy.Affectedbybugspray == false) return;
                 
                 Vector2 knockbackDir = (enemy.transform.position - transform.position);
 
