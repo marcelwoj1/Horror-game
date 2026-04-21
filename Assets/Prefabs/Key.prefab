@@ -14,19 +14,19 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 446d7ee8ef95a2843ae5ad456b4ddec9, type: 2}
     - target: {fileID: 6902581186310448193, guid: 01c0da1ee118f6747badb6ddd05b2cc6, type: 3}
       propertyPath: m_Name
-      value: Key Variant
+      value: Key
       objectReference: {fileID: 0}
     - target: {fileID: 7468206413685727411, guid: 01c0da1ee118f6747badb6ddd05b2cc6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -508019085657350288, guid: a2708148f321a484182fd6d244c16e71, type: 3}
+      objectReference: {fileID: 3813219994684007808, guid: 1438639b725e0984c826ef42a56242df, type: 3}
     - target: {fileID: 8848337407843392514, guid: 01c0da1ee118f6747badb6ddd05b2cc6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -48.966873
+      value: -48.50728
       objectReference: {fileID: 0}
     - target: {fileID: 8848337407843392514, guid: 01c0da1ee118f6747badb6ddd05b2cc6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.4231987
+      value: -4.37985
       objectReference: {fileID: 0}
     - target: {fileID: 8848337407843392514, guid: 01c0da1ee118f6747badb6ddd05b2cc6, type: 3}
       propertyPath: m_LocalPosition.z

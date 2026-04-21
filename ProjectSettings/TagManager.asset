@@ -8,6 +8,8 @@ TagManager:
   - BackDoor
   - Enemy
   - Spider
+  - Food
+  - SpiderFood
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Enemy
   - Door
   - Enemy Hitbox
-  - 
+  - Item
   - 
   - 
   - 

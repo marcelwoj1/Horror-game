@@ -43,9 +43,5 @@ public class PieTimer : MonoBehaviour
         {
             _playerManager.BugSprayEnded();
         }
-        else if(gameObject.name == "OrangeJuiceTimer")
-        {
-            _playerManager.OrangeJuiceEnded();
-        }
     }
 }

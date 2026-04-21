@@ -16,6 +16,11 @@ public class EquippedItem : MonoBehaviour
     private Movement _movement;
     private SpriteAnimator _animator;
 
+    [Header("Throwing Variables")]
+    public GameObject prefab;
+    public float forwardForce = 10f;
+    public float upForce = 5f;
+
 
     void Start()
     {
@@ -68,12 +73,12 @@ public class EquippedItem : MonoBehaviour
             break;
 
         case "JuicyMorsels":
-            _playerHealth.Heal(2);
+            ThrowItem();
             _inventoryManager.RemoveItem(ItemEquipped);
             break;
 
         case "OrangeJuice":
-            _playerManager.OrangeJuiceUsed();
+            _playerHealth.Heal(3);
             _inventoryManager.RemoveItem(ItemEquipped);
             break;
 
@@ -92,5 +97,15 @@ public class EquippedItem : MonoBehaviour
             TorchIsLit = false;
             TorchLight.SetActive(TorchIsLit);
         }
+    }
+    void ThrowItem()
+    {
+        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
+
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+
+        Vector2 throwDirection = new Vector2(transform.localScale.x > 0 ? 1 : -1, 1).normalized;
+
+        rb.AddForce(new Vector2(throwDirection.x * forwardForce, upForce), ForceMode2D.Impulse);
     }
 }

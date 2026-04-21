@@ -100,20 +100,6 @@ public class PlayerManager : MonoBehaviour
         _questService.SatisfyQuest("Axe");
     }
 
-    public void OrangeJuiceUsed()
-    {
-        OrangeJuiceTimer.SetActive(true);
-        _playerAttack.attackDamage = 3;
-        _movement._moveSpeed = 12;
-    }
-
-    public void OrangeJuiceEnded()
-    {
-        OrangeJuiceTimer.SetActive(false);
-        _playerAttack.attackDamage = 1;
-        _movement._moveSpeed = 6;
-    }
-
     public void BugSprayUsed()
     {
         IsBugSprayActive = true;
