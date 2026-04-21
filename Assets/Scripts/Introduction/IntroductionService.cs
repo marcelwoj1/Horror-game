@@ -14,9 +14,14 @@ public class IntroductionService : MonoBehaviour
     public bool ItemTutorialDone;
     public bool KeyTutorialDone;
 
+    public void StartTutorial()
+    {
+        panel.SetActive(true);
+        HintText.text = "Welcome to the Domatophobia! This is a tutorial level to show you the basics of the game. Click the left mouse button to continue.";
+    }
     public void Start()
     {
-        panel.SetActive(false);
+        //panel.SetActive(false);
     }
     public void Update()
     {

@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class Teleport : MonoBehaviour
 {
@@ -26,15 +28,24 @@ public class Teleport : MonoBehaviour
     private Transform playerTransform;
     private bool playerInRange = false;
     public bool DoorUnlocked = false;
+
+    [Header("Components")]
     private GameObject _player;
     private GameObject _lock;
     private QuestService _questService;
+
+    [Header("Variables")]
+    private bool isTutorial = false;
 
     private void Awake()
     {
         _player = GameObject.Find("Player");
         _lock = GameObject.Find("Lock");
         _questService = GameObject.Find("QuestService").GetComponent<QuestService>();
+        if(SceneManager.GetActiveScene().name == "Demo")
+        {
+            isTutorial = true;
+        }
         if (promptText != null)
         {
             promptText.gameObject.SetActive(true);
@@ -125,6 +136,10 @@ public class Teleport : MonoBehaviour
 
     private void TeleportPlayer(Transform player)
     {
+        if(isTutorial == true)
+        {
+            SceneManager.LoadScene("Intro");
+        }
         if (destination == null)
         {
             Debug.LogWarning("Teleport destination is not set!", this);
