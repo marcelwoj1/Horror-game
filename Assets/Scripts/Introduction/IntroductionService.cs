@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class IntroductionService : MonoBehaviour
 {
@@ -20,6 +21,17 @@ public class IntroductionService : MonoBehaviour
     void Start()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+        StartCoroutine(StartTutorialDelayed());
+    }
+
+    IEnumerator StartTutorialDelayed()
+    {
+        yield return null; // wait 1 frame
+        StartTutorial();
+    }
+
+    public void StartTutorial()
+    {
         StartTutorialDone = true;
         HintText.text = "Welcome to the Domatophobia! This is a tutorial level to show you the basics of the game. Click the left mouse button to continue.";
         panel.SetActive(true);

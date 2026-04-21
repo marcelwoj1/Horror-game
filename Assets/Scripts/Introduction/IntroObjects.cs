@@ -13,7 +13,6 @@ public class IntroObjects : MonoBehaviour
     {
         ObjectLight = transform.Find("Light")?.gameObject;
         ObjectLight.SetActive(false);
-        panel.SetActive(false);
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
