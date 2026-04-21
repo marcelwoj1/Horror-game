@@ -19,6 +19,7 @@ public class EnemyPatrol : MonoBehaviour
     public float viewDistance = 6f;
     public float viewAngle = 60f;
     public LayerMask visionMask;
+    public float levelTolerance = 0.5f;
 
     [Header("Patrol")]
     public Transform patrolPointsParent;
@@ -179,8 +180,12 @@ public class EnemyPatrol : MonoBehaviour
     {
         GameObject food = GameObject.FindGameObjectWithTag("SpiderFood");
 
+        if (food == null)
+            return;
 
-        if (food != null)
+        float yDifference = Mathf.Abs(food.transform.position.y - transform.position.y);
+
+        if (yDifference <= levelTolerance)
         {
             foodTarget = food.transform;
             currentState = EnemyState.Food;

@@ -35,10 +35,13 @@ public class InvenotryManager : MonoBehaviour
             Inventory ItemInSlot = slot.GetComponentInChildren<Inventory>();
             if(ItemInSlot != null)
             {
-                if(ItemInSlot.item.itemName == itemName)
+                if(slot.EquipSlot == true)
                 {
-                    ItemInSlot.RemoveItem(itemName);
-                    return;
+                    if(ItemInSlot.item.itemName == itemName)
+                    {
+                        ItemInSlot.RemoveItem(itemName);
+                        return;
+                    }
                 }
             }
         }

@@ -10566,6 +10566,7 @@ MonoBehaviour:
   TorchIsLit: 0
   TorchLight: {fileID: 715760574}
   _teleport: {fileID: 1384721886}
+  FoodParent: {fileID: 1695455236}
   prefab: {fileID: 3695669881732224108, guid: 7eed35577c139b54dadcede847bb1945, type: 3}
   forwardForce: 10
   upForce: 5

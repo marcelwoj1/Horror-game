@@ -15,6 +15,8 @@ public class EquippedItem : MonoBehaviour
     private PlayerManager _playerManager;
     private Movement _movement;
     private SpriteAnimator _animator;
+    public Transform FoodParent;
+    private SpriteRenderer _spriteRenderer;
 
     [Header("Throwing Variables")]
     public GameObject prefab;
@@ -29,6 +31,7 @@ public class EquippedItem : MonoBehaviour
         _inventoryManager = GameObject.Find("InventoryManager").GetComponent<InvenotryManager>();
         _playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SetItem(string item)
@@ -100,12 +103,16 @@ public class EquippedItem : MonoBehaviour
     }
     void ThrowItem()
     {
-        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity, FoodParent);
 
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-
-        Vector2 throwDirection = new Vector2(transform.localScale.x > 0 ? 1 : -1, 1).normalized;
-
-        rb.AddForce(new Vector2(throwDirection.x * forwardForce, upForce), ForceMode2D.Impulse);
+        if(_spriteRenderer.flipX == true)
+        {
+            rb.AddForce(new Vector2(forwardForce, upForce), ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(new Vector2(-forwardForce, upForce), ForceMode2D.Impulse);
+        }
     }
 }
