@@ -13,6 +13,7 @@ public class Boss_manager : MonoBehaviour
 
     private SpriteAnimator _animator;
     private Rigidbody2D rb;
+    private ShadowGrab shadowGrab;
 
     [Header("Components")]
     public GameObject shadow;
@@ -27,6 +28,7 @@ public class Boss_manager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         bossSlamAttack = GetComponent<BossSlamAttack>();
         bossChase = GetComponent<BossChase>();
+        shadowGrab = GetComponent<ShadowGrab>();
     }
 
     void Update()
@@ -54,7 +56,7 @@ public class Boss_manager : MonoBehaviour
                         break;
 
                     case 2:
-                        //SomeOtherAttack();
+                        shadowGrab.StartLiftAttack();
                         break;
                 }
                 HitsTaken = 0;

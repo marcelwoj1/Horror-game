@@ -18,11 +18,15 @@ public class BossAttackHitbox : MonoBehaviour
     private PlayerHealth _playerHealth;
     private BossSlamAttack _bossSlamAttack;
 
+    [Header("References")]
+    private ShadowGrab _shadowGrab;
+
     void Start()
     {
         boss_manager = GetComponentInParent<Boss_manager>();
         _animator = GetComponentInParent<SpriteAnimator>();
         _bossSlamAttack = GetComponentInParent<BossSlamAttack>();
+        _shadowGrab = GetComponentInParent<ShadowGrab>();
         GameObject player = GameObject.Find("Player");
         if (player != null)
         {
@@ -44,6 +48,7 @@ public class BossAttackHitbox : MonoBehaviour
         float distance = Vector2.Distance(transform.position, _playerTransform.position);
         if (distance <= detectionDistance)
         {
+            _shadowGrab.waitingForClick = false;
             _animator.Play("Attack");
 
             float side = boss_manager.transform.localScale.x;
