@@ -1,0 +1,377 @@
+fileFormatVersion: 2
+guid: ef843686e8f576c45919af3a8d730641
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 324477325259917527
+    second: starting cutscene sequence_0
+  - first:
+      213: -1854048402379207533
+    second: starting cutscene sequence_1
+  - first:
+      213: -5230246361617917885
+    second: starting cutscene sequence_2
+  - first:
+      213: 1430147930325014256
+    second: starting cutscene sequence_3
+  - first:
+      213: -7924199950013664488
+    second: starting cutscene sequence_4
+  - first:
+      213: -7136285880620315908
+    second: starting cutscene sequence_5
+  - first:
+      213: 4763955465259452312
+    second: starting cutscene sequence_6
+  - first:
+      213: 3337355809152076674
+    second: starting cutscene sequence_7
+  - first:
+      213: -7108131482023436664
+    second: starting cutscene sequence_8
+  - first:
+      213: 4519681557034684936
+    second: starting cutscene sequence_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 250
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: starting cutscene sequence_0
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 335
+        width: 755
+        height: 841
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d849cd7866c08400800000000000000
+      internalID: 324477325259917527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_1
+      rect:
+        serializedVersion: 2
+        x: 1269
+        y: 353
+        width: 755
+        height: 841
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39c8ecb1dc81546e0800000000000000
+      internalID: -1854048402379207533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_2
+      rect:
+        serializedVersion: 2
+        x: 2437
+        y: 358
+        width: 755
+        height: 841
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3481cf725ae6a67b0800000000000000
+      internalID: -5230246361617917885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_3
+      rect:
+        serializedVersion: 2
+        x: 3462
+        y: 346
+        width: 971
+        height: 772
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f6584327f7e8d310800000000000000
+      internalID: 1430147930325014256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_4
+      rect:
+        serializedVersion: 2
+        x: 4690
+        y: 306
+        width: 1158
+        height: 812
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81374423126970290800000000000000
+      internalID: -7924199950013664488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_5
+      rect:
+        serializedVersion: 2
+        x: 6035
+        y: 271
+        width: 1158
+        height: 812
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfa8dfd1dc1d6fc90800000000000000
+      internalID: -7136285880620315908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_6
+      rect:
+        serializedVersion: 2
+        x: 7521
+        y: 275
+        width: 1158
+        height: 812
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89702905148fc1240800000000000000
+      internalID: 4763955465259452312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_7
+      rect:
+        serializedVersion: 2
+        x: 8900
+        y: 268
+        width: 1158
+        height: 820
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28b88952d6ba05e20800000000000000
+      internalID: 3337355809152076674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_8
+      rect:
+        serializedVersion: 2
+        x: 10530
+        y: 259
+        width: 1158
+        height: 820
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88ed83dd318da5d90800000000000000
+      internalID: -7108131482023436664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starting cutscene sequence_9
+      rect:
+        serializedVersion: 2
+        x: 11987
+        y: 244
+        width: 1158
+        height: 820
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 802dfe80e6229be30800000000000000
+      internalID: 4519681557034684936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      starting cutscene sequence_0: 324477325259917527
+      starting cutscene sequence_1: -1854048402379207533
+      starting cutscene sequence_2: -5230246361617917885
+      starting cutscene sequence_3: 1430147930325014256
+      starting cutscene sequence_4: -7924199950013664488
+      starting cutscene sequence_5: -7136285880620315908
+      starting cutscene sequence_6: 4763955465259452312
+      starting cutscene sequence_7: 3337355809152076674
+      starting cutscene sequence_8: -7108131482023436664
+      starting cutscene sequence_9: 4519681557034684936
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

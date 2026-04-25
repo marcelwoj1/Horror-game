@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 2bc8f9c772a4afc40883d28a1f55e78e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1072357804116120335
+    second: ground pound attack_0
+  - first:
+      213: -2380462737050125203
+    second: ground pound attack_1
+  - first:
+      213: -326703559139193438
+    second: ground pound attack_2
+  - first:
+      213: 1418713889693531205
+    second: ground pound attack_3
+  - first:
+      213: -9176308701390040198
+    second: ground pound attack_4
+  - first:
+      213: 544457717005971828
+    second: ground pound attack_5
+  - first:
+      213: 8559402651796533911
+    second: ground pound attack_6
+  - first:
+      213: -9204961813494120590
+    second: ground pound attack_7
+  - first:
+      213: 7591687560401573535
+    second: ground pound attack_8
+  - first:
+      213: 3889040152490982798
+    second: ground pound attack_9
+  - first:
+      213: 7088479040853033318
+    second: ground pound attack_10
+  - first:
+      213: -6681509454904649096
+    second: ground pound attack_11
+  - first:
+      213: 5859976211005800411
+    second: ground pound attack_12
+  - first:
+      213: -3016899726972400564
+    second: ground pound attack_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ground pound attack_0
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 337
+        width: 1158
+        height: 2164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc6a8d32483e11f0800000000000000
+      internalID: -1072357804116120335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_1
+      rect:
+        serializedVersion: 2
+        x: 3379
+        y: 1978
+        width: 357
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6cb21db0c5e6fed0800000000000000
+      internalID: -2380462737050125203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_2
+      rect:
+        serializedVersion: 2
+        x: 4279
+        y: 1440
+        width: 397
+        height: 943
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ad07aa08d0577bf0800000000000000
+      internalID: -326703559139193438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_3
+      rect:
+        serializedVersion: 2
+        x: 5135
+        y: 1466
+        width: 425
+        height: 919
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54c781914c840b310800000000000000
+      internalID: 1418713889693531205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_4
+      rect:
+        serializedVersion: 2
+        x: 6044
+        y: 1443
+        width: 523
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a731250bad337a080800000000000000
+      internalID: -9176308701390040198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_5
+      rect:
+        serializedVersion: 2
+        x: 7291
+        y: 1939
+        width: 390
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4717c51b86d4e8700800000000000000
+      internalID: 544457717005971828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_6
+      rect:
+        serializedVersion: 2
+        x: 7423
+        y: 1081
+        width: 401
+        height: 534
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7927ed5bc5b19c670800000000000000
+      internalID: 8559402651796533911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_7
+      rect:
+        serializedVersion: 2
+        x: 1831
+        y: 505
+        width: 1320
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27fb5a72008614080800000000000000
+      internalID: -9204961813494120590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_8
+      rect:
+        serializedVersion: 2
+        x: 3469
+        y: 506
+        width: 289
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f96dc7b1d971b5960800000000000000
+      internalID: 7591687560401573535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_9
+      rect:
+        serializedVersion: 2
+        x: 4279
+        y: 444
+        width: 426
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8db476e965a8f530800000000000000
+      internalID: 3889040152490982798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_10
+      rect:
+        serializedVersion: 2
+        x: 5105
+        y: 396
+        width: 484
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 661c8db91265f5260800000000000000
+      internalID: 7088479040853033318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_11
+      rect:
+        serializedVersion: 2
+        x: 6227
+        y: 388
+        width: 600
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87a9ef80d828643a0800000000000000
+      internalID: -6681509454904649096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_12
+      rect:
+        serializedVersion: 2
+        x: 7335
+        y: 379
+        width: 630
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdf7d310151d25150800000000000000
+      internalID: 5859976211005800411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground pound attack_13
+      rect:
+        serializedVersion: 2
+        x: 8255
+        y: 332
+        width: 861
+        height: 582
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4c46dabea1d126d0800000000000000
+      internalID: -3016899726972400564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ground pound attack_0: -1072357804116120335
+      ground pound attack_1: -2380462737050125203
+      ground pound attack_10: 7088479040853033318
+      ground pound attack_11: -6681509454904649096
+      ground pound attack_12: 5859976211005800411
+      ground pound attack_13: -3016899726972400564
+      ground pound attack_2: -326703559139193438
+      ground pound attack_3: 1418713889693531205
+      ground pound attack_4: -9176308701390040198
+      ground pound attack_5: 544457717005971828
+      ground pound attack_6: 8559402651796533911
+      ground pound attack_7: -9204961813494120590
+      ground pound attack_8: 7591687560401573535
+      ground pound attack_9: 3889040152490982798
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

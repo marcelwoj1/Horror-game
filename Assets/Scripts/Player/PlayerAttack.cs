@@ -48,6 +48,15 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (Collider2D hitCollider in enemiesHit)
         {
+            //Boss
+            Boss_manager boss_manager = hitCollider.GetComponent<Boss_manager>();
+            if (boss_manager != null)
+            {
+                Vector2 knockbackDir = (boss_manager.transform.position - transform.position);
+                knockbackDir.Normalize();
+                knockbackDir.y = 0.2f;
+                boss_manager.TakeDamage(attackDamage, knockbackDir * knockbackForce);
+            }
             //Enemy
             Enemy enemy = hitCollider.GetComponent<Enemy>();
 

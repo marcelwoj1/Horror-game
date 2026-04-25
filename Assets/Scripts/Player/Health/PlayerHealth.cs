@@ -55,16 +55,17 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage, Vector2 knockback)
     {
         if(_playerManager.IsBugSprayActive == true) return;
+        
+        //Health Change 
+        Health -= damage;
+        OnHealthChanged?.Invoke();
+        SoundService.Instance?.Play("PlayerHurt");
         if (Health <= 0)
         {
             _animator.Play("Death");
             _playerManager.AllowMovement = false;
             return;
         }
-        //Health Change 
-        Health -= damage;
-        OnHealthChanged?.Invoke();
-        SoundService.Instance?.Play("PlayerHurt");
 
         _cameraTrack?.Shake(damageShakeMagnitude);
 
