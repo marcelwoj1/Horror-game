@@ -11355,8 +11355,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 846759869}
     m_Modifications:
     - target: {fileID: 770667655614498710, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 220.95013
+      objectReference: {fileID: 0}
+    - target: {fileID: 770667655614498710, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 87.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 770667655614498710, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 99.167
       objectReference: {fileID: 0}
     - target: {fileID: 783548827428617906, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
       propertyPath: m_LocalScale.x
@@ -11367,8 +11375,16 @@ PrefabInstance:
       value: Bedroom CamBounds
       objectReference: {fileID: 0}
     - target: {fileID: 2315366353393462245, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 122.78948
+      objectReference: {fileID: 0}
+    - target: {fileID: 2315366353393462245, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
       propertyPath: m_LocalPosition.x
       value: -87.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2315366353393462245, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 50.139
       objectReference: {fileID: 0}
     - target: {fileID: 3069578939943134200, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
       propertyPath: m_Name
@@ -11428,11 +11444,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4312324064969403280, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 176.58138
+      value: 176.02
       objectReference: {fileID: 0}
     - target: {fileID: 4312324064969403280, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 22.59
+      value: 22.604132
       objectReference: {fileID: 0}
     - target: {fileID: 6006090505075743118, guid: 10c2ce2cfa2fc9c44baa8e4a18278b66, type: 3}
       propertyPath: m_Sprite
@@ -15686,6 +15702,7 @@ GameObject:
   - component: {fileID: 1796370090}
   - component: {fileID: 1796370089}
   - component: {fileID: 1796370091}
+  - component: {fileID: 1796370092}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
@@ -15751,6 +15768,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6458b0b1410447a4e8c84d5280243ce0, type: 2}
   - {fileID: 11400000, guid: 8cb90c73a14f6e043a253839cde96a73, type: 2}
   - {fileID: 11400000, guid: d2d4e45a29ea65342ad76a6278559c55, type: 2}
+  - {fileID: 11400000, guid: c7d22aa03ac17484fbca8e6da81e1189, type: 2}
   _startingAnimation: 
   onAnimationStart:
     m_PersistentCalls:
@@ -15769,6 +15787,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1796370088}
           m_TargetAssemblyTypeName: BossChase, Assembly-CSharp
           m_MethodName: StartChasing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1796370091}
+          m_TargetAssemblyTypeName: Boss_manager, Assembly-CSharp
+          m_MethodName: BossBegin
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -15867,6 +15897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossChase
   speed: 1
+  isChasing: 0
 --- !u!61 &1796370089
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15953,10 +15984,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss_manager
   health: 21
+  HitsTaken: 0
   isAggressive: 0
   isDead: 0
-  HitsTaken: 0
+  isStunned: 0
+  isInvincible: 1
   shadow: {fileID: 7574918362791863237, guid: 399f82a3ff82f964a9ea2f5b5a0638cf, type: 3}
+--- !u!114 &1796370092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796370082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75a80a15dd96844e8f76ea6e31317be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossSlamAttack
+  GroundShadowPrefab: {fileID: 1195728267090416837, guid: f9d4bb9ad9cd3fa45baab22abeff5bc3, type: 3}
+  detectionDistance: 1.5
+  damage: 2
+  knockbackForce: 30
+  GroundPoundAttacking: 0
 --- !u!1 &1822806097
 GameObject:
   m_ObjectHideFlags: 0

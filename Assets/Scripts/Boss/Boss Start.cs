@@ -15,6 +15,5 @@ public class BossStart : MonoBehaviour
     {
         animator.Play("Start");
         SoundService.Instance?.Play("BossMusic");
-        boss_manager.isAggressive = true;
     }
 }

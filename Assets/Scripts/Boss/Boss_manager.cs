@@ -3,38 +3,73 @@ using System.Collections;
 
 public class Boss_manager : MonoBehaviour
 {
+    [Header("Variables")]
     public int health = 21;
+    public int HitsTaken = 0;
     public bool isAggressive = true;
     public bool isDead = false;
-    public int HitsTaken = 0;
+    public bool isStunned = false;
+    public bool isInvincible = false;
 
     private SpriteAnimator _animator;
     private Rigidbody2D rb;
 
-    [Header("Variables")]
+    [Header("Components")]
     public GameObject shadow;
     private Transform player;
+    private BossSlamAttack bossSlamAttack;
+    private BossChase bossChase;
 
     void Start()
     {
         _animator = GetComponent<SpriteAnimator>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        bossSlamAttack = GetComponent<BossSlamAttack>();
+        bossChase = GetComponent<BossChase>();
     }
 
     void Update()
     {
-        if(HitsTaken == 3)
+        if (bossSlamAttack.GroundPoundAttacking == false)
         {
-            SpawnShadows();
-            HitsTaken = 0;
+            if (HitsTaken == 3)
+            {
+                if(isStunned == true)
+                {
+                    HitsTaken = 0;
+                    return;
+                }
+                
+                int attack = Random.Range(0, 3); // 0, 1, or 2
+
+                switch (attack)
+                {
+                    case 0:
+                        SpawnShadows();
+                        break;
+
+                    case 1:
+                        bossSlamAttack.StartSlamAttack();
+                        break;
+
+                    case 2:
+                        //SomeOtherAttack();
+                        break;
+                }
+                HitsTaken = 0;
+            }
         }
     }
 
     public void TakeDamage(int damage, Vector2 knockback)
     {
         if (isDead) return;
-        isAggressive = true;
+        if (isInvincible) return;
+        
+        if(isStunned == false) isAggressive = true;
+        else isAggressive = false;
+
         HitsTaken++;
 
         health -= damage;
@@ -63,6 +98,33 @@ public class Boss_manager : MonoBehaviour
         yield return new WaitForSeconds(0.35f);
     }
 
+    public void BossBegin()
+    {
+        isAggressive = true;
+        isStunned = false;
+        isInvincible = false;
+    }
+    
+    public void BossStunned()
+    {
+        isAggressive = false;
+        isStunned = true;
+        bossChase.isChasing = false;
+        isInvincible = false;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        
+        StartCoroutine(StunnedRoutine());
+        _animator.Play("Stunned");
+    }
+    IEnumerator StunnedRoutine()
+    {
+        yield return new WaitForSeconds(4f);
+        isStunned = false;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        isAggressive = true;
+        bossChase.isChasing = true;
+    }
+
     public void Die()
     {
         Destroy(gameObject);
@@ -70,6 +132,6 @@ public class Boss_manager : MonoBehaviour
 
     private void SpawnShadows()
     {
-        Instantiate(shadow, player.position - new Vector3(0, 1.6f, 0), Quaternion.identity);
+        Instantiate(shadow, new Vector3(player.position.x, 28.32f, 0), Quaternion.identity);
     }
 }

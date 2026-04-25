@@ -10,7 +10,7 @@ public class BossChase : MonoBehaviour
 
     [Header("Variables")]
     public float speed = 2f;
-    private bool isChasing = false;
+    public bool isChasing = false;
 
     void Start()
     {

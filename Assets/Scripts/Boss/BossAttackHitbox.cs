@@ -8,7 +8,7 @@ public class BossAttackHitbox : MonoBehaviour
     public int damage = 1;
     public float detectionDistance = 1.5f;
     public float damageCooldown = 1.0f;
-    public float knockbackForce = 15f;
+    public float knockbackForce = 25f;
     private float _nextDamageTime;
 
     [Header("Components")]
@@ -16,11 +16,13 @@ public class BossAttackHitbox : MonoBehaviour
     private PlayerManager _playerManager;
     private Transform _playerTransform;
     private PlayerHealth _playerHealth;
+    private BossSlamAttack _bossSlamAttack;
 
     void Start()
     {
         boss_manager = GetComponentInParent<Boss_manager>();
         _animator = GetComponentInParent<SpriteAnimator>();
+        _bossSlamAttack = GetComponentInParent<BossSlamAttack>();
         GameObject player = GameObject.Find("Player");
         if (player != null)
         {
@@ -37,13 +39,13 @@ public class BossAttackHitbox : MonoBehaviour
         if (_playerManager.IsHiding) return;
         if (Time.time < _nextDamageTime) return;
         if (boss_manager.isAggressive == false) return;
+        if (_bossSlamAttack.GroundPoundAttacking == true) return;
 
         float distance = Vector2.Distance(transform.position, _playerTransform.position);
         if (distance <= detectionDistance)
         {
             _animator.Play("Attack");
 
-            // Direction for knockback (based on enemy facing direction)
             float side = boss_manager.transform.localScale.x;
             Vector2 knockbackDir = new Vector2(side, 1f).normalized;
 
