@@ -1,18 +1,70 @@
 using UnityEngine;
+using System.Collections;
 
 public class ShadowAttack : MonoBehaviour
 {
     private Transform player;
+    private SpriteAnimator _animator;
+    private PlayerHealth _playerHealth;
+    private BoxCollider2D _hitbox;
 
-    [Header("Variables")]
-    public GameObject shadow;
+    [Header("AttackVariables")]
+    public int damage = 1;
+    public float detectionDistance = 1.5f;
+    public float damageCooldown = 1.0f;
+    public float knockbackForce = 15f;
+    private float _nextDamageTime;
 
     void Start()
     {
+        _animator = GetComponent<SpriteAnimator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        _playerHealth = player.GetComponent<PlayerHealth>();
+        _hitbox = GetComponent<BoxCollider2D>();
+        _hitbox.enabled = false;
+        StartCoroutine(AttackRoutine());
     }
-    public void SpawnShadows()
+    
+    IEnumerator AttackRoutine()
     {
-        Instantiate(shadow, player.position, Quaternion.identity);
+        float timer = 0f;
+
+        // Follow player X for 4 seconds
+        while (timer < 4f)
+        {
+            if (gameObject != null)
+            {
+                Vector3 pos = transform.position;
+                pos.x = player.position.x;
+                transform.position = pos;
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+
+            _animator.Play("Attack");
+        }
     }
+    public void AttackPlayer()
+    {
+        _hitbox.enabled = true;
+        float distance = Vector2.Distance(transform.position, player.position);
+        if (distance <= detectionDistance)
+        {
+            // Direction for knockback (based on enemy facing direction)
+            float side = transform.localScale.x;
+            Vector2 knockbackDir = new Vector2(side, 1f).normalized;
+
+            _playerHealth.TakeDamage(damage, knockbackDir * knockbackForce);
+            _nextDamageTime = Time.time + damageCooldown;
+        }
+        _animator.Play("Death");
+    }
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
+
+
+    
 }

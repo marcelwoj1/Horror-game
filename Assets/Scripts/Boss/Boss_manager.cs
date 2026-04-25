@@ -10,20 +10,23 @@ public class Boss_manager : MonoBehaviour
 
     private SpriteAnimator _animator;
     private Rigidbody2D rb;
-    private ShadowAttack shadowAttack;
+
+    [Header("Variables")]
+    public GameObject shadow;
+    private Transform player;
 
     void Start()
     {
         _animator = GetComponent<SpriteAnimator>();
         rb = GetComponent<Rigidbody2D>();
-        shadowAttack = GetComponent<ShadowAttack>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
         if(HitsTaken == 3)
         {
-            shadowAttack.SpawnShadows();
+            SpawnShadows();
             HitsTaken = 0;
         }
     }
@@ -63,5 +66,10 @@ public class Boss_manager : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void SpawnShadows()
+    {
+        Instantiate(shadow, player.position - new Vector3(0, 1.6f, 0), Quaternion.identity);
     }
 }

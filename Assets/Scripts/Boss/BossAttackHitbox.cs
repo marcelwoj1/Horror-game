@@ -51,4 +51,6 @@ public class BossAttackHitbox : MonoBehaviour
             _nextDamageTime = Time.time + damageCooldown;
         }
     }
+    
+    
 }

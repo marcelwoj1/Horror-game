@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c86e1d3ee12ab14db8d856b0706c119, type: 3}
-  m_Name: ShadowAttack
+  m_Name: ShadowRemove
   m_EditorClassIdentifier: Assembly-CSharp::CustomSpriteAnimation
-  AnimationName: Attack
+  AnimationName: Death
   Frames:
-  - {fileID: -1333392522719472657, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
-  - {fileID: -2727349149611655556, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
-  - {fileID: -4858838907745582626, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
-  - {fileID: -8027600353295714979, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
-  - {fileID: 3423756695189680754, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
-  - {fileID: -1747356450915888882, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
   - {fileID: -7630007282808192289, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
+  - {fileID: -1747356450915888882, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
+  - {fileID: 3423756695189680754, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
+  - {fileID: -8027600353295714979, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
+  - {fileID: -4858838907745582626, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
+  - {fileID: -2727349149611655556, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
+  - {fileID: -1333392522719472657, guid: f4e60f4a1950a9b4db153fcc2dcb6dad, type: 3}
   FrameRate: 6
   Loop: 0
   PingPong: 0
