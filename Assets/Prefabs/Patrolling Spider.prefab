@@ -37,7 +37,6 @@ Transform:
   m_Children:
   - {fileID: 7937886408632977940}
   - {fileID: 6335618493958068181}
-  - {fileID: 2036666523818919631}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &572300322942457883
@@ -230,7 +229,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   health: 5
+  isAggressive: 1
   isDead: 0
+  Affectedbybugspray: 1
+  Key: {fileID: 0}
+  KeyDropped: 0
 --- !u!114 &5195721347503425492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,18 +246,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe3401a302307b4ab23a2d2647703bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol
+  foodTarget: {fileID: 0}
   patrolSpeed: 2
   chaseSpeed: 4
   viewDistance: 6
   viewAngle: 60
-  visionMask:
+  levelTolerance: 0.5
+  enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   patrolPointsParent: {fileID: 7937886408632977940}
-  isKnockedBack: 0
   offsetMagnitude: 2
   offsetSpeed: 2
   flipDebounceTime: 0.5
+  isKnockedBack: 0
+  distance: 0
+  currentState: 0
 --- !u!1 &3061267285988975567
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,74 +326,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7937886408632977940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4501581328148392497
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2036666523818919631}
-  - component: {fileID: 6776488558570702050}
-  m_Layer: 7
-  m_Name: Rear
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2036666523818919631
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4501581328148392497}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.92, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6965142080199110243}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &6776488558570702050
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4501581328148392497}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
 --- !u!1 &4546837145170175395
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +368,7 @@ GameObject:
   - component: {fileID: 6335618493958068181}
   - component: {fileID: 1650867649800199992}
   - component: {fileID: 5711581103232208962}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: AttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3157,7 +3157,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
+  m_Intensity: 0.1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 0000000099a26a2629876e574f179246eb4a6a99d7e579ef45901350
@@ -14761,6 +14761,10 @@ PrefabInstance:
       propertyPath: _hiding
       value: 
       objectReference: {fileID: 1030423181}
+    - target: {fileID: 5195721347503425492, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: enemyLayer.m_Bits
+      value: 640
+      objectReference: {fileID: 0}
     - target: {fileID: 5711581103232208962, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: _hiding
       value: 
@@ -17614,10 +17618,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 11.22
       objectReference: {fileID: 0}
-    - target: {fileID: 6144285893444687426, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6965142080199110243, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.7399993
@@ -17659,8 +17659,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 4501581328148392497, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
@@ -17682,7 +17681,7 @@ PrefabInstance:
       objectReference: {fileID: 1204244203}
     - target: {fileID: 1103153188551948494, guid: bcc74396785755f45acb07be5d65ad17, type: 3}
       propertyPath: DoorUnlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1103153188551948494, guid: bcc74396785755f45acb07be5d65ad17, type: 3}
       propertyPath: newCameraBounds

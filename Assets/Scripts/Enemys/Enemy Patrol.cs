@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -8,8 +8,8 @@ public class EnemyPatrol : MonoBehaviour
     private Transform player;
     public Transform foodTarget;
     private PlayerManager _playerManager;
-    private float startY;
     private Rigidbody2D rb;
+    private SpriteAnimator _animator;
 
     [Header("Movement")]
     public float patrolSpeed = 2f;
@@ -18,17 +18,13 @@ public class EnemyPatrol : MonoBehaviour
     [Header("Vision")]
     public float viewDistance = 6f;
     public float viewAngle = 60f;
-    public LayerMask visionMask;
     public float levelTolerance = 0.5f;
+    public LayerMask enemyLayer;
 
     [Header("Patrol")]
     public Transform patrolPointsParent;
-    
-    List<Vector3> patrolPoints = new List<Vector3>();
-    int currentPoint;
-
-    public bool isKnockedBack;
-    private SpriteAnimator _animator;
+    private List<Vector3> patrolPoints = new List<Vector3>();
+    private int currentPoint;
 
     [Header("Chase Randomness")]
     public float offsetMagnitude = 2f;
@@ -39,11 +35,28 @@ public class EnemyPatrol : MonoBehaviour
     private float _chaseDirection = 1f;
     private float _flipTimer;
 
+    public bool isKnockedBack;
+
+    public float distance;
+
+    public static List<SpiderFood> AllFood = new List<SpiderFood>();
+
+    public static void RegisterFood(SpiderFood food)
+    {
+        if (!AllFood.Contains(food))
+            AllFood.Add(food);
+    }
+
+    public static void UnregisterFood(SpiderFood food)
+    {
+        if (AllFood.Contains(food))
+            AllFood.Remove(food);
+    }
+
     public enum EnemyState
     {
         Patrol,
         Chase,
-        Search,
         Food
     }
 
@@ -51,13 +64,11 @@ public class EnemyPatrol : MonoBehaviour
 
     void Start()
     {
-        startY = transform.position.y;
         foreach (Transform point in patrolPointsParent)
-        {
             patrolPoints.Add(point.position);
-        }
 
         currentState = EnemyState.Patrol;
+
         _animator = GetComponent<SpriteAnimator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         _playerManager = player.GetComponent<PlayerManager>();
@@ -69,56 +80,116 @@ public class EnemyPatrol : MonoBehaviour
         if (isKnockedBack)
             return;
 
-        DetectSpiderFood();
-        DetectPlayer();
+        // PRIORITY SYSTEM
+        if (TryGetFood())
+        {
+            currentState = EnemyState.Food;
+        }
+        else if (CanSeePlayer())
+        {
+            currentState = EnemyState.Chase;
+        }
+        else
+        {
+            currentState = EnemyState.Patrol;
+        }
 
+        // EXECUTE BEHAVIOUR
         switch (currentState)
         {
             case EnemyState.Patrol:
-                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), false);
                 Patrol();
                 break;
 
             case EnemyState.Chase:
-                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), false);
                 ChasePlayer();
                 break;
 
-            case EnemyState.Search:
-                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), false);
-                Search();
-                break;
-
             case EnemyState.Food:
-                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), true);
                 GoToFood();
                 break;
         }
     }
 
-    void DetectPlayer()
+    // FOOD CHECK (TOP PRIORITY)
+    bool TryGetFood()
     {
-        Vector2 direction = player.position - transform.position;
-        float distance = direction.magnitude;
-
-        if (distance < viewDistance)
+        if (AllFood.Count == 0)
         {
-            Vector2 facing = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+            foodTarget = null;
+            return false;
+        }
 
-            float angle = Vector2.Angle(facing, direction);
+        SpiderFood closest = null;
+        float minDist = Mathf.Infinity;
 
-            if (angle < viewAngle / 2)
+        foreach (var food in AllFood)
+        {
+            if (food == null) continue;
+
+            float yDiff = Mathf.Abs(food.transform.position.y - transform.position.y);
+            if (yDiff > levelTolerance) continue;
+
+            float dist = Vector2.Distance(transform.position, food.transform.position);
+
+            if (dist < minDist)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, viewDistance, ~visionMask);
-
-                if (hit.collider != null && hit.collider.CompareTag("Player") && _playerManager.IsHiding == false)
-                {
-                    currentState = EnemyState.Chase;
-                }
+                minDist = dist;
+                closest = food;
             }
         }
+
+        if (closest != null)
+        {
+            foodTarget = closest.transform;
+            return true;
+        }
+
+        foodTarget = null;
+        return false;
     }
 
+    // PLAYER DETECTION
+    bool CanSeePlayer()
+{
+    Vector2 directionToPlayer = (player.position - transform.position);
+    float distance = directionToPlayer.magnitude;
+
+    if (distance > viewDistance)
+        return false;
+
+    directionToPlayer.Normalize();
+    Vector2 forward = transform.localScale.x >= 0 ? Vector2.right : Vector2.left;
+
+    float angle = Vector2.Angle(forward, directionToPlayer);
+
+    if (angle > viewAngle * 0.5f)
+        return false;
+
+    Debug.DrawRay(transform.position, directionToPlayer * viewDistance, Color.red);
+
+    RaycastHit2D hit = Physics2D.Raycast(
+        transform.position,
+        directionToPlayer,
+        viewDistance,
+        ~enemyLayer
+    );
+
+    if (hit.collider == null)
+        return false;
+
+    Debug.Log("Ray hit: " + hit.collider.name);
+
+    if (hit.collider.GetComponentInParent<PlayerManager>() != null &&
+        !_playerManager.IsHiding)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+    // PATROL
     void Patrol()
     {
         Vector3 target = patrolPoints[currentPoint];
@@ -129,29 +200,27 @@ public class EnemyPatrol : MonoBehaviour
         if (Vector2.Distance(transform.position, target) < 0.2f)
         {
             currentPoint++;
-
             if (currentPoint >= patrolPoints.Count)
                 currentPoint = 0;
         }
-        if (target.x > transform.position.x)
-            transform.localScale = new Vector3(1,1,1);
-        else
-            transform.localScale = new Vector3(-1,1,1);
+
+        transform.localScale = target.x > transform.position.x
+            ? new Vector3(1, 1, 1)
+            : new Vector3(-1, 1, 1);
     }
 
+    // CHASE
     void ChasePlayer()
     {
         if (_playerManager.IsHiding)
-            currentState = EnemyState.Search;
+            return;
 
-        // Calculate offset target
         _noiseTime += Time.deltaTime * offsetSpeed;
         float xOffset = (Mathf.PerlinNoise(_noiseTime, 0f) - 0.5f) * 2f * offsetMagnitude;
         float targetX = player.position.x + xOffset;
 
         float targetDirection = Mathf.Sign(targetX - transform.position.x);
 
-        // Debounce flip
         if (targetDirection != _chaseDirection && _flipTimer <= 0)
         {
             _chaseDirection = targetDirection;
@@ -161,59 +230,24 @@ public class EnemyPatrol : MonoBehaviour
         if (_flipTimer > 0)
             _flipTimer -= Time.deltaTime;
 
-        Vector3 move = new Vector3(_chaseDirection * chaseSpeed * Time.deltaTime, 0, 0);
+        transform.position += new Vector3(_chaseDirection * chaseSpeed * Time.deltaTime, 0, 0);
         _animator.Play("Walk");
-        transform.position += move;
-
-        float distance = Vector2.Distance(transform.position, player.position);
-        if (distance > viewDistance * 1.5f)
-        {
-            currentState = EnemyState.Search;
-        }
 
         transform.localScale = new Vector3(_chaseDirection, 1, 1);
     }
 
-    void Search()
-    {
-        // Simple version: return to patrol
-        currentState = EnemyState.Patrol;
-    }
-
-    void DetectSpiderFood()
-    {
-        GameObject food = GameObject.FindGameObjectWithTag("SpiderFood");
-
-        if (food == null)
-            return;
-
-        float yDifference = Mathf.Abs(food.transform.position.y - transform.position.y);
-
-        if (yDifference <= levelTolerance)
-        {
-            foodTarget = food.transform;
-            currentState = EnemyState.Food;
-        }
-    }
+    // GO TO FOOD
     void GoToFood()
     {
         if (foodTarget == null)
-        {
-            currentState = EnemyState.Patrol;
             return;
-        }
 
         Vector2 current = transform.position;
         Vector2 target = foodTarget.position;
 
         Vector2 dir = (target - current).normalized;
 
-        transform.position = Vector2.MoveTowards(
-            current,
-            target,
-            chaseSpeed * Time.deltaTime
-        );
-
+        transform.position = Vector2.MoveTowards(current, target, chaseSpeed * Time.deltaTime);
         _animator.Play("Walk");
 
         if (dir.x > 0.01f)
@@ -223,12 +257,13 @@ public class EnemyPatrol : MonoBehaviour
 
         if (Vector2.Distance(current, target) < 0.3f)
         {
-            StartCoroutine(EatFood(foodTarget.gameObject));
+            StartCoroutine(EatFood(foodTarget.GetComponent<SpiderFood>()));
             foodTarget = null;
-            currentState = EnemyState.Search;
         }
     }
-    IEnumerator EatFood(GameObject food)
+
+    // EAT FOOD
+    IEnumerator EatFood(SpiderFood food)
     {
         float oldSpeed = chaseSpeed;
         chaseSpeed = 0f;
@@ -236,10 +271,11 @@ public class EnemyPatrol : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         if (food != null)
-        Destroy(food);
+            Destroy(food.gameObject);
 
-    chaseSpeed = oldSpeed;
+        chaseSpeed = oldSpeed;
     }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

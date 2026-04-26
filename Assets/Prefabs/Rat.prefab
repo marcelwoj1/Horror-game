@@ -155,10 +155,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6160b8e5475ff4baa834933dbf7d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  health: 1
+  health: 2
   isAggressive: 1
   isDead: 0
   Affectedbybugspray: 1
+  Key: {fileID: 0}
+  KeyDropped: 0
 --- !u!61 &7003526093621839597
 BoxCollider2D:
   m_ObjectHideFlags: 0

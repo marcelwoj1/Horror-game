@@ -412,7 +412,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Will you be able to beat them?
+  m_Text: You and your cat made it safely out the house
 --- !u!222 &200383569
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -723,7 +723,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Find out in the full release of...
+  m_Text: Thankyou for playing...
 --- !u!222 &1142126669
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -942,7 +942,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Will you be able to save your cat?
+  m_Text: You conquered your biggest fears
 --- !u!222 &1466914956
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1151,7 +1151,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: But theres one more enemy to beat and they may be the strongest of all
+  m_Text: You Defeated the worst Spider of them all
 --- !u!222 &1507855311
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -4103,8 +4103,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2336580319771979704, guid: bcf92aef189215b4eb99e7c856838b67, type: 3}
       propertyPath: Hint
-      value: Spiders patrol different areas and will attack on site. You can either
-        fight back or hide in crates or with bug spray
+      value: Spiders patrol different areas and will attack on site- You can fight
+        with the axe, use bug spray to damage, morsels to distract or hide in crates
       objectReference: {fileID: 0}
     - target: {fileID: 2336580319771979704, guid: bcf92aef189215b4eb99e7c856838b67, type: 3}
       propertyPath: panel

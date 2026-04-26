@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2156070418355826810}
   - component: {fileID: 3842461306671373234}
   - component: {fileID: 9063878914404803194}
+  - component: {fileID: -1927170256767505940}
   m_Layer: 10
   m_Name: SpiderFood
   m_TagString: SpiderFood
@@ -166,3 +167,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-1927170256767505940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695669881732224108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea401698753cfc44ebad034787ef7cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpiderFood

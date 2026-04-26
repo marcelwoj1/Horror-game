@@ -78,7 +78,7 @@ public class IntroductionService : MonoBehaviour
             return;
         ItemTutorialDone = true;
         panel.SetActive(true);
-        HintText.text = "Once you have an item equipped you can use it by clicking the left mouse button. Different items have different uses. You can also drop items by clicking the Q key. Items dont stack do watch your inventory space.";
+        HintText.text = "Once you have an item equipped you can use it by clicking the left mouse button. Different items have different uses. You can also drop items by clicking the Q key. Items dont stack so watch your inventory space.";
         Time.timeScale = 0f;
     }
     public void KeyTutorial()
