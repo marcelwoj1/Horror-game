@@ -14,9 +14,11 @@ public class Boss_manager : MonoBehaviour
     private SpriteAnimator _animator;
     private Rigidbody2D rb;
     private ShadowGrab shadowGrab;
+    private QuestService questService;
 
     [Header("Components")]
     public GameObject shadow;
+    public GameObject Cat;
     private Transform player;
     private BossSlamAttack bossSlamAttack;
     private BossChase bossChase;
@@ -29,10 +31,17 @@ public class Boss_manager : MonoBehaviour
         bossSlamAttack = GetComponent<BossSlamAttack>();
         bossChase = GetComponent<BossChase>();
         shadowGrab = GetComponent<ShadowGrab>();
+        questService = FindAnyObjectByType<QuestService>();
     }
 
     void Update()
     {
+
+        if(isStunned == true)
+        {
+            _animator.Play("Stunned");
+        }
+
         if (bossSlamAttack.GroundPoundAttacking == false)
         {
             if (HitsTaken == 3)
@@ -78,8 +87,7 @@ public class Boss_manager : MonoBehaviour
 
         if (health <= 0)
         {
-            _animator.Play("Death");
-            isDead = true;
+            Die();
         }
         else
         {
@@ -120,7 +128,7 @@ public class Boss_manager : MonoBehaviour
     }
     IEnumerator StunnedRoutine()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         isStunned = false;
         rb.bodyType = RigidbodyType2D.Dynamic;
         isAggressive = true;
@@ -129,6 +137,8 @@ public class Boss_manager : MonoBehaviour
 
     public void Die()
     {
+        Instantiate(Cat, new Vector3(transform.position.x, transform.position.y - 1.6f, transform.position.z), Quaternion.identity);
+        questService.SatisfyQuest("FinalBoss");
         Destroy(gameObject);
     }
 

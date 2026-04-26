@@ -1,12 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-
-// ---------------------------------------------------------------------------
-// SoundGroup  –  one named group of clips (e.g. "Footsteps", "Music")
-// Shown as a list in the Inspector on the SoundService GameObject.
-// ---------------------------------------------------------------------------
-[System.Serializable]
+using System.Collections.Generic;[System.Serializable]
 public class SoundGroup
 {
     [Tooltip("Key used in SoundManager.Play(\"...\")")]
@@ -29,16 +23,10 @@ public class SoundGroup
     public bool Loop = false;
 }
 
-// ---------------------------------------------------------------------------
-// SoundService  –  singleton MonoBehaviour
-// Attach to a persistent GameObject in your first scene.
-// ---------------------------------------------------------------------------
 public class SoundService : MonoBehaviour
 {
-    // ── Singleton ────────────────────────────────────────────────────────────
     public static SoundService Instance { get; private set; }
 
-    // ── Inspector ────────────────────────────────────────────────────────────
     [Header("Sound Groups")]
     [SerializeField] private List<SoundGroup> _soundGroups = new List<SoundGroup>();
 
@@ -46,23 +34,18 @@ public class SoundService : MonoBehaviour
     [Tooltip("Max simultaneous AudioSources in the pool")]
     [SerializeField] private int _poolSize = 16;
 
-    // ── Private state ────────────────────────────────────────────────────────
     private Dictionary<string, SoundGroup> _groupDict = new Dictionary<string, SoundGroup>();
     private Queue<AudioSource> _pool = new Queue<AudioSource>();
 
-    // ── Unity lifecycle ──────────────────────────────────────────────────────
     private void Awake()
     {
-        // Singleton enforcement
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
 
-        // Build lookup dictionary
         foreach (var group in _soundGroups)
         {
             if (group == null || string.IsNullOrEmpty(group.GroupName)) continue;
@@ -73,54 +56,35 @@ public class SoundService : MonoBehaviour
                 Debug.LogWarning($"[SoundService] Duplicate group name '{group.GroupName}' – skipping.");
         }
 
-        // Pre-warm the AudioSource pool
         for (int i = 0; i < _poolSize; i++)
             _pool.Enqueue(CreateSource());
     }
 
-    // ── Public API ───────────────────────────────────────────────────────────
-
-    /// <summary>
-    /// Play a global (2-D) sound.
-    /// Example: SoundService.Instance.Play("Music");
-    /// </summary>
     public void Play(string groupName)
     {
         if (!TryGetGroup(groupName, out SoundGroup group)) return;
         PlayGlobal(group);
     }
 
-    /// <summary>
-    /// Play a global sound with an optional volume multiplier.
-    /// </summary>
     public void PlayGlobal(string groupName, float volumeMultiplier = 1f)
     {
         if (!TryGetGroup(groupName, out SoundGroup group)) return;
         
         AudioSource src = GetPooledSource();
         ConfigureSource(src, group);
-        src.volume *= volumeMultiplier; // Apply multiplier on top of base volume
+        src.volume *= volumeMultiplier;
         src.transform.SetParent(transform, false);
-        src.spatialBlend = 0f; // full 2-D
+        src.spatialBlend = 0f;
         src.Play();
 
         StartCoroutine(ReturnWhenDone(src, null));
     }
 
-    /// <summary>
-    /// Play a local (3-D / positional) sound at a world position.
-    /// Example: SoundService.Instance.Play("Footsteps", transform.position);
-    /// </summary>
     public void Play(string groupName, Vector2 position)
     {
         Play(groupName, position, null);
     }
 
-    /// <summary>
-    /// Play a local (3-D / positional) sound at a world position and optionally
-    /// attach it to a GameObject so it follows that object until it finishes.
-    /// Example: SoundService.Instance.Play("Footsteps", transform.position, gameObject);
-    /// </summary>
     public void Play(string groupName, Vector2 position, GameObject attachTo)
     {
         if (!TryGetGroup(groupName, out SoundGroup group)) return;
@@ -130,7 +94,6 @@ public class SoundService : MonoBehaviour
 
         if (attachTo != null)
         {
-            // Reparent the source so it follows the object
             src.transform.SetParent(attachTo.transform, false);
             src.transform.localPosition = Vector3.zero;
         }
@@ -140,20 +103,18 @@ public class SoundService : MonoBehaviour
             src.transform.position = new Vector3(position.x, position.y, 0f);
         }
 
-        src.spatialBlend = 1f; // full 3-D
+        src.spatialBlend = 1f;
         src.Play();
 
         StartCoroutine(ReturnWhenDone(src, attachTo));
     }
-
-    // ── Helpers ──────────────────────────────────────────────────────────────
 
     private void PlayGlobal(SoundGroup group)
     {
         AudioSource src = GetPooledSource();
         ConfigureSource(src, group);
         src.transform.SetParent(transform, false);
-        src.spatialBlend = 0f; // full 2-D
+        src.spatialBlend = 0f;
         src.Play();
 
         StartCoroutine(ReturnWhenDone(src, null));
@@ -171,7 +132,6 @@ public class SoundService : MonoBehaviour
         if (_pool.Count > 0)
             return _pool.Dequeue();
 
-        // Pool exhausted – create a temporary extra source
         Debug.LogWarning("[SoundService] AudioSource pool exhausted – creating a temporary source.");
         return CreateSource();
     }
@@ -187,7 +147,6 @@ public class SoundService : MonoBehaviour
 
     private void ConfigureSource(AudioSource src, SoundGroup group)
     {
-        // Pick a random clip from the group
         if (group.Clips == null || group.Clips.Length == 0)
         {
             Debug.LogWarning($"[SoundService] Group '{group.GroupName}' has no clips assigned.");
@@ -198,21 +157,19 @@ public class SoundService : MonoBehaviour
         src.volume = group.Volume;
         
         float randomPitch = group.Pitch + Random.Range(-group.PitchVariance, group.PitchVariance);
-        src.pitch  = Mathf.Clamp(randomPitch, 0.1f, 3f); // Unity's pitch range is roughly 0 to 3
+        src.pitch  = Mathf.Clamp(randomPitch, 0.1f, 3f);
         
         src.loop   = group.Loop;
     }
 
-    /// <summary>
-    /// Waits until the source finishes playing, then detaches and returns it to the pool.
-    /// </summary>
     private IEnumerator ReturnWhenDone(AudioSource src, GameObject attachedTo)
     {
-        // Wait for the clip to finish (loop = never returns on its own)
         if (!src.loop)
             yield return new WaitWhile(() => src.isPlaying);
 
-        // Detach from any parent object and re-parent to this manager
+        if (!src.loop)
+            yield return new WaitWhile(() => src.isPlaying);
+
         src.transform.SetParent(transform, false);
         src.transform.localPosition = Vector3.zero;
         src.clip = null;

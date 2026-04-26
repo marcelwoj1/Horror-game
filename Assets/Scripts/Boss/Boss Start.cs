@@ -3,17 +3,19 @@ using UnityEngine;
 public class BossStart : MonoBehaviour
 {
     private SpriteAnimator animator;
-    private Boss_manager boss_manager;
+    private QuestService questService;
+
 
     void Start()
     {
         animator = GetComponent<SpriteAnimator>();
-        boss_manager = GetComponent<Boss_manager>();
+        questService = FindAnyObjectByType<QuestService>();
     }
 
     public void StartBoss()
     {
         animator.Play("Start");
         SoundService.Instance?.Play("BossMusic");
+        questService.SatisfyQuest("FirstCat");
     }
 }

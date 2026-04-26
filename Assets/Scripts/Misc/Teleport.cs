@@ -141,10 +141,6 @@ public class Teleport : MonoBehaviour
         {
             SceneManager.LoadScene("Intro");
         }
-        if(isOutro == true)
-        {
-            SceneManager.LoadScene("Outro");
-        }
         if (destination == null)
         {
             Debug.LogWarning("Teleport destination is not set!", this);
