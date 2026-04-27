@@ -1,49 +1,27 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-// ---------------------------------------------------------------------------
-// AnimationSoundTrigger
-// Attach to any GameObject that has a SpriteAnimator.
-// Configure which animation frames should trigger which SoundService group.
-// ---------------------------------------------------------------------------
 public class AnimationSoundTrigger : MonoBehaviour
 {
     [System.Serializable]
     public class FrameSoundEntry
     {
-        [Tooltip("Animation name to listen for (e.g. \"Walk\")")]
         public string AnimationName;
-
-        [Tooltip("Frame indices that trigger the sound (e.g. 0, 1)")]
         public int[] FrameIndices;
-
-        [Tooltip("SoundService group to play (e.g. \"FootstepPlayer\")")]
         public string SoundGroupName;
-
-        // Runtime lookup set built from FrameIndices for O(1) checks
         [System.NonSerialized] public HashSet<int> FrameSet;
     }
 
-    [Header("Frame → Sound Mappings")]
     [SerializeField] private List<FrameSoundEntry> _entries = new List<FrameSoundEntry>();
-
     private SpriteAnimator _animator;
 
     private void Awake()
     {
         _animator = GetComponent<SpriteAnimator>();
+        if (_animator == null) return;
 
-        if (_animator == null)
-        {
-            Debug.LogWarning($"[AnimationSoundTrigger] No SpriteAnimator found on {gameObject.name}.");
-            return;
-        }
-
-        // Build HashSets for fast frame-index lookup
         foreach (var entry in _entries)
-        {
             entry.FrameSet = new HashSet<int>(entry.FrameIndices);
-        }
 
         _animator.OnFrameChanged += HandleFrameChanged;
     }
@@ -60,11 +38,10 @@ public class AnimationSoundTrigger : MonoBehaviour
 
         foreach (var entry in _entries)
         {
-            if (entry.AnimationName != animationName) continue;
-            if (!entry.FrameSet.Contains(frameIndex)) continue;
-
-            // Always play as a local (positional) sound attached to this object
-            SoundService.Instance.Play(entry.SoundGroupName, (Vector2)transform.position, gameObject);
+            if (entry.AnimationName == animationName && entry.FrameSet.Contains(frameIndex))
+            {
+                SoundService.Instance.Play(entry.SoundGroupName, (Vector2)transform.position, gameObject);
+            }
         }
     }
 }

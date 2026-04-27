@@ -14,8 +14,6 @@ public class CameraTrack : MonoBehaviour
     public static Transform BoundsTransform;
     [SerializeField] private Transform initialBoundsTransform;
 
-    [Header("Debug")]
-    [SerializeField] private bool showGizmos = true;
 
     [Header("Shake Settings")]
     [SerializeField] private float shakeDecay = 5f;
@@ -129,40 +127,5 @@ public class CameraTrack : MonoBehaviour
         return new Vector3(clampedX, clampedY, desiredPosition.z);
     }
 
-    private void OnDrawGizmos()
-    {
-        // Don't draw gizmos if not enabled
-        if (!showGizmos) return;
 
-        // Get bounds from transform
-        Transform boundsToShow = BoundsTransform != null ? BoundsTransform : initialBoundsTransform;
-        if (boundsToShow == null) return;
-
-        Vector3 center = boundsToShow.position;
-        Vector3 size = boundsToShow.lossyScale;
-
-        // Draw the full camera bounds
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(center, size);
-        
-        // Draw effective bounds 
-        if (cam == null) cam = GetComponent<Camera>();
-        if (cam != null)
-        {
-            float halfHeight = cam.orthographicSize;
-            float halfWidth = halfHeight * cam.aspect;
-            
-            Vector3 effectiveSize = new Vector3(
-                Mathf.Max(0, size.x - halfWidth * 2),
-                Mathf.Max(0, size.y - halfHeight * 2),
-                0
-            );
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(center, effectiveSize);
-            
-            // Draw current camera view
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(transform.position, new Vector3(halfWidth * 2, halfHeight * 2, 0));
-        }
-    }
 }

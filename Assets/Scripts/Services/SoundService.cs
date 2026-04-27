@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;[System.Serializable]
 public class SoundGroup
 {
-    [Tooltip("Key used in SoundManager.Play(\"...\")")]
+    [Tooltip("Sound group")]
     public string GroupName;
 
     [Tooltip("One or more clips; a random one is chosen each play")]
@@ -31,11 +31,10 @@ public class SoundService : MonoBehaviour
     [SerializeField] private List<SoundGroup> _soundGroups = new List<SoundGroup>();
 
     [Header("Settings")]
-    [Tooltip("Max simultaneous AudioSources in the pool")]
-    [SerializeField] private int _poolSize = 16;
+    [Tooltip("Global volume multiplier")]
+    [SerializeField] private float _globalVolume = 1f;
 
     private Dictionary<string, SoundGroup> _groupDict = new Dictionary<string, SoundGroup>();
-    private Queue<AudioSource> _pool = new Queue<AudioSource>();
 
     private void Awake()
     {
@@ -52,12 +51,7 @@ public class SoundService : MonoBehaviour
 
             if (!_groupDict.ContainsKey(group.GroupName))
                 _groupDict.Add(group.GroupName, group);
-            else
-                Debug.LogWarning($"[SoundService] Duplicate group name '{group.GroupName}' – skipping.");
         }
-
-        for (int i = 0; i < _poolSize; i++)
-            _pool.Enqueue(CreateSource());
     }
 
     public void Play(string groupName)
@@ -70,14 +64,15 @@ public class SoundService : MonoBehaviour
     {
         if (!TryGetGroup(groupName, out SoundGroup group)) return;
         
-        AudioSource src = GetPooledSource();
+        AudioSource src = CreateSource();
         ConfigureSource(src, group);
-        src.volume *= volumeMultiplier;
+        src.volume *= volumeMultiplier * _globalVolume;
         src.transform.SetParent(transform, false);
         src.spatialBlend = 0f;
         src.Play();
 
-        StartCoroutine(ReturnWhenDone(src, null));
+        if (!group.Loop)
+            Destroy(src.gameObject, src.clip.length / src.pitch + 0.1f);
     }
 
     public void Play(string groupName, Vector2 position)
@@ -89,8 +84,9 @@ public class SoundService : MonoBehaviour
     {
         if (!TryGetGroup(groupName, out SoundGroup group)) return;
 
-        AudioSource src = GetPooledSource();
+        AudioSource src = CreateSource();
         ConfigureSource(src, group);
+        src.volume *= _globalVolume;
 
         if (attachTo != null)
         {
@@ -106,39 +102,33 @@ public class SoundService : MonoBehaviour
         src.spatialBlend = 1f;
         src.Play();
 
-        StartCoroutine(ReturnWhenDone(src, attachTo));
+        if (!group.Loop)
+            Destroy(src.gameObject, src.clip.length / src.pitch + 0.1f);
     }
 
     private void PlayGlobal(SoundGroup group)
     {
-        AudioSource src = GetPooledSource();
+        AudioSource src = CreateSource();
         ConfigureSource(src, group);
+        src.volume *= _globalVolume;
         src.transform.SetParent(transform, false);
         src.spatialBlend = 0f;
         src.Play();
 
-        StartCoroutine(ReturnWhenDone(src, null));
+        if (!group.Loop)
+            Destroy(src.gameObject, src.clip.length / src.pitch + 0.1f);
     }
 
     private bool TryGetGroup(string groupName, out SoundGroup group)
     {
         if (_groupDict.TryGetValue(groupName, out group)) return true;
-        Debug.LogWarning($"[SoundService] Sound group '{groupName}' not found.");
+
         return false;
-    }
-
-    private AudioSource GetPooledSource()
-    {
-        if (_pool.Count > 0)
-            return _pool.Dequeue();
-
-        Debug.LogWarning("[SoundService] AudioSource pool exhausted – creating a temporary source.");
-        return CreateSource();
     }
 
     private AudioSource CreateSource()
     {
-        GameObject go = new GameObject("PooledAudioSource");
+        GameObject go = new GameObject("OneShotAudioSource");
         go.transform.SetParent(transform, false);
         AudioSource src = go.AddComponent<AudioSource>();
         src.playOnAwake = false;
@@ -149,7 +139,6 @@ public class SoundService : MonoBehaviour
     {
         if (group.Clips == null || group.Clips.Length == 0)
         {
-            Debug.LogWarning($"[SoundService] Group '{group.GroupName}' has no clips assigned.");
             return;
         }
 
@@ -161,19 +150,6 @@ public class SoundService : MonoBehaviour
         
         src.loop   = group.Loop;
     }
-
-    private IEnumerator ReturnWhenDone(AudioSource src, GameObject attachedTo)
-    {
-        if (!src.loop)
-            yield return new WaitWhile(() => src.isPlaying);
-
-        if (!src.loop)
-            yield return new WaitWhile(() => src.isPlaying);
-
-        src.transform.SetParent(transform, false);
-        src.transform.localPosition = Vector3.zero;
-        src.clip = null;
-
-        _pool.Enqueue(src);
-    }
 }
+
+

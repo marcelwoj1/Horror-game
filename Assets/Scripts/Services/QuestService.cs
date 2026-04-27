@@ -12,10 +12,10 @@ public class Quest
 
 public class QuestService : MonoBehaviour
 {
-    [Tooltip("The GameObject containing the UI Text element to display the current quest description.")]
+    [Tooltip("Text OBJ")]
     public GameObject textDisplay;
 
-    [Tooltip("Chronological list of quests the player must complete.")]
+    [Tooltip("List of quests")]
     public List<Quest> quests = new List<Quest>();
 
     private int _currentQuestIndex = 0;
@@ -23,7 +23,6 @@ public class QuestService : MonoBehaviour
 
     void Start()
     {
-        // Get the TextMeshPro component from the textDisplay GameObject or its children
         if (textDisplay != null)
         {
             _questTextComponent = textDisplay.GetComponentInChildren<TextMeshProUGUI>();

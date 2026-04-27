@@ -22,27 +22,60 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     }
     public void OnDrop(PointerEventData eventData)
     {
+        GameObject droppedObject = eventData.pointerDrag;
+        Inventory draggedInventory = droppedObject.GetComponent<Inventory>();
+
         if(transform.childCount == 0)
         {
-            GameObject droppedObject = eventData.pointerDrag;
-            Inventory inventory = droppedObject.GetComponent<Inventory>();
-            if(inventory.SlotSize <= slotSize)
+            // Empty slot — just place the item
+            if(draggedInventory.SlotSize <= slotSize)
             {
-                ItemName.text = inventory.ItemName;
-                ItemInfo.text = inventory.ItemDescription;
-                inventory.parentAfterDrag = transform;
-                if(EquipSlot)
+                PlaceItem(draggedInventory);
+            }
+        }
+        else
+        {
+            // Occupied slot — attempt a swap
+            Inventory existingInventory = GetComponentInChildren<Inventory>();
+            if(existingInventory == null || existingInventory == draggedInventory) return;
+
+            InventorySlot sourceSlot = draggedInventory.parentAfterDrag.GetComponent<InventorySlot>();
+            if(sourceSlot == null) return;
+
+            // Check both items fit in their new slots
+            if(draggedInventory.SlotSize <= slotSize && existingInventory.SlotSize <= sourceSlot.slotSize)
+            {
+                // Move existing item to the source slot
+                existingInventory.transform.SetParent(sourceSlot.transform);
+                if(sourceSlot.EquipSlot)
                 {
-                    inventory.IsEquiped = true;
-                    inventory.CheckIfEquiped();
+                    existingInventory.IsEquiped = true;
                 }
                 else
                 {
-                    inventory.IsEquiped = false;
-                    inventory.CheckIfEquiped();
+                    existingInventory.IsEquiped = false;
                 }
+                existingInventory.CheckIfEquiped();
+                sourceSlot.DisplayItemInfo();
+
+                // Place dragged item into this slot
+                PlaceItem(draggedInventory);
             }
         }
+    }
+
+    private void PlaceItem(Inventory inventory)
+    {
+        inventory.parentAfterDrag = transform;
+        if(EquipSlot)
+        {
+            inventory.IsEquiped = true;
+        }
+        else
+        {
+            inventory.IsEquiped = false;
+        }
+        inventory.CheckIfEquiped();
     }
     public void DisplayItemInfo()
     {
