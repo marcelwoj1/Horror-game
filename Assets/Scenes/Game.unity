@@ -10632,7 +10632,7 @@ MonoBehaviour:
   isKnockedBack: 0
   Inventory: {fileID: 1027944333}
   _spriteRenderer: {fileID: 1030423174}
-  _moveSpeed: 12
+  _moveSpeed: 4
   _jumpPower: 10
   _groundLayer:
     serializedVersion: 2
@@ -10699,7 +10699,7 @@ MonoBehaviour:
     onAnimationEnd:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1573252668}
+        - m_Target: {fileID: 553621749}
           m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
           m_MethodName: ReloadScene
           m_Mode: 1
@@ -16449,6 +16449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c35f4846c03ded64d94017e6d2f78ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss_manager
+  health: 0
   isAggressive: 0
   isDead: 0
   isStunned: 0

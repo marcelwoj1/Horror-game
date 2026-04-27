@@ -4,7 +4,7 @@ using System.Collections;
 public class Boss_manager : MonoBehaviour
 {
     [Header("Boss Stats")]
-    private int health;
+    public int health = 21;
     private int HitsTaken;
     public bool isAggressive = true;
     public bool isDead = false;
