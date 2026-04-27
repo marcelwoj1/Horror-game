@@ -3,20 +3,20 @@ using System.Collections;
 
 public class ShadowAttack : MonoBehaviour
 {
+    [Header("Components")]
     private Transform player;
     private SpriteAnimator _animator;
     private PlayerHealth _playerHealth;
     private BoxCollider2D _hitbox;
 
-    [Header("AttackVariables")]
+    [Header("Variables")]
     public int damage = 1;
     public float detectionDistance = 1.5f;
-    public float damageCooldown = 1.0f;
     public float knockbackForce = 15f;
-    private float _nextDamageTime;
 
     void Start()
     {
+        // Getting components
         _animator = GetComponent<SpriteAnimator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         _playerHealth = player.GetComponent<PlayerHealth>();
@@ -29,7 +29,7 @@ public class ShadowAttack : MonoBehaviour
     {
         float timer = 0f;
 
-        // Follow player X for 4 seconds
+        // Following player X for 4 seconds
         while (timer < 4f)
         {
             if (gameObject != null)
@@ -47,6 +47,7 @@ public class ShadowAttack : MonoBehaviour
     }
     public void AttackPlayer()
     {
+        // Enabling hitbox for 1 second to detect player
         _hitbox.enabled = true;
         float distance = Vector2.Distance(transform.position, player.position);
         if (distance <= detectionDistance)
@@ -56,10 +57,11 @@ public class ShadowAttack : MonoBehaviour
             Vector2 knockbackDir = new Vector2(side, 1f).normalized;
 
             _playerHealth.TakeDamage(damage, knockbackDir * knockbackForce);
-            _nextDamageTime = Time.time + damageCooldown;
         }
         _animator.Play("Death");
     }
+
+    // Destroys the Shadow object at end of animation
     public void Destroy()
     {
         Destroy(gameObject);

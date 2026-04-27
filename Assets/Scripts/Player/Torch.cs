@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class Torch : MonoBehaviour
 {
-    public Movement _movement;
+    [Header("Components")]
     public GameObject TorchLight;
+    public Movement _movement;
     private PlayerManager _playerManager;
     private EquippedItem _equippedItem;
-    float xpos;
-    float ypos;
+    
+    [Header("Variables")]
+    private float xpos;
+    private float ypos;
 
+    //Assigns variables in Start
     void Start()
     {
         _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
@@ -16,14 +20,18 @@ public class Torch : MonoBehaviour
     }
     void Update()
     {
+        //Turns off torch if player is not grounded or is hiding
         if(_movement.AirState != Movement.AirStates.Grounded || _playerManager.IsHiding == true)
         {
             TorchLight.SetActive(false);
             _equippedItem.TorchIsLit = false;
         }
 
+        //Gets the absolute position of the torch
         ypos = Mathf.Abs(TorchLight.transform.localPosition.y);
         xpos = Mathf.Abs(TorchLight.transform.localPosition.x);
+
+        //Sets the position of the torch based on whether the player is moving or not
         if(_movement.MoveState == Movement.MoveStates.Moving)
         {
             xpos = 1.1f;
@@ -36,20 +44,15 @@ public class Torch : MonoBehaviour
         }
         if (TorchLight != null)
         {
-            // Assuming flipX = true means Facing Right (based on Movement.cs logic)
-            // and flipX = false means Facing Left.
-            
-
+            //Sets the position and rotation of the torch based on whether the player is facing left or right
             if (_movement._spriteRenderer.flipX) // Right
             {
                 TorchLight.transform.localPosition = new Vector3(xpos, ypos, TorchLight.transform.localPosition.z);
-                // 0 degrees usually points Right in 2D
                 TorchLight.transform.localRotation = Quaternion.Euler(0, 0, -68);
             }
             else // Left
             {
                 TorchLight.transform.localPosition = new Vector3(-xpos, ypos, TorchLight.transform.localPosition.z);
-                // 180 degrees points Left
                 TorchLight.transform.localRotation = Quaternion.Euler(0, 0, 68);
             }
         }

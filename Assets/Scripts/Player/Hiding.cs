@@ -56,9 +56,17 @@ public class Hiding : MonoBehaviour
     public void UnHide()
     {
         _playerManager.IsHiding = false;
+
+        // Allow Movement
         _playerManager.AllowMovement = true;
+        
+        // Change Sprite Layer
         _spriteRenderer.sortingLayerName = "Player";
+
+        // Enable Gravity
         _rigidBody.gravityScale = 2;
+
+        // Enable Collision
         _capsuleCollider.enabled = true;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Janitor"), false);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy Hitbox"), false);
@@ -66,11 +74,13 @@ public class Hiding : MonoBehaviour
 
     IEnumerator WaitUntilGrounded()
     {
+        // Wait until the player is grounded or stops hiding
         yield return new WaitUntil(() => _movement.IsGrounded() || !_playerManager.IsHiding);
 
         if (!_playerManager.IsHiding)
             yield break;
 
+        // Change Y position so Player appears inside the crate
         _rigidBody.gravityScale = 0;
         transform.position = new Vector3(transform.position.x, transform.position.y + 1.4f, transform.position.z);
     }

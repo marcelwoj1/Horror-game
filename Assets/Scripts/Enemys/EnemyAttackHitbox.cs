@@ -34,6 +34,7 @@ public class EnemyAttackHitbox : MonoBehaviour
 
     private void Update()
     {
+        // Wont work if player is dead, hiding, or if enemy is not aggressive or eating food
         if (_playerTransform == null || enemy == null || _playerManager == null || _playerHealth == null) return;
         if (enemy.isDead) return;
         if (_playerManager.IsHiding) return;
@@ -44,15 +45,18 @@ public class EnemyAttackHitbox : MonoBehaviour
             if(_enemyPatrol.currentState == EnemyPatrol.EnemyState.Food) return;
         }
 
+        // Checks if player is within range
         float distance = Vector2.Distance(transform.position, _playerTransform.position);
         if (distance <= detectionDistance)
         {
+            // Plays attack animation
             _animator.Play("Attack");
 
-            // Direction for knockback (based on enemy facing direction)
+            // Direction for knockback
             float side = enemy.transform.localScale.x;
             Vector2 knockbackDir = new Vector2(side, 1f).normalized;
 
+            // Damage player
             _playerHealth.TakeDamage(damage, knockbackDir * knockbackForce);
             _nextDamageTime = Time.time + damageCooldown;
         }

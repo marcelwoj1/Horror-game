@@ -24,12 +24,16 @@ public class BossChase : MonoBehaviour
     {
         if (isChasing && boss_manager.isDead == false)
         {
+            // Calculates direction to player
             Vector2 direction = (player.position - transform.position).normalized;
+
+            // Moves boss in the direction of the player
             rb.linearVelocity = direction * speed;
             animator.Play("Walk");
         }
     }
 
+    // Function to start chasing and attacking player
     public void StartChasing()
     {
         isChasing = true;

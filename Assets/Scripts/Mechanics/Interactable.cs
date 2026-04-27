@@ -18,24 +18,14 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        // Find the player game object by name as requested
         _player = GameObject.Find("Player");
-        
-        if (_player == null)
-        {
-            Debug.LogWarning($"Interactable on {gameObject.name} could not find 'Player' object in the scene.");
-        }
 
-        // Cache the child named "Image"
+        //Finds the Interact image on the gameobject
         Transform imageTransform = transform.Find("Image");
         if (imageTransform != null)
         {
             _interactionImage = imageTransform.gameObject;
             _interactionImage.SetActive(false);
-        }
-        else
-        {
-            Debug.LogWarning($"Interactable on {gameObject.name} could not find a child named 'Image'.");
         }
     }
 

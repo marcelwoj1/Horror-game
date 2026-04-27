@@ -14,8 +14,9 @@ public class PlayerHealth : MonoBehaviour
     private Coroutine _hurtFlashRoutine;
     private Graphic _vignetteGraphic;
     private Rigidbody2D _rigidBody;
-    
     public GameObject HurtVignette;
+
+    [Header("Actions")]
     public Action OnDeath;
     public Action OnHealthChanged;
 
@@ -26,7 +27,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float hurtFadeMaxAlpha = 0.8f;
 
     [Header("Scripts")]    
-    
     private Movement _movement;
     private CameraTrack _cameraTrack;
     private PlayerManager _playerManager;
@@ -54,28 +54,34 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockback)
     {
+        //Dont take damage if bug spray is active
         if(_playerManager.IsBugSprayActive == true) return;
         
         //Health Change 
         Health -= damage;
         OnHealthChanged?.Invoke();
         SoundService.Instance?.Play("PlayerHurt");
+
+        //Check if dead
         if (Health <= 0)
         {
+            //Death Animation
             _animator.Play("Death");
             _playerManager.AllowMovement = false;
             return;
         }
 
+        //Camera Shake
         _cameraTrack?.Shake(damageShakeMagnitude);
 
+        //Hurt Flash
         if (HurtVignette != null)
         {
             if (_hurtFlashRoutine != null) StopCoroutine(_hurtFlashRoutine);
             _hurtFlashRoutine = StartCoroutine(HurtFadeRoutine());
         }
 
-        // Knockback
+        //Knockback
         _rigidBody.linearVelocity = Vector2.zero;
         _rigidBody.AddForce(knockback, ForceMode2D.Impulse);
         StartCoroutine(KnockbackRoutine());
@@ -86,11 +92,12 @@ public class PlayerHealth : MonoBehaviour
         HurtVignette.SetActive(true);
         float elapsed = 0;
 
+        //Checks if the vignette graphic is null
         if (_vignetteGraphic != null)
         {
             float startAlpha = _vignetteGraphic.color.a;
             
-            // Fade In
+            //Fade In
             while (elapsed < hurtFadeInDuration)
             {
                 elapsed += Time.deltaTime;
@@ -113,7 +120,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            // Simple fallback if no Graphic is found
+            //Fallback if no Graphic is found
             yield return new WaitForSeconds(hurtFadeInDuration + hurtFadeOutDuration);
         }
 
@@ -133,6 +140,7 @@ public class PlayerHealth : MonoBehaviour
 
     IEnumerator KnockbackRoutine()
     {
+        //Checks if movement script is null
         if (_movement != null) _movement.isKnockedBack = true;
         yield return new WaitForSeconds(0.35f);
         if (_movement != null) _movement.isKnockedBack = false;
@@ -140,8 +148,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(int healAmount)
     {
+        //Heal player
         Health += healAmount;
         OnHealthChanged?.Invoke();
+
+        //Dont go over max health
         if (Health > MaxHealth)
         {
             Health = MaxHealth;

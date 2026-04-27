@@ -8,34 +8,31 @@ public class Crate : MonoBehaviour
     
     [Header("Variables")]
     public bool _isPlayerNear = false;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         _hiding = _playerManager.GetComponent<Hiding>();
     }
 
+    //Checks if player is near and hides/unhides
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        //Checks if player is near the crate and presses E to hide/unhide
+        if(Input.GetKeyDown(KeyCode.E) && _isPlayerNear == true)
         {
-            if(_isPlayerNear == true)
+            if(_playerManager.IsHiding == false)
             {
-                if(_playerManager.IsHiding == false)
-                {
-                    Debug.Log("Hiding");
-                    _hiding.Hide();
-                }
+                _hiding.Hide();
+            }
             else
             {
-                Debug.Log("UnHiding");
                 _hiding.UnHide();
-            }
             }
         }
     }
 
+    //Checks if player is near the crate and sets isPlayerNear to true when player enters
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
@@ -44,6 +41,7 @@ public class Crate : MonoBehaviour
         }
     }
 
+    //Checks if player is near the crate and sets isPlayerNear to false when player leaves
     void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))

@@ -3,21 +3,23 @@ using UnityEngine;
 
 public class ShadowGrab : MonoBehaviour
 {
-    private Transform player;
+    [Header("Variables")]
     public float liftHeight = 6f;
     public float liftSpeed = 5f;
+    public bool waitingForClick = false;
+
+    [Header("Hand Prefab")]
     public GameObject shadowHand;
     private GameObject _shadowHand;
-    private Rigidbody2D rb;
 
     [Header("References")]
+    private Transform player;
+    private Rigidbody2D rb;
     private PlayerManager _playerManager;
-
-    [Header("Variables")]
-    public bool waitingForClick = false;
 
     void Start()
     {
+        // Getting components from player
         rb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         _playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         player = _playerManager.transform;
@@ -25,6 +27,7 @@ public class ShadowGrab : MonoBehaviour
 
     public void StartLiftAttack()
     {
+        // Spawning shadow hand
         waitingForClick = true;
         _shadowHand = Instantiate(shadowHand, new Vector3(player.position.x, 29f, player.position.z), Quaternion.identity);
         StartCoroutine(LiftRoutine());
@@ -32,17 +35,18 @@ public class ShadowGrab : MonoBehaviour
 
     IEnumerator LiftRoutine()
     {
-        // LOCK PLAYER CONTROL
+        // Stopping player movement and gravity
         _playerManager.AllowMovement = false;
         rb.gravityScale = 0f;
 
+        // Set Player Height Target
         Vector3 targetPos = new Vector3(
             player.position.x,
             30f,
             player.position.z
         );
 
-        // --- LIFT PLAYER UP ---
+        // Lifts Player Up
         while (Vector3.Distance(player.position, targetPos) > 0.05f)
         {
             player.position = Vector3.MoveTowards(
@@ -54,7 +58,7 @@ public class ShadowGrab : MonoBehaviour
             yield return null;
         }
 
-        // WAIT FOR INPUT
+        // Waiting for Mouse Click
         waitingForClick = true;
 
         while (waitingForClick)
@@ -67,7 +71,7 @@ public class ShadowGrab : MonoBehaviour
             yield return null;
         }
 
-        // UNLOCK PLAYER CONTROL
+        // Destroys hand and unlocks player controls
         rb.gravityScale = 2f;
         _playerManager.AllowMovement = true;
         Destroy(_shadowHand);

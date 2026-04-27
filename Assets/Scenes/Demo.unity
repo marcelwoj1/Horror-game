@@ -3250,8 +3250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793bd7f2024b8fd4696ba697a9be2934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Torch
-  _movement: {fileID: 1030423176}
   TorchLight: {fileID: 715760574}
+  _movement: {fileID: 1030423176}
 --- !u!1 &749872320
 GameObject:
   m_ObjectHideFlags: 0
@@ -4306,8 +4306,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0018613, y: -0.10611}
-  m_SizeDelta: {x: 800, y: 423.26}
+  m_AnchoredPosition: {x: 0.0018613, y: 0.00098848}
+  m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027944335
 MonoBehaviour:
@@ -5821,6 +5821,24 @@ MonoBehaviour:
   InventoryTutorialDone: 0
   ItemTutorialDone: 0
   KeyTutorialDone: 0
+  StartHintText: Welcome to the Domatophobia! This is a tutorial level to show you
+    the basics of the game. Click the left mouse button to continue.
+  MovementHintText: You can use the A and D keys to move left and right, and the
+    space bar to jump. You can also use C to crouch if your feeling extra sneeky(maybe
+    when trying to take something off someone).
+  DrawerHintText: Items dropped from drawers can be picked up by clicking E while
+    stood over them. Once picked up they will be stored in your inventory which you
+    can check by clicking the inventory button or I.
+  InventoryHintText: Items picked up are stored here- with what they are and what
+    they do detailed- and can be equipped by dragging the icon of the item into the
+    Equipped item slot. You can then close the inventory by clicking the inventory
+    button again or clicking I.
+  ItemHintText: Once you have an item equipped you can use it by clicking the left
+    mouse button. Different items have different uses. You can also drop items by
+    clicking the Q key. Items dont stack so watch your inventory space.
+  KeyHintText: Some doors are locked and require a key to open. You will find keys
+    in different places such as drawers or maybe attached to enemies. Use this key
+    to open the door in front of you and begin the game... good luck.
 --- !u!1 &1267881425
 GameObject:
   m_ObjectHideFlags: 0
@@ -11801,8 +11819,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.2462, y: -0.10693}
-  m_SizeDelta: {x: 814.5, y: 406.14}
+  m_AnchoredPosition: {x: -7.2462, y: 0.026509}
+  m_SizeDelta: {x: 814.5, y: 450.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1573252668
 MonoBehaviour:

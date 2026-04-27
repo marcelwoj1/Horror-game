@@ -9,7 +9,7 @@ public class BossSlamAttack : MonoBehaviour
     [Header("Movement Settings")]
     private float flyHeight = 10f;
     private float flySpeed = 20f;
-    private float followSpeed = 20f; // slightly faster for responsiveness
+    private float followSpeed = 20f;
     private float fallSpeed = 40f;
     private float StartY;
 
@@ -38,8 +38,7 @@ public class BossSlamAttack : MonoBehaviour
 
     void Update()
     {
-
-        // KEEPING YOUR SHADOW POSITION EXACTLY THE SAME
+        // Shadow follows boss position exactly
         if (_groundShadow != null)
         {
             _groundShadow.transform.position = new Vector3(transform.position.x, 28.2f, transform.position.z);
@@ -56,13 +55,14 @@ public class BossSlamAttack : MonoBehaviour
     {
         GroundPoundAttacking = true;
 
+        // Creating shadow on the ground
         _groundShadow = Instantiate(
             GroundShadowPrefab,
             new Vector3(transform.position.x, 28.2f, transform.position.z),
             Quaternion.identity
         );
 
-        // --- 1. FLY UP (RELATIVE HEIGHT) ---
+        // Boss flies into air
         float targetY = transform.position.y + flyHeight;
         Vector3 targetHeight = new Vector3(transform.position.x, targetY, transform.position.z);
 
@@ -77,7 +77,7 @@ public class BossSlamAttack : MonoBehaviour
             yield return null;
         }
 
-        // --- 2. FOLLOW PLAYER ---
+        // Boss follows player for a set time
         float timer = 0f;
 
         while (timer < followTime)
@@ -94,40 +94,44 @@ public class BossSlamAttack : MonoBehaviour
             yield return null;
         }
 
-        // --- LOCK POSITION (IMPORTANT FOR SHARP FEEL) ---
+        // After follow time is up the position is locked
         Vector3 lockedPos = new Vector3(player.position.x, targetY, player.position.z);
         transform.position = lockedPos;
 
-        // --- 3. SHORT HOVER ---
+        // Waits into air for another set time
         yield return new WaitForSeconds(hoverTime);
 
-        // --- 4. SLAM DOWN ---
+        // Flies down to the ground at locked position
         while (transform.position.y > StartY)
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
             yield return null;
         }
 
-        // Snap exactly to ground level
+        // Snaps back to earlier ground position
         transform.position = new Vector3(transform.position.x, StartY, transform.position.z);
 
+        // Checks if player is in range
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer >= detectionDistance)
         {
+            // Boss gets stunned if the player is not in range
             boss_manager.BossStunned();
         }
         else
         {
+            // Boss deals damage to the player if the player is in range
             float side = transform.localScale.x;
             Vector2 knockbackDir = new Vector2(side, 1f).normalized;
             _playerHealth.TakeDamage(damage, knockbackDir * knockbackForce);
         }
 
-        // Cleanup shadow
+        // Removes the shadow from the ground
         if (_groundShadow != null)
             Destroy(_groundShadow);
 
+        // Boss is no longer attacking
         GroundPoundAttacking = false;
     }
 }

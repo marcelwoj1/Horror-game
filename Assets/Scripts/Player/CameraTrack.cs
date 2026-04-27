@@ -32,7 +32,7 @@ public class CameraTrack : MonoBehaviour
         cam = GetComponent<Camera>();
         currentCameraPos = transform.position;
         
-        // Initialize static variables from serialized fields
+        // Set initial static variables
         if (Target == null && initialTarget != null)
             Target = initialTarget;
         
@@ -77,27 +77,19 @@ public class CameraTrack : MonoBehaviour
         transform.position = finalPos;
     }
 
-    /// <summary>
-    /// Applies a screen shake effect with the given magnitude.
-    /// </summary>
+    // Applies a screen shake effect with the given magnitude
     public void Shake(float magnitude)
     {
         currentShakeMagnitude = magnitude;
     }
 
-    /// <summary>
-    /// Updates the camera bounds at runtime. Camera will snap instantly to new bounds.
-    /// </summary>
-    /// <param name="newBounds">Transform with position as center and scale as size</param>
+    // Updates the camera bounds at runtime. Camera will snap instantly to new bounds
     public static void SetBounds(Transform newBounds)
     {
         BoundsTransform = newBounds;
     }
 
-    /// <summary>
-    /// Updates the camera target at runtime.
-    /// </summary>
-    /// <param name="newTarget">New target transform to follow</param>
+    // Updates the camera target at runtime
     public static void SetTarget(Transform newTarget)
     {
         Target = newTarget;
@@ -117,14 +109,14 @@ public class CameraTrack : MonoBehaviour
             currentCameraPos.z
         );
 
-        // Get bounds from transform (position = center, lossyScale = world size)
+        // Get bounds from transform
         Vector3 boundsCenter = BoundsTransform.position;
         Vector3 boundsSize = BoundsTransform.lossyScale;
         
         float halfWidth = boundsSize.x / 2f;
         float halfHeight = boundsSize.y / 2f;
 
-        // Calculate effective bounds (shrunk by camera size)
+        // Calculate effective bounds
         float minX = boundsCenter.x - halfWidth + camHalfWidth;
         float maxX = boundsCenter.x + halfWidth - camHalfWidth;
         float minY = boundsCenter.y - halfHeight + camHalfHeight;
@@ -139,19 +131,21 @@ public class CameraTrack : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        // Don't draw gizmos if not enabled
         if (!showGizmos) return;
 
+        // Get bounds from transform
         Transform boundsToShow = BoundsTransform != null ? BoundsTransform : initialBoundsTransform;
         if (boundsToShow == null) return;
 
         Vector3 center = boundsToShow.position;
         Vector3 size = boundsToShow.lossyScale;
 
-        // Draw the full camera bounds (green)
+        // Draw the full camera bounds
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(center, size);
         
-        // Draw effective bounds where camera center can move (yellow)
+        // Draw effective bounds 
         if (cam == null) cam = GetComponent<Camera>();
         if (cam != null)
         {
@@ -166,7 +160,7 @@ public class CameraTrack : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(center, effectiveSize);
             
-            // Draw current camera view (cyan)
+            // Draw current camera view
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireCube(transform.position, new Vector3(halfWidth * 2, halfHeight * 2, 0));
         }

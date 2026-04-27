@@ -48,6 +48,7 @@ public class Movement : MonoBehaviour
     public MoveStates MoveState;
     public AirStates AirState;
 
+    //Checks if the player is grounded
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle( new Vector2(_feetLocation.position.x, _feetLocation.position.y) , _GROUND_CHECK_RADIUS, _groundLayer);
@@ -103,10 +104,10 @@ public class Movement : MonoBehaviour
         }
 
 
-        // ANIMATION & FLIPPING
+        // animations and sprite flipping
         if (_animator != null)
         {
-            // Handle Flipping
+            // Flips player sprite
             if (_movementDirection.x > 0) 
             {
                 _animator.SetFlip(true);
@@ -116,7 +117,7 @@ public class Movement : MonoBehaviour
                 _animator.SetFlip(false);
             }
 
-            // Handle States
+            // Animation states
             if (AirState != AirStates.Grounded)
             {
                 if (AirState == AirStates.Jumping) _animator.Play("Jump");
@@ -124,9 +125,9 @@ public class Movement : MonoBehaviour
             }
             else
             {
+                // Different Walk Animations based on equipment
                 if (MoveState == MoveStates.Moving)
                 {
-                    // Walk Animations
                     if(FlashlightEquipped == true)
                     {
                         _animator.Play("TorchWalk");
@@ -138,11 +139,12 @@ public class Movement : MonoBehaviour
                 }
                 else
                 {
+                    // Crouch Animation
                     if(_playerManager.IsCrouching == true)
                     {
                         _animator.Play("Crouch");
                     }
-                    // Idle Animations
+                    // Different Idle Animations based on equipment
                     else if(AxeEquipped == true)
                     {
                         _animator.Play("AxeIdle");
@@ -159,6 +161,7 @@ public class Movement : MonoBehaviour
             }
         }
 
+        // Stop Movement if not allowed
         if(_playerManager.AllowMovement == false)
         {
             _rigidBody.linearVelocity = Vector2.zero;
@@ -168,15 +171,15 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        // Movement
         if(_playerManager.AllowMovement == true)
         {
             if (!isKnockedBack)
             {
-                // Move
+                // Apply movement velocity
                 _rigidBody.linearVelocityX = _movementDirection.x * _moveSpeed;
 
-                // Jump
+                // Apply jump velocity with jump buffer
                 if (Time.time - _lastJumpInput <= _JUMP_BUFFER && IsGrounded())
                 {
                     _lastJumpInput = -100f;
@@ -187,6 +190,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
+            // stop movement if not allowed
             _rigidBody.linearVelocity = Vector2.zero;
         }
     }

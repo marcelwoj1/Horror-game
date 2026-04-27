@@ -7,7 +7,7 @@ public class BugSprayAttack : MonoBehaviour
     public Transform attackPoint;
     public Vector2 attackSize = new Vector2(1, 1);
     public int attackDamage = 1;
-    public float knockbackForce = 5f;
+    public float knockbackForce = 1f;
     
     [Header("Layers")]
     public LayerMask enemyLayer;
@@ -27,26 +27,29 @@ public class BugSprayAttack : MonoBehaviour
     }
 
     void Update()
-{
-    if (_playerManager.IsBugSprayActive && sprayCoroutine == null)
     {
-        sprayCoroutine = StartCoroutine(SprayRoutine());
+        // Start Coroutine if Bug Spray is active and Coroutine is not running
+        if (_playerManager.IsBugSprayActive && sprayCoroutine == null)
+        {
+            sprayCoroutine = StartCoroutine(SprayRoutine());
+        }
+        // Stop Coroutine if Bug Spray is not active and Coroutine is running
+        else if (!_playerManager.IsBugSprayActive && sprayCoroutine != null)
+        {
+            StopCoroutine(sprayCoroutine);
+            sprayCoroutine = null;
+        }
     }
-    else if (!_playerManager.IsBugSprayActive && sprayCoroutine != null)
-    {
-        StopCoroutine(sprayCoroutine);
-        sprayCoroutine = null;
-    }
-}
 
-IEnumerator SprayRoutine()
-{
-    while (true)
+    IEnumerator SprayRoutine()
     {
-        Attack();
-        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            //Will attack enemies effected by bug spray every .5 seconds
+            Attack();
+            yield return new WaitForSeconds(1.5f);
+        }
     }
-}
     
     public void Attack()
     {
@@ -59,19 +62,21 @@ IEnumerator SprayRoutine()
 
         foreach (Collider2D hitCollider in enemiesHit)
         {
-            //Enemy
             Enemy enemy = hitCollider.GetComponent<Enemy>();
 
             if(enemy != null)
             {
+                //Will not hit enemies that are not affected by bug spray
                 if(enemy.Affectedbybugspray == false) return;
                 
+                //Will calculate the direction of the knockback
                 Vector2 knockbackDir = (enemy.transform.position - transform.position);
 
                 knockbackDir.Normalize();
 
                 knockbackDir.y = 0.2f; 
 
+                //Will apply damage and knockback to enemy
                 enemy.TakeDamage(attackDamage, knockbackDir * knockbackForce);
             }
         }

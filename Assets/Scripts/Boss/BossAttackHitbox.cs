@@ -38,22 +38,31 @@ public class BossAttackHitbox : MonoBehaviour
 
     private void Update()
     {
+        // Checks if any of the required components are missing or if the boss is dead
         if (_playerTransform == null || boss_manager == null || _playerManager == null || _playerHealth == null) return;
+
+        // Checks if boss is dead, player is hiding, cooldown is not ready, or boss is not aggressive
         if (boss_manager.isDead) return;
         if (_playerManager.IsHiding) return;
         if (Time.time < _nextDamageTime) return;
         if (boss_manager.isAggressive == false) return;
         if (_bossSlamAttack.GroundPoundAttacking == true) return;
 
+        // Checks if player is in range
         float distance = Vector2.Distance(transform.position, _playerTransform.position);
         if (distance <= detectionDistance)
         {
+            // Resets shadow grab
             _shadowGrab.waitingForClick = false;
+            
+            // Boss plays attack animation
             _animator.Play("Attack");
 
+            // Calculates direction to player and deals knockback to player in that direction
             float side = boss_manager.transform.localScale.x;
             Vector2 knockbackDir = new Vector2(side, 1f).normalized;
 
+            // Deals damage to player
             _playerHealth.TakeDamage(damage, knockbackDir * knockbackForce);
             _nextDamageTime = Time.time + damageCooldown;
         }

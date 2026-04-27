@@ -81,24 +81,27 @@ public class EnemyPatrol : MonoBehaviour
         if (isKnockedBack)
             return;
 
-        // PRIORITY SYSTEM
+        // Priority system for enemy states
+        // Checks for food
         if (TryGetFood())
         {
-            // Enemy Chases food
+            // Enemy Chases food if its detected
             currentState = EnemyState.Food;
         }
+        // Checks for player
         else if (CanSeePlayer())
         {
             // Enemy Chases player
             currentState = EnemyState.Chase;
         }
+        // Patrols
         else
         {
             // Enemy Patrols
             currentState = EnemyState.Patrol;
         }
 
-        // EXECUTE BEHAVIOUR
+        // Checks for current state and executes behaviour
         switch (currentState)
         {
             // Patrol
@@ -118,9 +121,10 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    //Checks if any food is spawned- top priority
+    // Checks if any food is spawned- top priority
     bool TryGetFood()
     {
+        // If there is no food, return false
         if (AllFood.Count == 0)
         {
             foodTarget = null;
