@@ -16,10 +16,12 @@ public class EnemyAttackHitbox : MonoBehaviour
     private PlayerManager _playerManager;
     private Transform _playerTransform;
     private PlayerHealth _playerHealth;
+    private EnemyPatrol _enemyPatrol;
 
     void Start()
     {
         enemy = GetComponentInParent<Enemy>();
+        _enemyPatrol = GetComponentInParent<EnemyPatrol>();
         _animator = GetComponentInParent<SpriteAnimator>();
         GameObject player = GameObject.Find("Player");
         if (player != null)
@@ -37,6 +39,10 @@ public class EnemyAttackHitbox : MonoBehaviour
         if (_playerManager.IsHiding) return;
         if (Time.time < _nextDamageTime) return;
         if (enemy.isAggressive == false) return;
+        if(_enemyPatrol != null)
+        {
+            if(_enemyPatrol.currentState == EnemyPatrol.EnemyState.Food) return;
+        }
 
         float distance = Vector2.Distance(transform.position, _playerTransform.position);
         if (distance <= detectionDistance)

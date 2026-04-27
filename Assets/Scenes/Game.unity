@@ -14762,8 +14762,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1030423181}
     - target: {fileID: 5195721347503425492, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: viewAngle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195721347503425492, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
+      propertyPath: viewDistance
+      value: 7.861
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195721347503425492, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: enemyLayer.m_Bits
-      value: 640
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5711581103232208962, guid: 535d18d0f788c984f8359e52db99d2d4, type: 3}
       propertyPath: _hiding

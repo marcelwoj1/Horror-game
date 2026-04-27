@@ -249,12 +249,12 @@ MonoBehaviour:
   foodTarget: {fileID: 0}
   patrolSpeed: 2
   chaseSpeed: 4
-  viewDistance: 6
-  viewAngle: 60
+  viewDistance: 7.861
+  viewAngle: 90
   levelTolerance: 0.5
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 8
   patrolPointsParent: {fileID: 7937886408632977940}
   offsetMagnitude: 2
   offsetSpeed: 2
