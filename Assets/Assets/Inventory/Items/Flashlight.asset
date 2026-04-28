@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Item
   itemName: Flashlight
   SlotSize: 1
-  itemImage: {fileID: 8926562824097235699, guid: 5c89aabf60cf436498bf96aa0df9b94a, type: 3}
+  itemImage: {fileID: -5913738696227704600, guid: c46f64176283bfa44994e39796bd844f, type: 3}
   ItemDescription: Use the flashlight for light in the dark

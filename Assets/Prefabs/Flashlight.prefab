@@ -103,7 +103,6 @@ GameObject:
   - component: {fileID: 3663438820836431242}
   - component: {fileID: 8828105860848173216}
   - component: {fileID: 6344175805961174086}
-  - component: {fileID: 1884781623839654655}
   - component: {fileID: 8852459484559515951}
   - component: {fileID: 6122365195514862318}
   m_Layer: 10
@@ -231,7 +230,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1884781623839654655}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PickFlashlightup, Assembly-CSharp
         m_MethodName: PickUp
         m_Mode: 1
@@ -243,18 +242,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1884781623839654655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5373014507852787714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b2137894cc5bad41a5c48c5a078a0f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PickFlashlightup
 --- !u!50 &8852459484559515951
 Rigidbody2D:
   serializedVersion: 5

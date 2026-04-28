@@ -1,41 +1,83 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Controls the behaviour of the Janitor enemy, including patrolling,
+/// chasing the player, and idle waiting behaviour.
+/// </summary>
+/// <remarks>
+/// Behaviour system:
+/// - Patrol: Moves between two points within a defined range
+/// - Wait: Stops and performs an idle action (mopping)
+/// - Chase: Pursues the player when aggressive and visible
+/// 
+/// The Janitor transitions between states based on:
+/// - Player visibility (hiding state)
+/// - Aggression state from the Enemy component
+/// </remarks>
 public class Janitor : MonoBehaviour
 {
     [Header("Components")]
+
+    /// <summary>Reference to the player transform.</summary>
     private Transform player;
+
+    /// <summary>Provides access to player state (e.g., hiding).</summary>
     private PlayerManager _playerManager;
+
+    /// <summary>Handles animation playback.</summary>
     private SpriteAnimator _animator;
+
+    /// <summary>Reference to the base enemy component.</summary>
     private Enemy enemy;
 
     [Header("Movement")]
+
+    /// <summary>Speed while patrolling between points.</summary>
     public float patrolSpeed = 2f;
+
+    /// <summary>Speed while chasing the player.</summary>
     public float chaseSpeed = 4f;
+
+    /// <summary>Total horizontal distance covered during patrol.</summary>
     public float patrolRange = 4f;
 
     [Header("Chase Toggle")]
+
+    /// <summary>Indicates whether the Janitor is currently chasing the player.</summary>
     public bool chasePlayer = false;
 
     [Header("Wait")]
+
+    /// <summary>Duration spent waiting at patrol points.</summary>
     public float waitTime = 5f;
 
-    //Patrol Points
+    // Patrol points
+
+    /// <summary>Left boundary of patrol movement.</summary>
     private float leftPoint;
+
+    /// <summary>Right boundary of patrol movement.</summary>
     private float rightPoint;
+
+    /// <summary>Current horizontal target position.</summary>
     private float targetX;
 
+    /// <summary>Indicates whether the Janitor is currently waiting.</summary>
     private bool isWaiting;
 
+    /// <summary>
+    /// Initialises patrol boundaries and component references.
+    /// </summary>
     void Start()
     {
         float startX = transform.position.x;
 
-        //Set patrol points
+        // Set patrol boundaries relative to starting position
         leftPoint = startX - patrolRange;
         rightPoint = startX + patrolRange;
 
-        //Set starting target
+        // Set initial patrol target
         targetX = rightPoint;
 
         _animator = GetComponent<SpriteAnimator>();
@@ -44,45 +86,69 @@ public class Janitor : MonoBehaviour
         enemy = GetComponent<Enemy>();
     }
 
+    /// <summary>
+    /// Updates behaviour each frame based on player visibility and aggression.
+    /// </summary>
+    /// <remarks>
+    /// Behaviour priority:
+    /// - If player is hiding → disable chase
+    /// - If aggressive and player visible → chase
+    /// - Otherwise → patrol
+    /// </remarks>
     void Update()
     {
-        //If player is hiding, janitor can't see them
-        if(_playerManager.IsHiding == true)
+        // Player hiding disables chase behaviour
+        if (_playerManager.IsHiding)
         {
             chasePlayer = false;
         }
-        //If Janitor is aggressive and player is not hiding, janitor chases player
-        if(enemy.isAggressive == true && _playerManager.IsHiding == false)
+
+        // Become aggressive and chase if conditions are met
+        if (enemy.isAggressive && !_playerManager.IsHiding)
         {
             chasePlayer = true;
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Janitor"), false);
+
+            Physics2D.IgnoreLayerCollision(
+                LayerMask.NameToLayer("Player"),
+                LayerMask.NameToLayer("Janitor"),
+                false
+            );
         }
 
-        //If waiting, janitor mops
+        // Waiting state (idle behaviour)
         if (isWaiting)
         {
             _animator.Play("Mopping");
-            if(chasePlayer == true)
+
+            // Interrupt waiting if player becomes a target
+            if (chasePlayer)
             {
                 isWaiting = false;
             }
+
             return;
         }
 
-        //Chase player if chaising
+        // Execute behaviour based on current state
         if (chasePlayer)
             Chase();
-        //Patrol if not chaising
         else
             Patrol();
     }
 
+    /// <summary>
+    /// Moves the Janitor between patrol points.
+    /// </summary>
+    /// <remarks>
+    /// When reaching a patrol boundary, the Janitor pauses briefly
+    /// before switching direction.
+    /// </remarks>
     void Patrol()
     {
-        //Set target
+        // Define target position
         Vector3 target = new Vector3(targetX, transform.position.y, transform.position.z);
 
-        //Move towards target
+        // Move towards patrol target
         transform.position = Vector2.MoveTowards(
             transform.position,
             target,
@@ -91,21 +157,27 @@ public class Janitor : MonoBehaviour
 
         _animator.Play("Walk");
 
-        //If close to target, wait
+        // Start waiting when close to target
         if (Mathf.Abs(transform.position.x - targetX) < 0.05f)
         {
             StartCoroutine(Wait());
         }
 
-        //Flip janitor to look at next target
+        // Face movement direction
         Flip(targetX);
     }
 
+    /// <summary>
+    /// Moves directly towards the player.
+    /// </summary>
+    /// <remarks>
+    /// This behaviour overrides patrol when the player is detected.
+    /// </remarks>
     void Chase()
     {
         if (player == null) return;
 
-        //Move towards player
+        // Move towards player position
         transform.position = Vector2.MoveTowards(
             transform.position,
             player.position,
@@ -114,29 +186,32 @@ public class Janitor : MonoBehaviour
 
         _animator.Play("Walk");
 
-        //Flip janitor to look at player
+        // Face the player
         Flip(player.position.x);
     }
 
-    //Wait before moving to next patrol point
+    /// <summary>
+    /// Pauses movement at patrol points before reversing direction.
+    /// </summary>
+    /// <returns>Coroutine controlling wait duration.</returns>
     IEnumerator Wait()
     {
-        //Set waiting
         isWaiting = true;
 
-        //Wait
         yield return new WaitForSeconds(waitTime);
 
-        //Flip target
+        // Switch patrol direction
         targetX = Mathf.Approximately(targetX, rightPoint)
             ? leftPoint
             : rightPoint;
 
-        //Stop waiting
         isWaiting = false;
     }
 
-    //Flip janitor to look at target
+    /// <summary>
+    /// Flips the sprite to face a given horizontal target.
+    /// </summary>
+    /// <param name="targetXPos">Target X position used to determine facing direction.</param>
     void Flip(float targetXPos)
     {
         transform.localScale = new Vector3(

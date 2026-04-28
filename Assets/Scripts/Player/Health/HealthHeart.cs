@@ -1,20 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-//Handles the individual heart visuals
+/// <summary>
+/// Represents a single heart UI element used to display player health.
+/// </summary>
+/// <remarks>
+/// This component:
+/// - Updates the visual state of a heart (full or empty)
+/// - Uses sprite swapping to reflect player health
+/// - Is controlled externally by the HealthHeartManager
+/// </remarks>
 public class HealthHeart : MonoBehaviour
 {
-    public Sprite FullHeart, EmptyHeart;
+    /// <summary>Sprite used when the heart is full.</summary>
+    public Sprite FullHeart;
 
-    Image HeartImage;
+    /// <summary>Sprite used when the heart is empty.</summary>
+    public Sprite EmptyHeart;
 
-    //Gets the heart image
+    /// <summary>Reference to the UI Image component.</summary>
+    private Image HeartImage;
+
+    /// <summary>
+    /// Initialises the Image component reference.
+    /// </summary>
     private void Awake()
     {
         HeartImage = GetComponent<Image>();
     }
 
-    //Sets the heart state to full or empty
+    /// <summary>
+    /// Updates the visual state of the heart.
+    /// </summary>
+    /// <param name="state">Desired heart state (full or empty).</param>
     public void SetHeartState(HeartState state)
     {
         switch (state)
@@ -22,16 +40,22 @@ public class HealthHeart : MonoBehaviour
             case HeartState.Full:
                 HeartImage.sprite = FullHeart;
                 break;
+
             case HeartState.Empty:
                 HeartImage.sprite = EmptyHeart;
                 break;
         }
     }
 
-    //Enum for heart states
+    /// <summary>
+    /// Defines possible visual states of a heart.
+    /// </summary>
     public enum HeartState
     {
+        /// <summary>Heart is full (represents available health).</summary>
         Full = 1,
+
+        /// <summary>Heart is empty (represents lost health).</summary>
         Empty = 0
     }
 }

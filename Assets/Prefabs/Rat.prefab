@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6160b8e5475ff4baa834933dbf7d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  health: 2
+  health: 4
   isAggressive: 1
   isDead: 0
   Affectedbybugspray: 1
@@ -247,9 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   speed: 4
-  offsetMagnitude: 2
-  offsetSpeed: 2
-  flipDebounceTime: 0.5
+  wakeDelay: 1
 --- !u!82 &-8019627001600151706
 AudioSource:
   m_ObjectHideFlags: 0
