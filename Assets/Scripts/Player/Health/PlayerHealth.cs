@@ -80,6 +80,10 @@ public class PlayerHealth : MonoBehaviour
     [Header("Vignette")]
     public Material _vignetteMaterial;
     public float _fallOff = 0;
+    [SerializeField] private float heartbeatStrength = 0.5f;
+    [SerializeField] private float heartbeatSpeed = 1.2f;
+
+    private float baseIntensity;
 
     /// <summary>
     /// Initialises component references and UI state.
@@ -126,7 +130,7 @@ public class PlayerHealth : MonoBehaviour
 
         Health -= damage;
         OnHealthChanged?.Invoke();
-        _fallOff += 0.5f;
+        _fallOff += 0.35f * damage;
         _vignetteMaterial.SetFloat("_Power", _fallOff);
 
         SoundService.Instance?.Play("PlayerHurt");
@@ -235,6 +239,9 @@ public class PlayerHealth : MonoBehaviour
         Health += healAmount;
         OnHealthChanged?.Invoke();
 
+        _fallOff -= 0.35f * healAmount;
+        _vignetteMaterial.SetFloat("_Power", _fallOff);
+
         if (Health > MaxHealth)
         {
             Health = MaxHealth;
@@ -250,6 +257,22 @@ public class PlayerHealth : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.L))
         {
             Heal(1);
+        }
+
+        float baseIntensity = 0.94f;
+
+        float pulse = 0f;
+
+        if (Health == 1)
+        {
+            float t = Time.time * 2f;
+
+            float beat1 = Mathf.Pow(Mathf.Max(0, Mathf.Sin(t * 6f)), 10f);
+            float beat2 = Mathf.Pow(Mathf.Max(0, Mathf.Sin((t - 0.15f) * 6f)), 10f);
+
+            pulse = (beat1 + beat2 * 0.7f) * 0.4f;
+
+            _vignetteMaterial.SetFloat("_Power", baseIntensity + pulse);
         }
     }
 }

@@ -43,11 +43,11 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _FallOff: 0
-    - _Intensity: 0.94
-    - _Power: 2.5
+    - _Intensity: 0.94006133
+    - _Power: -0.000000029802322
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.23584908, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.15294118, g: 0, b: 0, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
