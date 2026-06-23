@@ -77,6 +77,10 @@ public class PlayerHealth : MonoBehaviour
     /// <summary>Reference to player manager.</summary>
     private PlayerManager _playerManager;
 
+    [Header("Vignette")]
+    public Material _vignetteMaterial;
+    public float _fallOff = 0;
+
     /// <summary>
     /// Initialises component references and UI state.
     /// </summary>
@@ -100,6 +104,7 @@ public class PlayerHealth : MonoBehaviour
                 _vignetteGraphic.color = c;
             }
         }
+        _vignetteMaterial.SetFloat("_Power", _fallOff);
     }
 
     /// <summary>
@@ -121,6 +126,8 @@ public class PlayerHealth : MonoBehaviour
 
         Health -= damage;
         OnHealthChanged?.Invoke();
+        _fallOff += 0.5f;
+        _vignetteMaterial.SetFloat("_Power", _fallOff);
 
         SoundService.Instance?.Play("PlayerHurt");
 
@@ -231,6 +238,18 @@ public class PlayerHealth : MonoBehaviour
         if (Health > MaxHealth)
         {
             Health = MaxHealth;
+        }
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            TakeDamage(1, Vector2.zero);
+        }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            Heal(1);
         }
     }
 }

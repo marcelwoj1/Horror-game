@@ -11352,6 +11352,8 @@ MonoBehaviour:
   hurtFadeInDuration: 0.1
   hurtFadeOutDuration: 0.3
   hurtFadeMaxAlpha: 1
+  _vignetteMaterial: {fileID: 2100000, guid: b6015a8c1eb044f44a03396639801d3a, type: 2}
+  _fallOff: 0
 --- !u!114 &1030423181
 MonoBehaviour:
   m_ObjectHideFlags: 0
