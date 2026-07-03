@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7385093dcfb7d9f4298dca185f3bf317
+guid: 435e11ff0d9f5b446aafaeb515a2b0c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -138867055639201834
-    second: marcel-05_0
+      213: 4018814452851649147
+    second: Foot_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: marcel-05_0
+      name: Foot_0
       rect:
         serializedVersion: 2
-        x: 1036
-        y: 50
-        width: 2095
-        height: 4068
+        x: 0
+        y: 8
+        width: 1708
+        height: 1330
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6d7fe9d0625a21ef0800000000000000
-      internalID: -138867055639201834
+      spriteID: b7aad68c372b5c730800000000000000
+      internalID: 4018814452851649147
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      marcel-05_0: -138867055639201834
+      Foot_0: 4018814452851649147
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
