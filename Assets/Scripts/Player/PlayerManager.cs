@@ -72,6 +72,10 @@ public class PlayerManager : MonoBehaviour
     /// <summary>UI element for controls panel.</summary>
     public GameObject ControlsPanel;
 
+    [Header("Vignette")]
+    public Material _vignetteMaterial;
+    public float _fallOff = 1f;
+
     /// <summary>
     /// Initialises references and determines game mode.
     /// </summary>
@@ -125,6 +129,13 @@ public class PlayerManager : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+
+        if (IsBugSprayActive)
+        {
+            _fallOff -= Time.deltaTime / 10;
+            _vignetteMaterial.SetFloat("_Power", _fallOff);
+        }
+
     }
 
     /// <summary>
@@ -217,6 +228,9 @@ public class PlayerManager : MonoBehaviour
         IsBugSprayActive = true;
         BugSprayTimer.SetActive(true);
         BugSprayEffect.SetActive(true);
+        _fallOff = 1f;
+        _vignetteMaterial.color = new Color(0f, 0.18f, 0f, 1f);
+        _vignetteMaterial.SetFloat("_Falloff", _fallOff);
     }
 
     /// <summary>

@@ -108,7 +108,7 @@ public class PlayerHealth : MonoBehaviour
                 _vignetteGraphic.color = c;
             }
         }
-        _vignetteMaterial.SetFloat("_Power", _fallOff);
+        _vignetteMaterial.SetFloat("_Falloff", _fallOff);
     }
 
     /// <summary>
@@ -131,7 +131,8 @@ public class PlayerHealth : MonoBehaviour
         Health -= damage;
         OnHealthChanged?.Invoke();
         _fallOff += 0.35f * damage;
-        _vignetteMaterial.SetFloat("_Power", _fallOff);
+        _vignetteMaterial.color = new Color(0.16f, 0f, 0.02f, 1f);
+        _vignetteMaterial.SetFloat("_Falloff", _fallOff);
 
         SoundService.Instance?.Play("PlayerHurt");
 
@@ -240,7 +241,8 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke();
 
         _fallOff -= 0.35f * healAmount;
-        _vignetteMaterial.SetFloat("_Power", _fallOff);
+        _vignetteMaterial.color = new Color(0.16f, 0f, 0.02f, 1f);
+        _vignetteMaterial.SetFloat("_Falloff", _fallOff);
 
         if (Health > MaxHealth)
         {
@@ -263,16 +265,23 @@ public class PlayerHealth : MonoBehaviour
 
         float pulse = 0f;
 
+        /// <summary>
+        /// Controls the heartbeat effect when player has 1 health
+        /// </summary>
         if (Health == 1)
         {
+            //timing for the heartbeat
             float t = Time.time * 2f;
 
+            //using sin wave to create a heartbeat effect
             float beat1 = Mathf.Pow(Mathf.Max(0, Mathf.Sin(t * 6f)), 10f);
             float beat2 = Mathf.Pow(Mathf.Max(0, Mathf.Sin((t - 0.15f) * 6f)), 10f);
 
+            //adding the two beat together to create a heartbeat effect
             pulse = (beat1 + beat2 * 0.7f) * 0.4f;
 
-            _vignetteMaterial.SetFloat("_Power", baseIntensity + pulse);
+            _vignetteMaterial.SetFloat("_Falloff", baseIntensity + pulse);
+            
         }
     }
 }

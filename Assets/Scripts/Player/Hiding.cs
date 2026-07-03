@@ -40,6 +40,16 @@ public class Hiding : MonoBehaviour
     private CapsuleCollider2D _capsuleCollider;
 
     /// <summary>
+    /// Reference to the vignette material.
+    /// </summary>
+    public Material _vignetteMaterial;
+
+    /// <summary>
+    /// Reference to the vignette falloff.
+    /// </summary>
+    private float _fallOff;
+
+    /// <summary>
     /// Initialises component references.
     /// </summary>
     public void Start()
@@ -70,6 +80,10 @@ public class Hiding : MonoBehaviour
             return;
 
         _playerManager.IsHiding = true;
+
+        _fallOff = 4f;
+        _vignetteMaterial.SetFloat("_Falloff", _fallOff);
+        _vignetteMaterial.color = Color.black;
 
         // Move player behind objects visually
         _spriteRenderer.sortingLayerName = "Wall";
@@ -104,6 +118,9 @@ public class Hiding : MonoBehaviour
     public void UnHide()
     {
         _playerManager.IsHiding = false;
+
+        _fallOff = 0f;
+        _vignetteMaterial.SetFloat("_Falloff", _fallOff);
 
         // Restore movement
         _playerManager.AllowMovement = true;

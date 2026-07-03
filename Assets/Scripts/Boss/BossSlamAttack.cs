@@ -73,6 +73,17 @@ public class BossSlamAttack : MonoBehaviour
     /// <summary>Indicates whether the slam attack is currently active.</summary>
     public bool GroundPoundAttacking = false;
 
+    [Header("Vignette")]
+    /// <summary>
+    /// Reference to the vignette material.
+    /// </summary>
+    public Material _vignetteMaterial;
+
+    /// <summary>
+    /// Falloff value for the vignette.
+    /// </summary>
+    private float _fallOff;
+
     /// <summary>
     /// Initialises references and stores starting position.
     /// </summary>
@@ -121,7 +132,7 @@ public class BossSlamAttack : MonoBehaviour
             Quaternion.identity
         );
 
-        // Phase 1: Ascend
+        // Ascend
         float targetY = transform.position.y + flyHeight;
         Vector3 targetHeight = new Vector3(transform.position.x, targetY, transform.position.z);
 
@@ -136,7 +147,7 @@ public class BossSlamAttack : MonoBehaviour
             yield return null;
         }
 
-        // Phase 2: Follow player horizontally
+        // Follow player horizontally
         float timer = 0f;
 
         while (timer < followTime)
@@ -157,10 +168,10 @@ public class BossSlamAttack : MonoBehaviour
         Vector3 lockedPos = new Vector3(player.position.x, targetY, player.position.z);
         transform.position = lockedPos;
 
-        // Phase 3: Hover
+        // Hover
         yield return new WaitForSeconds(hoverTime);
 
-        // Phase 4: Slam down
+        // Slam down
         while (transform.position.y > StartY)
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
@@ -169,21 +180,32 @@ public class BossSlamAttack : MonoBehaviour
 
         transform.position = new Vector3(transform.position.x, StartY, transform.position.z);
 
-        // Phase 5: Apply result
+        // Apply result
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer >= detectionDistance)
         {
-            // Player avoided attack → boss is stunned
+            // Player avoided attack - boss is stunned
             boss_manager.BossStunned();
         }
         else
         {
-            // Player hit → apply damage
+            // Player hit - apply damage
             float side = transform.localScale.x;
             Vector2 knockbackDir = new Vector2(side, 1f).normalized;
 
             _playerHealth.TakeDamage(damage, knockbackDir * knockbackForce);
+
+            // Vignette
+            _fallOff = 4f;
+            _vignetteMaterial.SetFloat("_Falloff", _fallOff);
+            _vignetteMaterial.color = Color.black;
+            while (_fallOff > 0)
+            {
+                _fallOff -= Time.deltaTime * 1.25f;
+                _vignetteMaterial.SetFloat("_Falloff", _fallOff);
+                yield return null;
+            }
         }
 
         // Cleanup shadow indicator
