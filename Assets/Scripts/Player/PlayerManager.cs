@@ -73,8 +73,11 @@ public class PlayerManager : MonoBehaviour
     public GameObject ControlsPanel;
 
     [Header("Vignette")]
+    /// <summary>Reference to vignette material.</summary>
     public Material _vignetteMaterial;
-    public float _fallOff = 1f;
+
+    /// <summary>Falloff value for vignette effect.</summary>
+    public float _fallOff = 0;
 
     /// <summary>
     /// Initialises references and determines game mode.
@@ -130,10 +133,20 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
+        /// <summary>
+        /// Updates the falloff value for vignette effect.
+        /// </summary>
         if (IsBugSprayActive)
         {
+            /// <summary>
+            /// Decrements the falloff value for vignette effect.
+            /// </summary>
             _fallOff -= Time.deltaTime / 10;
-            _vignetteMaterial.SetFloat("_Power", _fallOff);
+
+            /// <summary>
+            /// Sends the falloff value for vignette effect to the material.
+            /// </summary>
+            _vignetteMaterial.SetFloat("_Falloff", _fallOff);
         }
 
     }
@@ -228,8 +241,20 @@ public class PlayerManager : MonoBehaviour
         IsBugSprayActive = true;
         BugSprayTimer.SetActive(true);
         BugSprayEffect.SetActive(true);
+
+        /// <summary>
+        /// Sets the falloff value for vignette effect.
+        /// </summary>
         _fallOff = 1f;
+
+        /// <summary>
+        /// Sets the color for vignette effect.
+        /// </summary>
         _vignetteMaterial.color = new Color(0f, 0.18f, 0f, 1f);
+
+        /// <summary>
+        /// Sends the falloff value for vignette effect to the material.
+        /// </summary>
         _vignetteMaterial.SetFloat("_Falloff", _fallOff);
     }
 

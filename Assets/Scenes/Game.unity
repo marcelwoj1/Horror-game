@@ -429,7 +429,6 @@ RectTransform:
   - {fileID: 1333203374}
   - {fileID: 553621748}
   - {fileID: 283896154}
-  - {fileID: 995940567}
   - {fileID: 497653390}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10758,81 +10757,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &995940566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 995940567}
-  - component: {fileID: 995940569}
-  - component: {fileID: 995940568}
-  m_Layer: 5
-  m_Name: Vignette
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &995940567
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 995940566}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 98334496}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: 0.00074768}
-  m_SizeDelta: {x: 800, y: 450}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &995940568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 995940566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 2100000, guid: b6015a8c1eb044f44a03396639801d3a, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &995940569
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 995940566}
-  m_CullTransparentMesh: 1
 --- !u!1 &1018079868
 GameObject:
   m_ObjectHideFlags: 0
@@ -11428,10 +11352,8 @@ MonoBehaviour:
   hurtFadeInDuration: 0.1
   hurtFadeOutDuration: 0.3
   hurtFadeMaxAlpha: 1
-  _vignetteMaterial: {fileID: 2100000, guid: b6015a8c1eb044f44a03396639801d3a, type: 2}
+  _vignetteMaterial: {fileID: 2100000, guid: aa76f37710cfd704bb84a419be71c2cc, type: 2}
   _fallOff: 0
-  heartbeatStrength: 0.5
-  heartbeatSpeed: 1.2
 --- !u!114 &1030423181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11444,7 +11366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1941ab748584812408e8fcc10af001ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hiding
-  _vignetteMaterial: {fileID: 2100000, guid: b6015a8c1eb044f44a03396639801d3a, type: 2}
+  _vignetteMaterial: {fileID: 2100000, guid: aa76f37710cfd704bb84a419be71c2cc, type: 2}
 --- !u!114 &1030423182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11560,7 +11482,7 @@ MonoBehaviour:
   BugSprayTimer: {fileID: 1267881425}
   BugSprayEffect: {fileID: 963955517}
   ControlsPanel: {fileID: 283896153}
-  _vignetteMaterial: {fileID: 2100000, guid: b6015a8c1eb044f44a03396639801d3a, type: 2}
+  _vignetteMaterial: {fileID: 2100000, guid: aa76f37710cfd704bb84a419be71c2cc, type: 2}
   _fallOff: 1
 --- !u!114 &1030423186
 MonoBehaviour:
@@ -17592,7 +17514,7 @@ MonoBehaviour:
   damage: 2
   knockbackForce: 30
   GroundPoundAttacking: 0
-  _vignetteMaterial: {fileID: 2100000, guid: b6015a8c1eb044f44a03396639801d3a, type: 2}
+  _vignetteMaterial: {fileID: 2100000, guid: aa76f37710cfd704bb84a419be71c2cc, type: 2}
 --- !u!114 &1796370093
 MonoBehaviour:
   m_ObjectHideFlags: 0

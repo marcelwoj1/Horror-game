@@ -78,12 +78,17 @@ public class PlayerHealth : MonoBehaviour
     private PlayerManager _playerManager;
 
     [Header("Vignette")]
+    /// <summary>Reference to Vignette Material.</summary>
     public Material _vignetteMaterial;
-    public float _fallOff = 0;
-    [SerializeField] private float heartbeatStrength = 0.5f;
-    [SerializeField] private float heartbeatSpeed = 1.2f;
 
+    /// <summary>Falloff value for vignette effect.</summary>
+    public float _fallOff = 0;
+
+    /// <summary>Base intensity of vignette heartbeat effect.</summary>
     private float baseIntensity;
+
+    /// <summary>Pulse value for vignette heartbeat effect.</summary>
+    private float pulse = 0;
 
     /// <summary>
     /// Initialises component references and UI state.
@@ -130,8 +135,20 @@ public class PlayerHealth : MonoBehaviour
 
         Health -= damage;
         OnHealthChanged?.Invoke();
+
+        /// <summary>
+        /// Increases the vignette intensity.
+        /// </summary>
         _fallOff += 0.35f * damage;
+
+        /// <summary>
+        /// Sets the color for vignette effect.
+        /// </summary>
         _vignetteMaterial.color = new Color(0.16f, 0f, 0.02f, 1f);
+
+        /// <summary>
+        /// Sends the falloff value for vignette effect to the material.
+        /// </summary>
         _vignetteMaterial.SetFloat("_Falloff", _fallOff);
 
         SoundService.Instance?.Play("PlayerHurt");
@@ -240,10 +257,24 @@ public class PlayerHealth : MonoBehaviour
         Health += healAmount;
         OnHealthChanged?.Invoke();
 
+        /// <summary>
+        /// Decreases the vignette intensity.
+        /// </summary>
         _fallOff -= 0.35f * healAmount;
+
+        /// <summary>
+        /// Sets the color for vignette effect.
+        /// </summary>
         _vignetteMaterial.color = new Color(0.16f, 0f, 0.02f, 1f);
+
+        /// <summary>
+        /// Sends the falloff value for vignette effect to the material.
+        /// </summary>
         _vignetteMaterial.SetFloat("_Falloff", _fallOff);
 
+        /// <summary>
+        /// Checks if the player health is greater than the maximum health.
+        /// </summary>
         if (Health > MaxHealth)
         {
             Health = MaxHealth;
@@ -261,27 +292,32 @@ public class PlayerHealth : MonoBehaviour
             Heal(1);
         }
 
-        float baseIntensity = 0.94f;
+        baseIntensity = 0.94f;
 
-        float pulse = 0f;
+        pulse = 0f;
 
         /// <summary>
         /// Controls the heartbeat effect when player has 1 health
         /// </summary>
         if (Health == 1)
         {
-            //timing for the heartbeat
+            /// <summary>
+            /// Timing for the heartbeat
+            /// </summary>
             float t = Time.time * 2f;
 
-            //using sin wave to create a heartbeat effect
+            /// <summary>
+            /// Using sin wave to create a heartbeat effect
+            /// </summary>
             float beat1 = Mathf.Pow(Mathf.Max(0, Mathf.Sin(t * 6f)), 10f);
             float beat2 = Mathf.Pow(Mathf.Max(0, Mathf.Sin((t - 0.15f) * 6f)), 10f);
 
-            //adding the two beat together to create a heartbeat effect
+            /// <summary>
+            /// Adding the two beat together to create a heartbeat effect
+            /// </summary>
             pulse = (beat1 + beat2 * 0.7f) * 0.4f;
 
             _vignetteMaterial.SetFloat("_Falloff", baseIntensity + pulse);
-            
         }
     }
 }

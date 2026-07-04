@@ -197,12 +197,31 @@ public class BossSlamAttack : MonoBehaviour
             _playerHealth.TakeDamage(damage, knockbackDir * knockbackForce);
 
             // Vignette
+
+            /// <summary>
+            /// Sets the falloff value for vignette effect.
+            /// </summary>
             _fallOff = 4f;
+            /// <summary>
+            /// Sends the falloff value for vignette effect to the material.
+            /// </summary>
             _vignetteMaterial.SetFloat("_Falloff", _fallOff);
+            /// <summary>
+            /// Sets the color for vignette effect.
+            /// </summary>
             _vignetteMaterial.color = Color.black;
+            /// <summary>
+            /// Updates the falloff value for vignette effect.
+            /// </summary>
             while (_fallOff > 0)
             {
+                /// <summary>
+                /// Decreases the vignette effects over a few seconds.
+                /// </summary>
                 _fallOff -= Time.deltaTime * 1.25f;
+                /// <summary>
+                /// Sends the falloff value for vignette effect to the material.
+                /// </summary>
                 _vignetteMaterial.SetFloat("_Falloff", _fallOff);
                 yield return null;
             }

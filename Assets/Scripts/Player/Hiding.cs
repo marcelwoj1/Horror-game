@@ -39,6 +39,7 @@ public class Hiding : MonoBehaviour
     /// <summary>Collider used for player collision.</summary>
     private CapsuleCollider2D _capsuleCollider;
 
+    [Header("Vignette")]
     /// <summary>
     /// Reference to the vignette material.
     /// </summary>
@@ -81,8 +82,19 @@ public class Hiding : MonoBehaviour
 
         _playerManager.IsHiding = true;
 
+        /// <summary>
+        /// Sets the falloff value for vignette effect.
+        /// </summary>
         _fallOff = 4f;
+
+        /// <summary>
+        /// Sends the falloff value for vignette effect to the material.
+        /// </summary>
         _vignetteMaterial.SetFloat("_Falloff", _fallOff);
+
+        /// <summary>
+        /// Sets the color for vignette effect.
+        /// </summary>
         _vignetteMaterial.color = Color.black;
 
         // Move player behind objects visually
@@ -119,7 +131,14 @@ public class Hiding : MonoBehaviour
     {
         _playerManager.IsHiding = false;
 
+        /// <summary>
+        /// Sets the falloff value for vignette effect.
+        /// </summary>
         _fallOff = 0f;
+
+        /// <summary>
+        /// Sends the falloff value for vignette effect to the material.
+        /// </summary>
         _vignetteMaterial.SetFloat("_Falloff", _fallOff);
 
         // Restore movement
