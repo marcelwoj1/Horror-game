@@ -59,6 +59,10 @@ public class Player_IK : MonoBehaviour
     private Dictionary<string, SpriteRenderer> _rightItemSprites = new Dictionary<string, SpriteRenderer>();
     private string _lastCheckedItem = null;
     private bool _facingRight;
+    private SpriteRenderer _leftFootSpriteRenderer;
+    private SpriteRenderer _rightFootSpriteRenderer;
+    private PlayerManager _playerManager;
+    private Vector3 _originalRigLocalPos;
 
     // Chains
     private IKChain _leftArmChain;
@@ -103,9 +107,12 @@ public class Player_IK : MonoBehaviour
         if (_rb == null) _rb = GetComponentInParent<Rigidbody2D>();
         _equippedItem = GetComponent<EquippedItem>();
         if (_equippedItem == null) _equippedItem = GetComponentInParent<EquippedItem>();
+        _playerManager = GetComponent<PlayerManager>();
+        if (_playerManager == null) _playerManager = GetComponentInParent<PlayerManager>();
 
         if (Player_IK_Rig != null)
         {
+            _originalRigLocalPos = Player_IK_Rig.transform.localPosition;
             Head = FindChildByName("Head");
             UpperTorso = FindChildByName("UpperTorso");
             LowerTorso = FindChildByName("LowerTorso");
@@ -114,6 +121,18 @@ public class Player_IK : MonoBehaviour
             RightArmLimbs = FindChildByName("RightArm");
             LeftLegLimbs = FindChildByName("LeftLeg");
             RightLegLimbs = FindChildByName("RightLeg");
+
+            if (LeftLegLimbs != null)
+            {
+                Transform foot3 = FindChildInRoot(LeftLegLimbs, "3");
+                if (foot3 != null) _leftFootSpriteRenderer = foot3.GetComponent<SpriteRenderer>();
+            }
+
+            if (RightLegLimbs != null)
+            {
+                Transform foot3 = FindChildInRoot(RightLegLimbs, "3");
+                if (foot3 != null) _rightFootSpriteRenderer = foot3.GetComponent<SpriteRenderer>();
+            }
 
             IK_ATTACH_L = FindChildByName("IK_ATTACH_L");
             IK_ATTACH_R = FindChildByName("IK_ATTACH_R");
@@ -217,6 +236,18 @@ public class Player_IK : MonoBehaviour
 
     void Update()
     {
+        if (Player_IK_Rig != null && _playerManager != null)
+        {
+            if (_playerManager.IsCrouching)
+            {
+                Player_IK_Rig.transform.localPosition = Vector3.Lerp(Player_IK_Rig.transform.localPosition, _originalRigLocalPos + new Vector3(0, -1f, 0), Time.deltaTime * 10f);
+            }
+            else
+            {
+                Player_IK_Rig.transform.localPosition = Vector3.Lerp(Player_IK_Rig.transform.localPosition, _originalRigLocalPos, Time.deltaTime * 10f);
+            }
+        }
+
         // Check movement state
         bool isMoving = false;
         if (_movement != null)
@@ -320,6 +351,12 @@ public class Player_IK : MonoBehaviour
             else if (_rb.linearVelocityX > 0.05f) dirSign = 1f;
         }
 
+        Vector3 crouchFootOffset = Vector3.zero;
+        if (_playerManager != null && _playerManager.IsCrouching)
+        {
+            crouchFootOffset = new Vector3(0, 0.5f, 0);
+        }
+
         if (isMoving)
         {
             float time = Time.time * runAnimationSpeed;
@@ -327,12 +364,12 @@ public class Player_IK : MonoBehaviour
             {
                 if (LowerTorso != null)
                 {
-                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0);
+                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0) + crouchFootOffset;
                     LeftLegTarget.position = LowerTorso.transform.position + _leftLegOffsetFromTorso + leftOffset;
                 }
                 else
                 {
-                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0);
+                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0) + crouchFootOffset;
                     LeftLegTarget.localPosition = _leftLegBaseLocalPos + leftOffset;
                 }
             }
@@ -341,12 +378,12 @@ public class Player_IK : MonoBehaviour
                 float rightTime = time + Mathf.PI;
                 if (LowerTorso != null)
                 {
-                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0);
+                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0) + crouchFootOffset;
                     RightLegTarget.position = LowerTorso.transform.position + _rightLegOffsetFromTorso + rightOffset;
                 }
                 else
                 {
-                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0);
+                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0) + crouchFootOffset;
                     RightLegTarget.localPosition = _rightLegBaseLocalPos + rightOffset;
                 }
             }
@@ -357,24 +394,24 @@ public class Player_IK : MonoBehaviour
             {
                 if (LowerTorso != null)
                 {
-                    Vector3 targetPos = LowerTorso.transform.position + _leftLegOffsetFromTorso;
+                    Vector3 targetPos = LowerTorso.transform.position + _leftLegOffsetFromTorso + crouchFootOffset;
                     LeftLegTarget.position = Vector3.Lerp(LeftLegTarget.position, targetPos, Time.deltaTime * 5f);
                 }
                 else
                 {
-                    LeftLegTarget.localPosition = Vector3.Lerp(LeftLegTarget.localPosition, _leftLegBaseLocalPos, Time.deltaTime * 5f);
+                    LeftLegTarget.localPosition = Vector3.Lerp(LeftLegTarget.localPosition, _leftLegBaseLocalPos + crouchFootOffset, Time.deltaTime * 5f);
                 }
             }
             if (RightLegTarget != null)
             {
                 if (LowerTorso != null)
                 {
-                    Vector3 targetPos = LowerTorso.transform.position + _rightLegOffsetFromTorso;
+                    Vector3 targetPos = LowerTorso.transform.position + _rightLegOffsetFromTorso + crouchFootOffset;
                     RightLegTarget.position = Vector3.Lerp(RightLegTarget.position, targetPos, Time.deltaTime * 5f);
                 }
                 else
                 {
-                    RightLegTarget.localPosition = Vector3.Lerp(RightLegTarget.localPosition, _rightLegBaseLocalPos, Time.deltaTime * 5f);
+                    RightLegTarget.localPosition = Vector3.Lerp(RightLegTarget.localPosition, _rightLegBaseLocalPos + crouchFootOffset, Time.deltaTime * 5f);
                 }
             }
         }
@@ -389,6 +426,16 @@ public class Player_IK : MonoBehaviour
             if (_rb.linearVelocityX < -0.05f) _facingRight = false;
             else if (_rb.linearVelocityX > 0.05f) _facingRight = true;
             faceRight = _facingRight;
+        }
+
+        if (_leftFootSpriteRenderer != null)
+        {
+            _leftFootSpriteRenderer.flipX = faceRight;
+        }
+        
+        if (_rightFootSpriteRenderer != null)
+        {
+            _rightFootSpriteRenderer.flipX = faceRight;
         }
 
         string currentItem = _equippedItem != null ? _equippedItem.ItemEquipped : "";
