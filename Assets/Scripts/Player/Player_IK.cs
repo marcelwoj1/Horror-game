@@ -52,6 +52,7 @@ public class Player_IK : MonoBehaviour
     
     private Movement _movement;
     private Rigidbody2D _rb;
+    private SpriteRenderer _axeSpriteRenderer;
 
     // Chains
     private IKChain _leftArmChain;
@@ -116,6 +117,15 @@ public class Player_IK : MonoBehaviour
             if (RightLegTarget != null && LowerTorso != null)
             {
                 _rightLegOffsetFromTorso = RightLegTarget.position - LowerTorso.transform.position;
+            }
+        }
+
+        if (LeftArmTarget != null)
+        {
+            Transform axeTransform = FindChildInRoot(LeftArmTarget.gameObject, "Axe");
+            if (axeTransform != null)
+            {
+                _axeSpriteRenderer = axeTransform.GetComponent<SpriteRenderer>();
             }
         }
 
@@ -189,6 +199,13 @@ public class Player_IK : MonoBehaviour
             isMoving = Mathf.Abs(_rb.linearVelocityX) > 0.1f;
         }
 
+        float dirSign = 1f;
+        if (_rb != null)
+        {
+            if (_rb.linearVelocityX < -0.05f) dirSign = -1f;
+            else if (_rb.linearVelocityX > 0.05f) dirSign = 1f;
+        }
+
         if (isMoving)
         {
             float time = Time.time * runAnimationSpeed;
@@ -196,12 +213,12 @@ public class Player_IK : MonoBehaviour
             {
                 if (LowerTorso != null)
                 {
-                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0);
+                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0);
                     LeftLegTarget.position = LowerTorso.transform.position + _leftLegOffsetFromTorso + leftOffset;
                 }
                 else
                 {
-                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0);
+                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0);
                     LeftLegTarget.localPosition = _leftLegBaseLocalPos + leftOffset;
                 }
             }
@@ -210,12 +227,12 @@ public class Player_IK : MonoBehaviour
                 float rightTime = time + Mathf.PI;
                 if (LowerTorso != null)
                 {
-                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0);
+                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0);
                     RightLegTarget.position = LowerTorso.transform.position + _rightLegOffsetFromTorso + rightOffset;
                 }
                 else
                 {
-                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0);
+                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength * dirSign, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0);
                     RightLegTarget.localPosition = _rightLegBaseLocalPos + rightOffset;
                 }
             }
@@ -245,6 +262,15 @@ public class Player_IK : MonoBehaviour
                 {
                     RightLegTarget.localPosition = Vector3.Lerp(RightLegTarget.localPosition, _rightLegBaseLocalPos, Time.deltaTime * 5f);
                 }
+            }
+        }
+
+        if (_axeSpriteRenderer != null)
+        {
+            bool hasAxe = _movement != null && _movement.AxeEquipped;
+            if (_axeSpriteRenderer.enabled != hasAxe)
+            {
+                _axeSpriteRenderer.enabled = hasAxe;
             }
         }
 
