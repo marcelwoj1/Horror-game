@@ -32,13 +32,30 @@ public class Player_IK : MonoBehaviour
     
 
 
+
+    public Transform _startPart;
+    public Transform _endPart;
+    public GameObject _allLimbs;
+    private IKChain _tempChain;
+
+
     void Start()
     {
-
+       
+        _tempChain = new IKChain
+        {
+            root = _startPart,
+            target = _endPart,
+            allLimbs = _allLimbs
+        };
+        _ikService.InitializeChain(_tempChain);
+      
     }
 
     void Update()
     {
-   
+      
+        _ikService.Solve(_tempChain);
+       
     }
 }
