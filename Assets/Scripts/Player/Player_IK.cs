@@ -52,7 +52,9 @@ public class Player_IK : MonoBehaviour
     
     private Movement _movement;
     private Rigidbody2D _rb;
-    private SpriteRenderer _axeSpriteRenderer;
+    private SpriteRenderer _leftAxeSpriteRenderer;
+    private SpriteRenderer _rightAxeSpriteRenderer;
+    private bool _facingRight;
 
     // Chains
     private IKChain _leftArmChain;
@@ -125,7 +127,16 @@ public class Player_IK : MonoBehaviour
             Transform axeTransform = FindChildInRoot(LeftArmTarget.gameObject, "Axe");
             if (axeTransform != null)
             {
-                _axeSpriteRenderer = axeTransform.GetComponent<SpriteRenderer>();
+                _leftAxeSpriteRenderer = axeTransform.GetComponent<SpriteRenderer>();
+            }
+        }
+
+        if (RightArmTarget != null)
+        {
+            Transform axeTransform = FindChildInRoot(RightArmTarget.gameObject, "Axe");
+            if (axeTransform != null)
+            {
+                _rightAxeSpriteRenderer = axeTransform.GetComponent<SpriteRenderer>();
             }
         }
 
@@ -265,12 +276,35 @@ public class Player_IK : MonoBehaviour
             }
         }
 
-        if (_axeSpriteRenderer != null)
+        bool hasAxe = _movement != null && _movement.AxeEquipped;
+
+        bool faceRight = false;
+        if (_movement != null && _movement.HeadSpriteRenderer != null)
         {
-            bool hasAxe = _movement != null && _movement.AxeEquipped;
-            if (_axeSpriteRenderer.enabled != hasAxe)
+            faceRight = _movement.HeadSpriteRenderer.flipX;
+        }
+        else if (_rb != null)
+        {
+            if (_rb.linearVelocityX < -0.05f) _facingRight = false;
+            else if (_rb.linearVelocityX > 0.05f) _facingRight = true;
+            faceRight = _facingRight;
+        }
+
+        if (_leftAxeSpriteRenderer != null)
+        {
+            bool leftActive = hasAxe && !faceRight;
+            if (_leftAxeSpriteRenderer.enabled != leftActive)
             {
-                _axeSpriteRenderer.enabled = hasAxe;
+                _leftAxeSpriteRenderer.enabled = leftActive;
+            }
+        }
+
+        if (_rightAxeSpriteRenderer != null)
+        {
+            bool rightActive = hasAxe && faceRight;
+            if (_rightAxeSpriteRenderer.enabled != rightActive)
+            {
+                _rightAxeSpriteRenderer.enabled = rightActive;
             }
         }
 
