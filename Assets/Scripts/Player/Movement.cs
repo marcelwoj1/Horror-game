@@ -67,6 +67,12 @@ public class Movement : MonoBehaviour
     /// <summary>Reference to player manager for state control.</summary>
     private PlayerManager _playerManager;
 
+    
+    public Player_IK _playerIK;
+    public SpriteRenderer HeadSpriteRenderer;
+    public SpriteRenderer UpperTorsoSpriteRenderer;
+    public SpriteRenderer LowerTorsoSpriteRenderer;
+
     [Header("Config")]
 
     /// <summary>Horizontal movement speed.</summary>
@@ -142,6 +148,22 @@ public class Movement : MonoBehaviour
         _feetLocation = transform.Find("FeetLocation").transform;
         _animator = GetComponent<SpriteAnimator>();
         _playerManager = GetComponent<PlayerManager>();
+
+        if (_playerIK == null)
+        {
+            _playerIK = GetComponent<Player_IK>();
+        }
+
+        if (_playerIK != null && _playerIK.Player_IK_Rig != null)
+        {
+            Transform[] children = _playerIK.Player_IK_Rig.GetComponentsInChildren<Transform>(true);
+            foreach (Transform child in children)
+            {
+                if (child.name == "Head" && HeadSpriteRenderer == null) HeadSpriteRenderer = child.GetComponent<SpriteRenderer>();
+                else if (child.name == "UpperTorso" && UpperTorsoSpriteRenderer == null) UpperTorsoSpriteRenderer = child.GetComponent<SpriteRenderer>();
+                else if (child.name == "LowerTorso" && LowerTorsoSpriteRenderer == null) LowerTorsoSpriteRenderer = child.GetComponent<SpriteRenderer>();
+            }
+        }
     }
 
     /// <summary>
@@ -178,13 +200,19 @@ public class Movement : MonoBehaviour
             AirState = AirStates.Grounded;
 
         // Animation and sprite orientation
+        if (_movementDirection.x > 0)
+        {
+            if (_animator != null) _animator.SetFlip(true);
+            SetIKSpriteFlip(true);
+        }
+        else if (_movementDirection.x < 0)
+        {
+            if (_animator != null) _animator.SetFlip(false);
+            SetIKSpriteFlip(false);
+        }
+
         if (_animator != null)
         {
-            if (_movementDirection.x > 0)
-                _animator.SetFlip(true);
-            else if (_movementDirection.x < 0)
-                _animator.SetFlip(false);
-
             if (AirState != AirStates.Grounded)
             {
                 if (AirState == AirStates.Jumping) _animator.Play("Jump");
@@ -244,5 +272,12 @@ public class Movement : MonoBehaviour
         {
             _rigidBody.linearVelocity = Vector2.zero;
         }
+    }
+
+    private void SetIKSpriteFlip(bool flipX)
+    {
+        if (HeadSpriteRenderer != null) HeadSpriteRenderer.flipX = flipX;
+        if (UpperTorsoSpriteRenderer != null) UpperTorsoSpriteRenderer.flipX = flipX;
+        if (LowerTorsoSpriteRenderer != null) LowerTorsoSpriteRenderer.flipX = flipX;
     }
 }
