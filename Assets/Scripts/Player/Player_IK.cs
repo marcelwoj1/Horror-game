@@ -68,9 +68,32 @@ public class Player_IK : MonoBehaviour
     private Vector3 _leftArmSwingOffset = Vector3.zero;
     private Vector3 _rightArmSwingOffset = Vector3.zero;
 
+    
+    public float swaySpeed = 1f;
+    public float swayMagnitude = 0.05f;
+
+    private float _leftArmSwaySeedX;
+    private float _leftArmSwaySeedY;
+    private float _rightArmSwaySeedX;
+    private float _rightArmSwaySeedY;
+
+    
+    public float walkBobSpeed = 10f;
+    public float walkBobMagnitude = 0.03f;
+    private float _currentWalkBobY = 0f;
+
+    
+    public float cursorFollowMagnitude = 0.45f;
+    public float cursorFollowScaling = 0.7f;
+
 
     void Start()
     {
+        _leftArmSwaySeedX = Random.Range(0f, 1000f);
+        _leftArmSwaySeedY = Random.Range(0f, 1000f);
+        _rightArmSwaySeedX = Random.Range(0f, 1000f);
+        _rightArmSwaySeedY = Random.Range(0f, 1000f);
+
         _movement = GetComponent<Movement>();
         if (_movement == null) _movement = GetComponentInParent<Movement>();
         _rb = GetComponent<Rigidbody2D>();
@@ -181,31 +204,7 @@ public class Player_IK : MonoBehaviour
 
     void Update()
     {
-        // Update Arm Target world positions relative to UpperTorso (with swing anims)
-        if (LeftArmTarget != null)
-        {
-            if (UpperTorso != null)
-            {
-                LeftArmTarget.position = UpperTorso.transform.position + _leftArmOffsetFromTorso + _leftArmSwingOffset;
-            }
-            else
-            {
-                LeftArmTarget.localPosition = _leftArmBaseLocalPos + _leftArmSwingOffset;
-            }
-        }
-
-        if (RightArmTarget != null)
-        {
-            if (UpperTorso != null)
-            {
-                RightArmTarget.position = UpperTorso.transform.position + _rightArmOffsetFromTorso + _rightArmSwingOffset;
-            }
-            else
-            {
-                RightArmTarget.localPosition = _rightArmBaseLocalPos + _rightArmSwingOffset;
-            }
-        }
-
+        // Check movement state
         bool isMoving = false;
         if (_movement != null)
         {
@@ -215,6 +214,91 @@ public class Player_IK : MonoBehaviour
         {
             isMoving = Mathf.Abs(_rb.linearVelocityX) > 0.1f;
         }
+
+        // Calculate Walk Bob
+        float targetBobY = 0f;
+        if (isMoving)
+        {
+            targetBobY = Mathf.Sin(Time.time * walkBobSpeed) * walkBobMagnitude;
+        }
+        _currentWalkBobY = Mathf.Lerp(_currentWalkBobY, targetBobY, Time.deltaTime * 10f);
+        Vector3 walkBob = new Vector3(0f, _currentWalkBobY, 0f);
+
+        // Calculate Perlin Noise sway offsets for the arms
+        Vector3 leftSway = GetPerlinSway(_leftArmSwaySeedX, _leftArmSwaySeedY);
+        Vector3 rightSway = GetPerlinSway(_rightArmSwaySeedX, _rightArmSwaySeedY);
+
+        // Calculate Cursor Follow offsets for the arms
+        Vector3 leftMouseOffset = Vector3.zero;
+        Vector3 rightMouseOffset = Vector3.zero;
+        Camera mainCam = Camera.main;
+        if (mainCam != null)
+        {
+            Vector3 mouseWorldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = 0f;
+
+            if (UpperTorso != null)
+            {
+                Vector3 leftShoulder = UpperTorso.transform.position + _leftArmOffsetFromTorso;
+                Vector3 leftDir = mouseWorldPos - leftShoulder;
+                if (leftDir.sqrMagnitude > 0.0001f)
+                {
+                    leftMouseOffset = leftDir.normalized * Mathf.Min(leftDir.magnitude * cursorFollowScaling, cursorFollowMagnitude);
+                }
+
+                Vector3 rightShoulder = UpperTorso.transform.position + _rightArmOffsetFromTorso;
+                Vector3 rightDir = mouseWorldPos - rightShoulder;
+                if (rightDir.sqrMagnitude > 0.0001f)
+                {
+                    rightMouseOffset = rightDir.normalized * Mathf.Min(rightDir.magnitude * cursorFollowScaling, cursorFollowMagnitude);
+                }
+            }
+            else
+            {
+                if (LeftArmTarget != null)
+                {
+                    Vector3 leftDir = mouseWorldPos - LeftArmTarget.position;
+                    if (leftDir.sqrMagnitude > 0.0001f)
+                    {
+                        leftMouseOffset = leftDir.normalized * Mathf.Min(leftDir.magnitude * cursorFollowScaling, cursorFollowMagnitude);
+                    }
+                }
+                if (RightArmTarget != null)
+                {
+                    Vector3 rightDir = mouseWorldPos - RightArmTarget.position;
+                    if (rightDir.sqrMagnitude > 0.0001f)
+                    {
+                        rightMouseOffset = rightDir.normalized * Mathf.Min(rightDir.magnitude * cursorFollowScaling, cursorFollowMagnitude);
+                    }
+                }
+            }
+        }
+
+        // Update Arm Target world positions relative to UpperTorso (including swing, sway, walk bob & cursor follow offsets)
+        if (LeftArmTarget != null)
+        {
+            if (UpperTorso != null)
+            {
+                LeftArmTarget.position = UpperTorso.transform.position + _leftArmOffsetFromTorso + _leftArmSwingOffset + leftSway + walkBob + leftMouseOffset;
+            }
+            else
+            {
+                LeftArmTarget.localPosition = _leftArmBaseLocalPos + _leftArmSwingOffset + leftSway + walkBob + leftMouseOffset;
+            }
+        }
+
+        if (RightArmTarget != null)
+        {
+            if (UpperTorso != null)
+            {
+                RightArmTarget.position = UpperTorso.transform.position + _rightArmOffsetFromTorso + _rightArmSwingOffset + rightSway + walkBob + rightMouseOffset;
+            }
+            else
+            {
+                RightArmTarget.localPosition = _rightArmBaseLocalPos + _rightArmSwingOffset + rightSway + walkBob + rightMouseOffset;
+            }
+        }
+
 
         float dirSign = 1f;
         if (_rb != null)
@@ -407,6 +491,14 @@ public class Player_IK : MonoBehaviour
         {
             _leftArmSwingOffset = Vector3.zero;
         }
+    }
+
+    private Vector3 GetPerlinSway(float seedX, float seedY)
+    {
+        float time = Time.time * swaySpeed;
+        float x = (Mathf.PerlinNoise(seedX + time, 0f) - 0.5f) * 2f * swayMagnitude;
+        float y = (Mathf.PerlinNoise(0f, seedY + time) - 0.5f) * 2f * swayMagnitude;
+        return new Vector3(x, y, 0f);
     }
 
     private GameObject FindChildByName(string name)
