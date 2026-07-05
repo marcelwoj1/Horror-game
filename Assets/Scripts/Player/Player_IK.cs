@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_IK : MonoBehaviour
@@ -53,8 +54,10 @@ public class Player_IK : MonoBehaviour
     
     private Movement _movement;
     private Rigidbody2D _rb;
-    private SpriteRenderer _leftAxeSpriteRenderer;
-    private SpriteRenderer _rightAxeSpriteRenderer;
+    private EquippedItem _equippedItem;
+    private Dictionary<string, SpriteRenderer> _leftItemSprites = new Dictionary<string, SpriteRenderer>();
+    private Dictionary<string, SpriteRenderer> _rightItemSprites = new Dictionary<string, SpriteRenderer>();
+    private string _lastCheckedItem = null;
     private bool _facingRight;
 
     // Chains
@@ -98,6 +101,8 @@ public class Player_IK : MonoBehaviour
         if (_movement == null) _movement = GetComponentInParent<Movement>();
         _rb = GetComponent<Rigidbody2D>();
         if (_rb == null) _rb = GetComponentInParent<Rigidbody2D>();
+        _equippedItem = GetComponent<EquippedItem>();
+        if (_equippedItem == null) _equippedItem = GetComponentInParent<EquippedItem>();
 
         if (Player_IK_Rig != null)
         {
@@ -153,19 +158,27 @@ public class Player_IK : MonoBehaviour
 
         if (LeftArmTarget != null)
         {
-            Transform axeTransform = FindChildInRoot(LeftArmTarget.gameObject, "Axe");
-            if (axeTransform != null)
+            foreach (Transform child in LeftArmTarget.GetComponentsInChildren<Transform>(true))
             {
-                _leftAxeSpriteRenderer = axeTransform.GetComponent<SpriteRenderer>();
+                SpriteRenderer sr = child.GetComponent<SpriteRenderer>();
+                if (sr != null && child != LeftArmTarget)
+                {
+                    _leftItemSprites[child.name] = sr;
+                    sr.enabled = false;
+                }
             }
         }
 
         if (RightArmTarget != null)
         {
-            Transform axeTransform = FindChildInRoot(RightArmTarget.gameObject, "Axe");
-            if (axeTransform != null)
+            foreach (Transform child in RightArmTarget.GetComponentsInChildren<Transform>(true))
             {
-                _rightAxeSpriteRenderer = axeTransform.GetComponent<SpriteRenderer>();
+                SpriteRenderer sr = child.GetComponent<SpriteRenderer>();
+                if (sr != null && child != RightArmTarget)
+                {
+                    _rightItemSprites[child.name] = sr;
+                    sr.enabled = false;
+                }
             }
         }
 
@@ -366,8 +379,6 @@ public class Player_IK : MonoBehaviour
             }
         }
 
-        bool hasAxe = _movement != null && _movement.AxeEquipped;
-
         bool faceRight = false;
         if (_movement != null && _movement.HeadSpriteRenderer != null)
         {
@@ -380,21 +391,35 @@ public class Player_IK : MonoBehaviour
             faceRight = _facingRight;
         }
 
-        if (_leftAxeSpriteRenderer != null)
+        string currentItem = _equippedItem != null ? _equippedItem.ItemEquipped : "";
+
+        if (currentItem != _lastCheckedItem)
         {
-            bool leftActive = hasAxe && !faceRight;
-            if (_leftAxeSpriteRenderer.enabled != leftActive)
+            if (!string.IsNullOrEmpty(currentItem))
             {
-                _leftAxeSpriteRenderer.enabled = leftActive;
+                if (!_leftItemSprites.ContainsKey(currentItem) && !_rightItemSprites.ContainsKey(currentItem))
+                {
+                    Debug.Log("cant find: " + currentItem);
+                }
+            }
+            _lastCheckedItem = currentItem;
+        }
+
+        foreach (var kvp in _leftItemSprites)
+        {
+            bool active = (kvp.Key == currentItem) && !faceRight;
+            if (kvp.Value.enabled != active)
+            {
+                kvp.Value.enabled = active;
             }
         }
 
-        if (_rightAxeSpriteRenderer != null)
+        foreach (var kvp in _rightItemSprites)
         {
-            bool rightActive = hasAxe && faceRight;
-            if (_rightAxeSpriteRenderer.enabled != rightActive)
+            bool active = (kvp.Key == currentItem) && faceRight;
+            if (kvp.Value.enabled != active)
             {
-                _rightAxeSpriteRenderer.enabled = rightActive;
+                kvp.Value.enabled = active;
             }
         }
 
