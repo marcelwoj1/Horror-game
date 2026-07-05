@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player_IK : MonoBehaviour
@@ -61,6 +62,11 @@ public class Player_IK : MonoBehaviour
     private IKChain _rightArmChain;
     private IKChain _leftLegChain;
     private IKChain _rightLegChain;
+
+    // Swing Animation variables
+    private Coroutine _swingCoroutine;
+    private Vector3 _leftArmSwingOffset = Vector3.zero;
+    private Vector3 _rightArmSwingOffset = Vector3.zero;
 
 
     void Start()
@@ -175,16 +181,16 @@ public class Player_IK : MonoBehaviour
 
     void Update()
     {
-        // Update Arm Target world positions relative to UpperTorso (without animation)
+        // Update Arm Target world positions relative to UpperTorso (with swing anims)
         if (LeftArmTarget != null)
         {
             if (UpperTorso != null)
             {
-                LeftArmTarget.position = UpperTorso.transform.position + _leftArmOffsetFromTorso;
+                LeftArmTarget.position = UpperTorso.transform.position + _leftArmOffsetFromTorso + _leftArmSwingOffset;
             }
             else
             {
-                LeftArmTarget.localPosition = _leftArmBaseLocalPos;
+                LeftArmTarget.localPosition = _leftArmBaseLocalPos + _leftArmSwingOffset;
             }
         }
 
@@ -192,11 +198,11 @@ public class Player_IK : MonoBehaviour
         {
             if (UpperTorso != null)
             {
-                RightArmTarget.position = UpperTorso.transform.position + _rightArmOffsetFromTorso;
+                RightArmTarget.position = UpperTorso.transform.position + _rightArmOffsetFromTorso + _rightArmSwingOffset;
             }
             else
             {
-                RightArmTarget.localPosition = _rightArmBaseLocalPos;
+                RightArmTarget.localPosition = _rightArmBaseLocalPos + _rightArmSwingOffset;
             }
         }
 
@@ -312,6 +318,95 @@ public class Player_IK : MonoBehaviour
         _ikService.Solve(_rightArmChain);
         _ikService.Solve(_leftLegChain);
         _ikService.Solve(_rightLegChain);
+    }
+
+    public void PlayAttackSwing()
+    {
+        bool faceRight = false;
+        if (_movement != null && _movement.HeadSpriteRenderer != null)
+        {
+            faceRight = _movement.HeadSpriteRenderer.flipX;
+        }
+        else if (_rb != null)
+        {
+            faceRight = _facingRight;
+        }
+
+        if (_swingCoroutine != null)
+        {
+            StopCoroutine(_swingCoroutine);
+            _leftArmSwingOffset = Vector3.zero;
+            _rightArmSwingOffset = Vector3.zero;
+        }
+
+        _swingCoroutine = StartCoroutine(SwingAnimation(faceRight));
+    }
+
+    private IEnumerator SwingAnimation(bool isRightArm)
+    {
+        float duration = 0.25f;
+        float elapsed = 0f;
+
+        bool faceRight = false;
+        if (_movement != null && _movement.HeadSpriteRenderer != null)
+        {
+            faceRight = _movement.HeadSpriteRenderer.flipX;
+        }
+        else if (_rb != null)
+        {
+            faceRight = _facingRight;
+        }
+        float finalDir = faceRight ? 1f : -1f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            Vector3 offset = Vector3.zero;
+            if (t < 0.5f)
+            {
+                float subT = t / 0.25f;
+                float x = Mathf.Lerp(0f, -0.4f * finalDir, subT);
+                float y = Mathf.Lerp(0f, 0.4f, subT);
+                offset = new Vector3(x, y, 0f);
+            }
+            else if (t < 0.7f)
+            {
+                float subT = (t - 0.25f) / 0.35f;
+                float x = Mathf.Lerp(-0.4f * finalDir, 0.8f * finalDir, subT);
+                float y = Mathf.Lerp(0.4f, -0.4f, subT);
+                offset = new Vector3(x, y, 0f);
+            }
+            else
+            {
+
+                float subT = (t - 0.6f) / 0.4f;
+                float x = Mathf.Lerp(0.8f * finalDir, 0f, subT);
+                float y = Mathf.Lerp(-0.4f, 0f, subT);
+                offset = new Vector3(x, y, 0f);
+            }
+
+            if (isRightArm)
+            {
+                _rightArmSwingOffset = offset;
+            }
+            else
+            {
+                _leftArmSwingOffset = offset;
+            }
+
+            yield return null;
+        }
+
+        if (isRightArm)
+        {
+            _rightArmSwingOffset = Vector3.zero;
+        }
+        else
+        {
+            _leftArmSwingOffset = Vector3.zero;
+        }
     }
 
     private GameObject FindChildByName(string name)
