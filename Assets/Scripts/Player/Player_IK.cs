@@ -40,10 +40,16 @@ public class Player_IK : MonoBehaviour
     public float strideLength = 0.5f;
     public float stepHeight = 0.25f;
 
+    private Vector3 _leftArmBaseLocalPos;
+    private Vector3 _rightArmBaseLocalPos;
     private Vector3 _leftLegBaseLocalPos;
     private Vector3 _rightLegBaseLocalPos;
+    
+    private Vector3 _leftArmOffsetFromTorso;
+    private Vector3 _rightArmOffsetFromTorso;
     private Vector3 _leftLegOffsetFromTorso;
     private Vector3 _rightLegOffsetFromTorso;
+    
     private Movement _movement;
     private Rigidbody2D _rb;
 
@@ -90,9 +96,19 @@ public class Player_IK : MonoBehaviour
             LeftLegTarget = FindChildInRoot(TargetPositions, "LeftLeg");
             RightLegTarget = FindChildInRoot(TargetPositions, "RightLeg");
 
+            if (LeftArmTarget != null) _leftArmBaseLocalPos = LeftArmTarget.localPosition;
+            if (RightArmTarget != null) _rightArmBaseLocalPos = RightArmTarget.localPosition;
             if (LeftLegTarget != null) _leftLegBaseLocalPos = LeftLegTarget.localPosition;
             if (RightLegTarget != null) _rightLegBaseLocalPos = RightLegTarget.localPosition;
 
+            if (LeftArmTarget != null && UpperTorso != null)
+            {
+                _leftArmOffsetFromTorso = LeftArmTarget.position - UpperTorso.transform.position;
+            }
+            if (RightArmTarget != null && UpperTorso != null)
+            {
+                _rightArmOffsetFromTorso = RightArmTarget.position - UpperTorso.transform.position;
+            }
             if (LeftLegTarget != null && LowerTorso != null)
             {
                 _leftLegOffsetFromTorso = LeftLegTarget.position - LowerTorso.transform.position;
@@ -138,6 +154,31 @@ public class Player_IK : MonoBehaviour
 
     void Update()
     {
+        // Update Arm Target world positions relative to UpperTorso (without animation)
+        if (LeftArmTarget != null)
+        {
+            if (UpperTorso != null)
+            {
+                LeftArmTarget.position = UpperTorso.transform.position + _leftArmOffsetFromTorso;
+            }
+            else
+            {
+                LeftArmTarget.localPosition = _leftArmBaseLocalPos;
+            }
+        }
+
+        if (RightArmTarget != null)
+        {
+            if (UpperTorso != null)
+            {
+                RightArmTarget.position = UpperTorso.transform.position + _rightArmOffsetFromTorso;
+            }
+            else
+            {
+                RightArmTarget.localPosition = _rightArmBaseLocalPos;
+            }
+        }
+
         bool isMoving = false;
         if (_movement != null)
         {
