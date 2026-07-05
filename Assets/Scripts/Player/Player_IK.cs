@@ -35,6 +35,18 @@ public class Player_IK : MonoBehaviour
     private Transform LeftLegTarget;
     private Transform RightLegTarget;
 
+    
+    public float runAnimationSpeed = 10f;
+    public float strideLength = 0.5f;
+    public float stepHeight = 0.25f;
+
+    private Vector3 _leftLegBaseLocalPos;
+    private Vector3 _rightLegBaseLocalPos;
+    private Vector3 _leftLegOffsetFromTorso;
+    private Vector3 _rightLegOffsetFromTorso;
+    private Movement _movement;
+    private Rigidbody2D _rb;
+
     // Chains
     private IKChain _leftArmChain;
     private IKChain _rightArmChain;
@@ -44,6 +56,11 @@ public class Player_IK : MonoBehaviour
 
     void Start()
     {
+        _movement = GetComponent<Movement>();
+        if (_movement == null) _movement = GetComponentInParent<Movement>();
+        _rb = GetComponent<Rigidbody2D>();
+        if (_rb == null) _rb = GetComponentInParent<Rigidbody2D>();
+
         if (Player_IK_Rig != null)
         {
             Head = FindChildByName("Head");
@@ -72,6 +89,18 @@ public class Player_IK : MonoBehaviour
             RightArmTarget = FindChildInRoot(TargetPositions, "RightArm");
             LeftLegTarget = FindChildInRoot(TargetPositions, "LeftLeg");
             RightLegTarget = FindChildInRoot(TargetPositions, "RightLeg");
+
+            if (LeftLegTarget != null) _leftLegBaseLocalPos = LeftLegTarget.localPosition;
+            if (RightLegTarget != null) _rightLegBaseLocalPos = RightLegTarget.localPosition;
+
+            if (LeftLegTarget != null && LowerTorso != null)
+            {
+                _leftLegOffsetFromTorso = LeftLegTarget.position - LowerTorso.transform.position;
+            }
+            if (RightLegTarget != null && LowerTorso != null)
+            {
+                _rightLegOffsetFromTorso = RightLegTarget.position - LowerTorso.transform.position;
+            }
         }
 
         _leftArmChain = new IKChain
@@ -109,6 +138,75 @@ public class Player_IK : MonoBehaviour
 
     void Update()
     {
+        bool isMoving = false;
+        if (_movement != null)
+        {
+            isMoving = _movement.MoveState == Movement.MoveStates.Moving && _movement.AirState == Movement.AirStates.Grounded;
+        }
+        else if (_rb != null)
+        {
+            isMoving = Mathf.Abs(_rb.linearVelocityX) > 0.1f;
+        }
+
+        if (isMoving)
+        {
+            float time = Time.time * runAnimationSpeed;
+            if (LeftLegTarget != null)
+            {
+                if (LowerTorso != null)
+                {
+                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0);
+                    LeftLegTarget.position = LowerTorso.transform.position + _leftLegOffsetFromTorso + leftOffset;
+                }
+                else
+                {
+                    Vector3 leftOffset = new Vector3(Mathf.Sin(time) * strideLength, Mathf.Max(0, Mathf.Cos(time)) * stepHeight, 0);
+                    LeftLegTarget.localPosition = _leftLegBaseLocalPos + leftOffset;
+                }
+            }
+            if (RightLegTarget != null)
+            {
+                float rightTime = time + Mathf.PI;
+                if (LowerTorso != null)
+                {
+                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0);
+                    RightLegTarget.position = LowerTorso.transform.position + _rightLegOffsetFromTorso + rightOffset;
+                }
+                else
+                {
+                    Vector3 rightOffset = new Vector3(Mathf.Sin(rightTime) * strideLength, Mathf.Max(0, Mathf.Cos(rightTime)) * stepHeight, 0);
+                    RightLegTarget.localPosition = _rightLegBaseLocalPos + rightOffset;
+                }
+            }
+        }
+        else
+        {
+            if (LeftLegTarget != null)
+            {
+                if (LowerTorso != null)
+                {
+                    Vector3 targetPos = LowerTorso.transform.position + _leftLegOffsetFromTorso;
+                    LeftLegTarget.position = Vector3.Lerp(LeftLegTarget.position, targetPos, Time.deltaTime * 5f);
+                }
+                else
+                {
+                    LeftLegTarget.localPosition = Vector3.Lerp(LeftLegTarget.localPosition, _leftLegBaseLocalPos, Time.deltaTime * 5f);
+                }
+            }
+            if (RightLegTarget != null)
+            {
+                if (LowerTorso != null)
+                {
+                    Vector3 targetPos = LowerTorso.transform.position + _rightLegOffsetFromTorso;
+                    RightLegTarget.position = Vector3.Lerp(RightLegTarget.position, targetPos, Time.deltaTime * 5f);
+                }
+                else
+                {
+                    RightLegTarget.localPosition = Vector3.Lerp(RightLegTarget.localPosition, _rightLegBaseLocalPos, Time.deltaTime * 5f);
+                }
+            }
+        }
+
         _ikService.Solve(_leftArmChain);
         _ikService.Solve(_rightArmChain);
         _ikService.Solve(_leftLegChain);
