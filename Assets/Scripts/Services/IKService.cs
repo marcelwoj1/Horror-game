@@ -27,9 +27,10 @@ public class IKService : MonoBehaviour
         for (int i = 0; i < chain.count; i++)
         {
             Transform limb = chain.allLimbs.transform.GetChild(i);
-            chain.tails[i] = limb.Find("Tail");
-            chain.heads[i] = limb.Find("Head");
-            chain.lengths[i] = Vector3.Distance(chain.tails[i].position, chain.heads[i].position);
+            int idx = int.Parse(limb.name) - 1;
+            chain.tails[idx] = limb.Find("Tail");
+            chain.heads[idx] = limb.Find("Head");
+            chain.lengths[idx] = Vector3.Distance(chain.tails[idx].position, chain.heads[idx].position);
         }
     }
 
@@ -70,12 +71,13 @@ public class IKService : MonoBehaviour
         for (int i = 0; i < chain.count; i++)
         {
             Transform limb = chain.allLimbs.transform.GetChild(i);
+            int idx = int.Parse(limb.name) - 1;
 
-            Vector3 tailOffset = chain.tails[i].position - limb.position;
-            limb.position = joints[i] - tailOffset;
+            Vector3 tailOffset = chain.tails[idx].position - limb.position;
+            limb.position = joints[idx] - tailOffset;
 
-            Vector3 currentDir = (chain.heads[i].position - chain.tails[i].position).normalized;
-            Vector3 desiredDir = (joints[i + 1] - joints[i]).normalized;
+            Vector3 currentDir = (chain.heads[idx].position - chain.tails[idx].position).normalized;
+            Vector3 desiredDir = (joints[idx + 1] - joints[idx]).normalized;
 
             Quaternion rotation = Quaternion.FromToRotation(currentDir, desiredDir);
             limb.rotation = rotation * limb.rotation;
