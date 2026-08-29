@@ -19,6 +19,9 @@ public class PlayerAttack : MonoBehaviour
 
     /// <summary>Reference to player movement system.</summary>
     public Movement _movement;
+
+    
+    private Player_IK _playerIK;
     
     [Header("Attack")]
 
@@ -41,6 +44,16 @@ public class PlayerAttack : MonoBehaviour
 
     /// <summary>Layer used for enemy detection.</summary>
     public LayerMask enemyLayer;
+
+  
+    void Start()
+    {
+        if (_movement == null)
+        {
+            _movement = GetComponent<Movement>();
+        }
+        _playerIK = GetComponent<Player_IK>();
+    }
 
     /// <summary>
     /// Updates attack point position based on player facing direction.
@@ -81,6 +94,12 @@ public class PlayerAttack : MonoBehaviour
     {
         // Play attack sound
         SoundService.Instance?.Play("PlayerAttack");
+
+        // Trigger the IK swing animation
+        if (_playerIK != null)
+        {
+            _playerIK.PlayAttackSwing();
+        }
 
         Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(
             attackPoint.position,
